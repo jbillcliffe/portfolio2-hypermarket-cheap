@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (button of buttons) {
         button.addEventListener("click", function () {
             if (this.getAttribute("data-button") === "play-new") {
-                startGame("new","new");
+                startGame("new", "new");
             } else if (this.getAttribute("data-button") === "about") {
                 showAbout();
             } else {
@@ -15,15 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Global Variables - Values that are required across the game.
-let specialOffers = [];
 let playerCash = 0.00;
 let shopStock = [];
 let basketStock = [];
-
-//specialOptions = [{ specialOption }, ...];
-//itemOptions = [{ itemOption }, ...];
 let cashLow = 30.00;
 let cashHigh = 100.00;
+
+/*
+  Special Options and Item Options are created during the initial loading of 
+  game, they are then merged into at {item} object, all of these are initially
+  assigned to the "shopStock" array, these can then be moved to the
+  "basketStock" array and also be returned
+*/
 
 /**
  * Function to start the game.
@@ -31,9 +34,15 @@ let cashHigh = 100.00;
  * these parameters default as "new". These are changed upon request when the
  * function is called.
  */
-function startGame(customerType="new",dayType="new")
-{
+function startGame(customerType = "new", dayType = "new") {
+    console.log(customerType + ", " + dayType);
+}
 
+/**
+ * Function to show the About information
+ */
+function showAbout() {
+    console.log("Show About Info");
 }
 
 /**
@@ -41,8 +50,8 @@ function startGame(customerType="new",dayType="new")
  * then choose a random amount of cash from a range, if customerType="same"
  * then the cash amount is not changed
  */
-function startCash(customerType="new") {
-    
+function startCash(customerType = "new") {
+
 }
 
 /**
@@ -50,8 +59,8 @@ function startCash(customerType="new") {
  * then a new generation of stock is created, new items,amounts and prices. If
  * dayType="same" then no change in prices/stocks for a new game
  */
-function startStock(dayType="new") {
-    
+function startStock(dayType = "new") {
+
 }
 
 /**
@@ -60,7 +69,7 @@ function startStock(dayType="new") {
  * has requested the items be returned and this is not the process of beginning
  * a new game
  */
-function emptyBasket(requestType="new") {
+function emptyBasket(requestType = "new") {
 
 }
 
