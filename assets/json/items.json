@@ -1,0 +1,371 @@
+[
+    {
+        "id": 1,
+        "name": "Bread",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "bakery"
+    },
+    {
+        "id": 2,
+        "name": "Milk",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "dairy"
+    },
+    {
+        "id": 3,
+        "name": "Cheese",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "dairy"
+    },
+    {
+        "id": 4,
+        "name": "Newspaper",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "stationary"
+    },
+    {
+        "id": 5,
+        "name": "Beef Mince",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "meat"
+    },
+    {
+        "id": 6,
+        "name": "Steak",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "meat"
+    },
+    {
+        "id": 7,
+        "name": "Pork Loin Steaks",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "meat"
+    },
+    {
+        "id": 8,
+        "name": "Turkey Twizzlers",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "frozen"
+    },
+    {
+        "id": 9,
+        "name": "Cornetto",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "frozen"
+    },
+    {
+        "id": 10,
+        "name": "Chips",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "frozen"
+    },
+    {
+        "id": 11,
+        "name": "Strawberry Yoghurt",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "dairy"
+    },
+    {
+        "id": 12,
+        "name": "Cucumber",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "vegetables"
+    },
+    {
+        "id": 13,
+        "name": "Peppers",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "vegetables"
+    },
+    {
+        "id": 14,
+        "name": "Tomatoes",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "vegetables"
+    },
+    {
+        "id": 15,
+        "name": "Cabbage",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "vegetables"
+    },
+    {
+        "id": 16,
+        "name": "Iceburg Lettuce",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "vegetables"
+    },
+    {
+        "id": 17,
+        "name": "Apples",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "fruit"
+    },
+    {
+        "id": 18,
+        "name": "Pears",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "fruit"
+    },
+    {
+        "id": 19,
+        "name": "Watermelon",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "fruit"
+    },
+    {
+        "id": 20,
+        "name": "Strawberries",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "fruit"
+    },
+    {
+        "id": 21,
+        "name": "Corn Flakes",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "cereal"
+    },
+    {
+        "id": 22,
+        "name": "Weetabix",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "cereal"
+    },
+    {
+        "id": 23,
+        "name": "Coco Pops",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "cereal"
+    },
+    {
+        "id": 24,
+        "name": "Shredded Wheat",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "cereal"
+    },
+    {
+        "id": 25,
+        "name": "Laundry Detergent",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "household"
+    },
+    {
+        "id": 26,
+        "name": "Fabric Softener",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "household"
+    },
+    {
+        "id": 27,
+        "name": "Colour Catchers",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "household"
+    },
+    {
+        "id": 28,
+        "name": "Black Bin Bags",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "household"
+    },
+    {
+        "id": 29,
+        "name": "Food Bin Bags",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "household"
+    },
+    {
+        "id": 30,
+        "name": "Washing Up Liquid",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "household"
+    },
+    {
+        "id": 31,
+        "name": "Coca-Cola",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "drinks"
+    },
+    {
+        "id": 32,
+        "name": "Lemonade",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "drinks"
+    },
+    {
+        "id": 33,
+        "name": "Ribena",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "drinks"
+    },
+    {
+        "id": 34,
+        "name": "Orange Squash",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "drinks"
+    },
+    {
+        "id": 35,
+        "name": "Bottled Water",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "drinks"
+    },
+    {
+        "id": 36,
+        "name": "Doughnuts",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "bakery"
+    },
+    {
+        "id": 37,
+        "name": "Chicken Nuggets",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "frozen"
+    },
+    {
+        "id": 38,
+        "name": "Chicken Breast",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "meat"
+    },
+    {
+        "id": 39,
+        "name": "Pens",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "stationary"
+    },
+    {
+        "id": 40,
+        "name": "Pencils",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 0,
+        "highStock": 10,
+        "aisle": "stationary"
+    },
+    {
+        "id": 41,
+        "name": "Birthday Card for Partner...",
+        "lowPrice": 0.90,
+        "highPrice": 1.80,
+        "lowStock": 1,
+        "highStock": 10,
+        "aisle": "stationary"
+    }
+]
