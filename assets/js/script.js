@@ -97,8 +97,3 @@ function removeFromBasket(itemId) {
 function checkoutBasket() {
 
 }
-
-/**
- * Function to start the next game. Depending on button selected will determine
- * which what parameters to send to startGame
- */

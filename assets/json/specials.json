@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Half Price",
+        "chance": 0.1,
+        "factor": 0.5,
+        "occurance": 1
+    },
+    {
+        "id": 2,
+        "name": "10% Off",
+        "chance": 0.4,
+        "factor": 0.9,
+        "occurance": 3
+    },
+    {
+        "id": 3,
+        "name": "20% Off",
+        "chance": 0.3,
+        "factor": 0.8,
+        "occurance": 2
+    },
+    {
+        "id": 4,
+        "name": "25% Off",
+        "chance": 0.2,
+        "factor": 0.75,
+        "occurance": 1
+    }
+]
