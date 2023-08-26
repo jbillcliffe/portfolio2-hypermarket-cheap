@@ -36,7 +36,10 @@ let cashHigh = 100.00;
  */
 function startGame(customerType = "new", dayType = "new") {
     console.log(customerType + ", " + dayType);
-    startCash("new");
+    //Implement startCash based on new or same customer
+    startCash(customerType);
+    //Implement startStock based on new or same day
+    startStock(dayType);
 }
 
 /**
@@ -73,6 +76,28 @@ function startCash(customerType = "new") {
  * dayType="same" then no change in prices/stocks for a new game
  */
 function startStock(dayType = "new") {
+    /*
+        Go through each item in items.json and beginning setting stock levels
+        also applying specieals as necessary
+    */
+    //file data imported to this array
+    //let stockData = [];
+    //getJSON gets the data from the items.json file and holds them in stockData
+    $.getJSON("assets/json/items.json", function (data) {
+        //stockData = data;
+
+        for (item of data) {
+            //console.log(item);
+            let thisItemStock = Math.round(Math.random() * (item.highStock - item.lowStock) + item.lowStock);
+            let thisItemPrice = (Math.random() * (item.highPrice - item.lowPrice) + item.lowPrice).toFixed(2);
+            let thisItem = { id: item.id, name: item.name, price: thisItemPrice, quantity: thisItemStock };
+            shopStock.push(thisItem);
+            //console.log(thisItemPrice);
+        }
+    });
+
+    console.log(shopStock);
+
 
 }
 
