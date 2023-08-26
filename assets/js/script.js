@@ -36,6 +36,7 @@ let cashHigh = 100.00;
  */
 function startGame(customerType = "new", dayType = "new") {
     console.log(customerType + ", " + dayType);
+    startCash("new");
 }
 
 /**
@@ -52,6 +53,18 @@ function showAbout() {
  */
 function startCash(customerType = "new") {
 
+    /*
+        eg. 0.5 * 70 + 30 = 35 + 30
+        eg. 1 * 70 + 30 = 100
+        eg. 0 * 70 + 30 = 30
+
+        Examples to show how using Math.random (which generates between 0 and 1)
+        we can provide the random cash generating element to fit the numbers 
+        provided. "toFixed(2)" sets the number to 2 decimal places, accurate
+        for cash.
+    */
+    playerCash = (Math.random() * (cashHigh - cashLow) + cashLow).toFixed(2);
+    console.log(playerCash);
 }
 
 /**
