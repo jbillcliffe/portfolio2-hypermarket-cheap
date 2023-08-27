@@ -37,13 +37,16 @@ let specialOffers = [];
  * function is called.
  */
 function startGame(customerType = "new", dayType = "new") {
+    if (dayType === "new") {
+        //Implement startCash based on new or same customer
+        startCash(customerType);
+        //Implement startStock based on new or same day
+        startStock(dayType);
+        //start with an empty basket
+        emptyBasket();
+    }
     console.log(customerType + ", " + dayType);
-    //Implement startCash based on new or same customer
-    startCash(customerType);
-    //Implement startStock based on new or same day
-    startStock(dayType);
 }
-
 /**
  * Function to show the About information
  */
@@ -59,14 +62,14 @@ function showAbout() {
 function startCash(customerType = "new") {
 
     /*
-        eg. 0.5 * 70 + 30 = 35 + 30
-        eg. 1 * 70 + 30 = 100
-        eg. 0 * 70 + 30 = 30
-
-        Examples to show how using Math.random (which generates between 0 and 1)
-        we can provide the random cash generating element to fit the numbers 
-        provided. "toFixed(2)" sets the number to 2 decimal places, accurate
-        for cash.
+      eg. 0.5 * 70 + 30 = 35 + 30
+      eg. 1 * 70 + 30 = 100
+      eg. 0 * 70 + 30 = 30
+  
+      Examples to show how using Math.random (which generates between 0 and 1)
+      we can provide the random cash generating element to fit the numbers 
+      provided. "toFixed(2)" sets the number to 2 decimal places, accurate
+      for cash.
     */
     playerCash = (Math.random() * (cashHigh - cashLow) + cashLow).toFixed(2);
     console.log(playerCash);
@@ -79,8 +82,8 @@ function startCash(customerType = "new") {
  */
 function startStock(dayType = "new") {
     /*
-        Go through each item in items.json and beginning setting stock levels
-        also applying specieals as necessary
+      Go through each item in items.json and beginning setting stock levels
+      also applying specieals as necessary
     */
     //getJSON gets the data from the specials.json file and holds them for stock creation
     $.getJSON("assets/json/specials.json", function (json) {
@@ -93,8 +96,8 @@ function startStock(dayType = "new") {
     $.getJSON("assets/json/items.json", function (data) {
         for (item of data) {
             /*
-                Adding aisles to the shop too, this is flexible for upgrade as it searches the list for aisles
-                and adds them in
+              Adding aisles to the shop too, this is flexible for upgrade as it searches the list for aisles
+              and adds them in
             */
             aisles.indexOf(item.aisle) >= 0 ? null : aisles.push(item.aisle);
             //randomly create an amount of stock
@@ -102,9 +105,9 @@ function startStock(dayType = "new") {
             //randomly create a price for the current game (will not necessarily be the same next time)
             let thisItemPrice = (Math.random() * (item.highPrice - item.lowPrice) + item.lowPrice).toFixed(2);
             /*
-                Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
-                ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
-                But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
+              Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
+              ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
+              But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
             */
             //empty variable for special modifier
             let thisSpecial;
@@ -115,8 +118,8 @@ function startStock(dayType = "new") {
                     //if no occurances left of special offers set special to 1 and continue
                     if (specialOffers[i].occurance > 0) {
                         /*
-                            if the random number is less or equal to chance then set the special
-                            modifier and continue
+                          if the random number is less or equal to chance then set the special
+                          modifier and continue
                         */
                         if (thisScore <= specialOffers[i].chance) {
                             //remove an occurance so specials don't keep forever generating
@@ -133,9 +136,8 @@ function startStock(dayType = "new") {
             } else {
                 thisSpecial = 1;
             }
-
             //create the item to go into the shop stock
-            let thisItem = { id: item.id, name: item.name, price: thisItemPrice, quantity: thisItemStock, special: thisSpecial };
+            let thisItem = { id: item.id, name: item.name, price: thisItemPrice, quantity: thisItemStock, aisle: item.aisle, special: thisSpecial };
             shopStock.push(thisItem);
         }
     });
@@ -150,7 +152,14 @@ function startStock(dayType = "new") {
  * a new game
  */
 function emptyBasket(requestType = "new") {
-
+    if (requestType === "new") {
+        basketStock = [];
+    } else {
+        /*
+          For each item in basket, return to stock. Cash is not altered, 
+          this only changes on checkout.
+        */
+    }
 }
 
 /**
