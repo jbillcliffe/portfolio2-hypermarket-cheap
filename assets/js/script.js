@@ -15,12 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Global Variables - Values that are required across the game.
-let playerCash = 0.00;
-let specialOffers = [];
-let shopStock = [];
+let aisles = [];
 let basketStock = [];
-let cashLow = 30.00;
 let cashHigh = 100.00;
+let cashLow = 30.00;
+let playerCash = 0.00;
+let shopStock = [];
+let specialOffers = [];
 
 /*
   Special Options and Item Options are created during the initial loading of 
@@ -81,20 +82,21 @@ function startStock(dayType = "new") {
         Go through each item in items.json and beginning setting stock levels
         also applying specieals as necessary
     */
-
     //getJSON gets the data from the specials.json file and holds them for stock creation
     $.getJSON("assets/json/specials.json", function (json) {
         for (offer of json) {
-
             specialOffers.push({ id: offer.id, name: offer.name, chance: offer.chance, factor: offer.factor, occurance: offer.occurance });
         }
     });
     console.log(specialOffers);
     //getJSON gets the data from the items.json file to then work with each item
     $.getJSON("assets/json/items.json", function (data) {
-        //stockData = data;
-
         for (item of data) {
+            /*
+                Adding aisles to the shop too, this is flexible for upgrade as it searches the list for aisles
+                and adds them in
+            */
+            aisles.indexOf(item.aisle) >= 0 ? null : aisles.push(item.aisle);
             //randomly create an amount of stock
             let thisItemStock = Math.round(Math.random() * (item.highStock - item.lowStock) + item.lowStock);
             //randomly create a price for the current game (will not necessarily be the same next time)
@@ -104,10 +106,8 @@ function startStock(dayType = "new") {
                 ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
                 But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
             */
-
             //empty variable for special modifier
             let thisSpecial;
-
             if (Math.random() < 0.4) {
                 for (let i = 0; i < specialOffers.length; i++) {
                     //secondary number generation for "mini-game"
@@ -137,14 +137,10 @@ function startStock(dayType = "new") {
             //create the item to go into the shop stock
             let thisItem = { id: item.id, name: item.name, price: thisItemPrice, quantity: thisItemStock, special: thisSpecial };
             shopStock.push(thisItem);
-
-
         }
     });
-
     console.log(shopStock);
-
-
+    console.log(aisles);
 }
 
 /**
