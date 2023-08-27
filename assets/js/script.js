@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //Global Variables - Values that are required across the game.
 let playerCash = 0.00;
+let specialOffers = [];
 let shopStock = [];
 let basketStock = [];
 let cashLow = 30.00;
@@ -80,19 +81,64 @@ function startStock(dayType = "new") {
         Go through each item in items.json and beginning setting stock levels
         also applying specieals as necessary
     */
-    //file data imported to this array
-    //let stockData = [];
-    //getJSON gets the data from the items.json file and holds them in stockData
+
+    //getJSON gets the data from the specials.json file and holds them for stock creation
+    $.getJSON("assets/json/specials.json", function (json) {
+        for (offer of json) {
+
+            specialOffers.push({ id: offer.id, name: offer.name, chance: offer.chance, factor: offer.factor, occurance: offer.occurance });
+        }
+    });
+    console.log(specialOffers);
+    //getJSON gets the data from the items.json file to then work with each item
     $.getJSON("assets/json/items.json", function (data) {
         //stockData = data;
 
         for (item of data) {
-            //console.log(item);
+            //randomly create an amount of stock
             let thisItemStock = Math.round(Math.random() * (item.highStock - item.lowStock) + item.lowStock);
+            //randomly create a price for the current game (will not necessarily be the same next time)
             let thisItemPrice = (Math.random() * (item.highPrice - item.lowPrice) + item.lowPrice).toFixed(2);
-            let thisItem = { id: item.id, name: item.name, price: thisItemPrice, quantity: thisItemStock };
+            /*
+                Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
+                ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
+                But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
+            */
+
+            //empty variable for special modifier
+            let thisSpecial;
+
+            if (Math.random() < 0.4) {
+                for (let i = 0; i < specialOffers.length; i++) {
+                    //secondary number generation for "mini-game"
+                    let thisScore = Math.random();
+                    //if no occurances left of special offers set special to 1 and continue
+                    if (specialOffers[i].occurance > 0) {
+                        /*
+                            if the random number is less or equal to chance then set the special
+                            modifier and continue
+                        */
+                        if (thisScore <= specialOffers[i].chance) {
+                            //remove an occurance so specials don't keep forever generating
+                            specialOffers[i].occurance--;
+                            //set thisSpecial to the modifier
+                            thisSpecial = specialOffers[i].factor;
+                            break;
+                        }
+                    } else {
+                        thisSpecial = 1;
+                    }
+                    thisSpecial = 1;
+                }
+            } else {
+                thisSpecial = 1;
+            }
+
+            //create the item to go into the shop stock
+            let thisItem = { id: item.id, name: item.name, price: thisItemPrice, quantity: thisItemStock, special: thisSpecial };
             shopStock.push(thisItem);
-            //console.log(thisItemPrice);
+
+
         }
     });
 
