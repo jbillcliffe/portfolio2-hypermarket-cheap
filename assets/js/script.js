@@ -44,9 +44,22 @@ function startGame(customerType = "new", dayType = "new") {
         startStock(dayType);
         //start with an empty basket
         emptyBasket();
+        //Create the game environment.
+        createEnvironment();
     }
     console.log(customerType + ", " + dayType);
 }
+
+/**
+ * Create the game environment which is based on a new customer on a new day.
+ * If the day is the same, then a whole new environment is not required.
+ * Create buttons for the aisles. Clicking on the buttons will show the shop
+ * items associated with the aisle.
+ */
+function createEnvironment() {
+    
+}
+
 /**
  * Function to show the About information
  */

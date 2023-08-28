@@ -16,14 +16,27 @@ body {
     max-height: 1024px;
     margin-left: auto;
     margin-right: auto;
-
+    border: 2px solid black;
+    height: 90%;
 }
 
 .game-menu {
-    display: flex;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
+
+}
+
+.the-toolbar {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    background-color: #3d9970;
+    height: 50px;
+
+}
+
+.the-shop {
+    display: flex;
+    flex-direction: row;
 }
 
 .menu-button {
@@ -33,9 +46,25 @@ body {
     text-transform: uppercase;
     letter-spacing: 1.2px;
     font-size: large;
-    /*margin-top: 2rem auto 2rem auto;*/
     margin: 2rem auto;
+    cursor: pointer;
+}
 
+.awesome-button {
+    background: none;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0 20px 0 0;
+    padding: 0;
+    font-size: 24px;
+    transition: 0.5s;
+}
+
+.awesome-button:hover {
+    transition: 0.5s;
+    color: cyan;
 }
 
 footer {

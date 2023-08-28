@@ -23,15 +23,34 @@
     <header>
       <!--Header image put in by css-->
     </header>
-    <div class="game-container">
-      <div class="game-menu">
-        <button data-button="play-new" class="menu-button">
-          Play New Game <i class="fas fa-shopping-cart"></i>
-        </button>
-        <button data-button="about" class="menu-button">
-          About <i class="fas fa-info"></i>
+    <div class="game-container game-menu" id="game-menu">
+      <button data-button="play-new" class="menu-button">
+        Play New Game <i class="fas fa-shopping-cart"></i>
+      </button>
+      <button data-button="about" class="menu-button">
+        About <i class="fas fa-info"></i>
+      </button>
+    </div>
+    <div class="game-container game-screen" id="game-screen">
+      <!--Across the top, like a header-->
+      <div class="the-toolbar">
+        <button data-button="show-basket" class="awesome-button">
+          <i class="fas fa-shopping-cart"></i>
         </button>
       </div>
+      <!--The shop as a whole-->
+      <div class="the-shop">
+        <!--Bulk of game screen, left side-->
+        <div class="the-items">
+            
+        </div>
+        <!--Remaining portion of screen on right to store aisles as links-->
+        <div class="the-aisles">
+
+        </div>
+      </div>
+      
+      
     </div>
     <footer>
       <!--Footer content, social links-->
