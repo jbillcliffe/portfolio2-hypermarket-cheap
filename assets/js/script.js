@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.getElementsByTagName("button");
 
-    for (button of buttons) {
+    for (let button of buttons) {
         button.addEventListener("click", function () {
             if (this.getAttribute("data-button") === "play-new") {
                 startGame("new", "new");
@@ -42,10 +42,11 @@ function startGame(customerType = "new", dayType = "new") {
         startCash(customerType);
         //Implement startStock based on new or same day
         startStock(dayType);
+        setTimeout(createEnvironment, 2000);
         //start with an empty basket
         emptyBasket();
         //Create the game environment.
-        createEnvironment();
+        //createEnvironment();
     }
     console.log(customerType + ", " + dayType);
 }
@@ -57,7 +58,25 @@ function startGame(customerType = "new", dayType = "new") {
  * items associated with the aisle.
  */
 function createEnvironment() {
-    
+    /*
+        Add the aisles, default to no aisle selected and a message to choose an aisle to go to.
+    */
+    let aisleList = document.getElementById("the-aisles");
+    //console.log();
+    for (let aisle of aisles) {
+        console.log(aisle);
+        let aisleButton = document.createElement("BUTTON");
+        aisleButton.className = "aisle-button";
+        aisleButton.id = aisle;
+        aisleButton.onclick = `changeAisle(${aisle})`;
+        aisleButton.innerHTML = aisle;
+        console.log(aisleButton);
+        aisleList.appendChild(aisleButton);
+    }
+
+    console.log(aisleList);
+    document.getElementById("game-menu").style.display = "none";
+    document.getElementById("game-screen").style.display = "block";
 }
 
 /**
@@ -104,7 +123,7 @@ function startStock(dayType = "new") {
             specialOffers.push({ id: offer.id, name: offer.name, chance: offer.chance, factor: offer.factor, occurance: offer.occurance });
         }
     });
-    console.log(specialOffers);
+
     //getJSON gets the data from the items.json file to then work with each item
     $.getJSON("assets/json/items.json", function (data) {
         for (item of data) {
@@ -154,8 +173,16 @@ function startStock(dayType = "new") {
             shopStock.push(thisItem);
         }
     });
+    //console.log(shopStock);
+    specialOffers = JSON.parse(JSON.stringify(specialOffers));
+    shopStock = JSON.parse(JSON.stringify(shopStock));
+    aisles = JSON.parse(JSON.stringify(aisles));
+
+    console.log(specialOffers);
     console.log(shopStock);
     console.log(aisles);
+
+
 }
 
 /**
