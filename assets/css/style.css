@@ -68,7 +68,13 @@ body {
     background: none;
     color: white;
     cursor: pointer;
-    transition: 0.5s;
+    box-shadow: 0 0 4px 2px #073b24 inset;
+    transition: all 0.3s ease;
+    border-radius: 25px;
+}
+
+.aisle-button:hover {
+    box-shadow: 0 0 4px 100px #073b24 inset;
 }
 
 .menu-button {
@@ -94,8 +100,7 @@ body {
     transition: 0.5s;
 }
 
-.awesome-button:hover,
-.aisle-button:hover {
+.awesome-button:hover {
     transition: 0.5s;
     color: cyan;
 }

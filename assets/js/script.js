@@ -68,7 +68,7 @@ function createEnvironment() {
         let aisleButton = document.createElement("BUTTON");
         aisleButton.className = "aisle-button";
         aisleButton.id = aisle;
-        aisleButton.onclick = `changeAisle(${aisle})`;
+        aisleButton.onclick = function () { changeAisle(aisle); };
         aisleButton.innerHTML = aisle;
         console.log(aisleButton);
         aisleList.appendChild(aisleButton);
@@ -202,6 +202,45 @@ function emptyBasket(requestType = "new") {
     }
 }
 
+/**
+ * Function which tells the game to change aisle by sending across the id
+ * it can use it to filter the JSON data. Starts by clearing the-items div,
+ * then populating it with new divs which have content
+ */
+function changeAisle(aisleId) {
+    console.log(aisleId);
+
+    let shopAisle = document.getElementById("the-items");
+    console.log(shopAisle);
+    shopAisle.innerHTML = "";
+
+    for (let stockItem of shopStock) {
+
+        if (stockItem.aisle === aisleId) {
+
+            const aisleItem = document.createElement("DIV");
+            const basketAdd = document.createElement("BUTTON");
+            basketAdd.id = "shop_" + stockItem.id;
+            basketAdd.data = stockItem.id;
+            basketAdd.innerHTML = "+";
+            const itemPTag = document.createElement("P");
+            let itemText = document.createTextNode(stockItem.name + ", Stock : " + stockItem.quantity);
+            console.log(itemPTag);
+            console.log(itemText);
+            console.log(basketAdd);
+            console.log(aisleItem);
+            itemPTag.appendChild(itemText);
+            aisleItem.appendChild(itemPTag);
+            aisleItem.appendChild(basketAdd);
+
+            shopAisle.appendChild(aisleItem);
+
+        } else {
+            continue;
+        }
+    }
+
+}
 /**
  * Function to add an item to the basket (including its quantity). itemId is
  * passed to the function
