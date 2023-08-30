@@ -55,7 +55,7 @@
     },
     {
         "id": 7,
-        "name": "Pork Loin Steaks",
+        "name": "Pork Chops",
         "lowPrice": 0.90,
         "highPrice": 1.80,
         "lowStock": 0,
@@ -73,7 +73,7 @@
     },
     {
         "id": 9,
-        "name": "Cornetto",
+        "name": "Ice Creams",
         "lowPrice": 0.90,
         "highPrice": 1.80,
         "lowStock": 0,

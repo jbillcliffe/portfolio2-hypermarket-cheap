@@ -14,7 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 
-//Global Variables - Values that are required across the game.
+/*
+    --- Global Variables --- 
+    Values that are required across the game. Therefore they are declared at
+    the top of the script
+*/
+
 let aisles = [];
 let basketStock = [];
 let cashHigh = 100.00;
@@ -23,32 +28,26 @@ let playerCash = 0.00;
 let shopStock = [];
 let specialOffers = [];
 
-/*
-  Special Options and Item Options are created during the initial loading of 
-  game, they are then merged into at {item} object, all of these are initially
-  assigned to the "shopStock" array, these can then be moved to the
-  "basketStock" array and also be returned
-*/
-
 /**
  * Function to start the game.
  * customerType and dayType will determine how the function operates, both of
  * these parameters default as "new". These are changed upon request when the
- * function is called.
+ * function is called. 
+ * Cash, stock and the environment are initated here
  */
 function startGame(customerType = "new", dayType = "new") {
+
     if (dayType === "new") {
-        //Implement startCash based on new or same customer
         startCash(customerType);
-        //Implement startStock based on new or same day
         startStock(dayType);
+        /*
+            A delay of 2s gives time to for the 
+            arrays of data to populate during the startStock function before
+            performing createEnvironment which relies on these variables
+        */
         setTimeout(createEnvironment, 2000);
-        //start with an empty basket
         emptyBasket();
-        //Create the game environment.
-        //createEnvironment();
     }
-    console.log(customerType + ", " + dayType);
 }
 
 /**
@@ -62,7 +61,7 @@ function createEnvironment() {
         Add the aisles, default to no aisle selected and a message to choose an aisle to go to.
     */
     let aisleList = document.getElementById("the-aisles");
-    //console.log();
+
     for (let aisle of aisles) {
         console.log(aisle);
         let aisleButton = document.createElement("BUTTON");
@@ -127,21 +126,19 @@ function startStock(dayType = "new") {
     //getJSON gets the data from the items.json file to then work with each item
     $.getJSON("assets/json/items.json", function (data) {
         for (item of data) {
-            /*
-              Adding aisles to the shop too, this is flexible for upgrade as it searches the list for aisles
-              and adds them in
-            */
+
+            //adding aisle options
             aisles.indexOf(item.aisle) >= 0 ? null : aisles.push(item.aisle);
-            //randomly create an amount of stock
+
             let thisItemStock = Math.round(Math.random() * (item.highStock - item.lowStock) + item.lowStock);
-            //randomly create a price for the current game (will not necessarily be the same next time)
             let thisItemPrice = (Math.random() * (item.highPrice - item.lowPrice) + item.lowPrice).toFixed(2);
+
             /*
               Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
               ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
               But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
             */
-            //empty variable for special modifier
+
             let thisSpecial;
             if (Math.random() < 0.4) {
                 for (let i = 0; i < specialOffers.length; i++) {
@@ -173,16 +170,11 @@ function startStock(dayType = "new") {
             shopStock.push(thisItem);
         }
     });
-    //console.log(shopStock);
+
+    //ensure that arrays that could be strings, are effectively parsed into objects
     specialOffers = JSON.parse(JSON.stringify(specialOffers));
     shopStock = JSON.parse(JSON.stringify(shopStock));
     aisles = JSON.parse(JSON.stringify(aisles));
-
-    console.log(specialOffers);
-    console.log(shopStock);
-    console.log(aisles);
-
-
 }
 
 /**
@@ -208,30 +200,54 @@ function emptyBasket(requestType = "new") {
  * then populating it with new divs which have content
  */
 function changeAisle(aisleId) {
-    console.log(aisleId);
 
+    //Ensure the shop is emptied each time an aisle button is clicked
     let shopAisle = document.getElementById("the-items");
-    console.log(shopAisle);
     shopAisle.innerHTML = "";
 
+    //Iterate through the stock options and add when its the right aisle option
     for (let stockItem of shopStock) {
 
         if (stockItem.aisle === aisleId) {
-
+            //Creating the elements for each aisle item
             const aisleItem = document.createElement("DIV");
-            aisleItem.className = "aisle-item";
             const itemDisplay = document.createElement("DIV");
-            itemDisplay.className = "aisle-item-p-div";
             const basketAdd = document.createElement("BUTTON");
-            basketAdd.id = "shop_" + stockItem.id;
-            basketAdd.className = "aisle-item-button";
-            basketAdd.data = stockItem.id;
-            basketAdd.innerHTML = "+";
             const itemPTag = document.createElement("P");
-            let itemText = document.createTextNode(stockItem.name);
             const stockPTag = document.createElement("P");
-            let stockText = document.createTextNode("Stock : " + stockItem.quantity);
 
+            //variable text nodes for stock and item text
+            let stockText;
+            let itemText = document.createTextNode(stockItem.name);
+
+            //class names for the main div, text div and button for css styling
+            aisleItem.className = "aisle-item";
+            itemDisplay.className = "aisle-item-p-div";
+            basketAdd.className = "aisle-item-button";
+            itemPTag.className = "aisle-item-text";
+
+            //add to basket button element properties
+            basketAdd.id = "basket-add_" + stockItem.id;
+            basketAdd.onclick = function () { addToBasket(stockItem.id); };
+            basketAdd.innerHTML = "+";
+
+            //stock text property of id, to allow manipulation when stock changes
+            stockPTag.id = "stock_" + stockItem.id;
+
+            //Check if there is stock available at the start, if there is none,
+            //display out of stock text
+            if (stockItem.quantity > 0) {
+                stockText = document.createTextNode("Stock : " + stockItem.quantity);
+                stockPTag.className = "aisle-item-text";
+            } else {
+                stockText = document.createTextNode("Out Of Stock. Come back another day");
+                stockPTag.className = "aisle-item-text no-stock";
+            }
+            /*
+                Appending to the document. Text nodes to paragraphs, paragraphs
+                to text div, the text div to the aisle div and then the button to 
+                the aisle div
+            */
             itemPTag.appendChild(itemText);
             stockPTag.appendChild(stockText);
             itemDisplay.appendChild(itemPTag);
@@ -239,19 +255,24 @@ function changeAisle(aisleId) {
             aisleItem.appendChild(itemDisplay);
             aisleItem.appendChild(basketAdd);
 
+            //add the item to the shop
             shopAisle.appendChild(aisleItem);
 
         } else {
+            //skip this iteration and move to next
             continue;
         }
     }
 
 }
 /**
- * Function to add an item to the basket (including its quantity). itemId is
- * passed to the function
+ * Function to add an item to the basket, done on an individual basis. You 
+ * only have one hand when you are holding a basket!
+ * It checks if the id of the object is already in the basket. If so it needs
+ * to alter the quantity rather than
  */
 function addToBasket(itemId) {
+    console.log(itemId);
 
 }
 

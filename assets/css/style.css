@@ -3,6 +3,7 @@
     box-sizing: border-box;
 }
 
+/*Header Styling for the logo */
 header {
     display: flex;
     flex-direction: row;
@@ -11,10 +12,18 @@ header {
     background: url('../images/header-logo.webp') no-repeat center center;
 }
 
+/* Little to no body styling, as it occurs in the game-container and beyond */
 body {
     background-color: white;
 }
 
+/* footer styling */
+footer {
+    width: 100%;
+    height: 80px;
+}
+
+/* Class for game container, holds menu, about and the game */
 .game-container {
     display: flex;
     flex-direction: column;
@@ -26,6 +35,19 @@ body {
     height: 100%;
 }
 
+/* styling for the buttons on the main menu */
+.menu-button {
+    width: 250px;
+    height: 100px;
+    font-family: "Wallpoet", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-size: 16px;
+    margin: 2rem auto;
+    cursor: pointer;
+}
+
+/* Styling for the toolbar in the game, contains the basket button */
 .the-toolbar {
     display: flex;
     max-width: 1440px;
@@ -36,6 +58,7 @@ body {
     border-bottom: 2px solid black;
 }
 
+/* container for the game below the toolbar */
 .the-shop {
     display: flex;
     flex-direction: row;
@@ -43,6 +66,7 @@ body {
     width: 100%;
 }
 
+/* container for the items which are available */
 .the-items {
     display: flex;
     flex-direction: column;
@@ -51,15 +75,17 @@ body {
     padding: 2rem;
 }
 
+/* container to hold the aisle options */
 .the-aisles {
     display: flex;
     flex-direction: column;
     width: 30%;
-    background-color: #3d9970;
+    background-color: black;
     border-left: 2px solid black;
     padding-left: 2px;
 }
 
+/* styling for the button which has each aisle option */
 .aisle-button {
     height: 4rem;
     width: 100%;
@@ -67,7 +93,7 @@ body {
     letter-spacing: 1.2px;
     font-size: large;
     margin: 0.1rem auto;
-    background: none;
+    background-color: #3d9970;
     color: white;
     cursor: pointer;
     box-shadow: 0 0 4px 2px #073b24 inset;
@@ -75,30 +101,35 @@ body {
     border-radius: 25px;
 }
 
+/* when hovering over an aisle option, accent it for clarity */
 .aisle-button:hover {
-    box-shadow: 0 0 4px 100px #073b24 inset;
+    box-shadow: 0 0 4px 100px #2500cac4 inset;
 }
 
+/* styling for the container which has each item in the shop, which has the 
+item name, the stock and a button to add it to your basket */
 .aisle-item {
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 100%;
     height: auto;
     border: 2px solid black;
     box-shadow: 0 0 4px 2px black;
-    background-color: #3d9970;
+    background-color: black;
     justify-content: space-between;
     margin: 1rem 0 0rem 0rem;
     padding: 0.5rem;
 }
 
-
+/* for the text container part of the aisle item div (name and stock to be 
+stacked vertically)*/
 .aisle-item-p-div {
     display: flex;
     flex-direction: column;
 }
 
-.aisle-item p {
+/*styling for the text inside the aisle item (text styling of name and stock */
+.aisle-item-text {
     font-family: "Wallpoet", sans-serif;
     letter-spacing: 1.2px;
     font-size: large;
@@ -106,6 +137,14 @@ body {
     margin: auto auto auto 1rem;
 }
 
+/*Colour assignment for stock text, can also be used elsewhere when declared
+in this way */
+.no-stock {
+    color: red;
+}
+
+
+/* styling for the + button inside the aisle item */
 .aisle-item-button {
     height: 3rem;
     width: 3rem;
@@ -118,17 +157,9 @@ body {
     margin: auto 1rem;
 }
 
-.menu-button {
-    width: 250px;
-    height: 100px;
-    font-family: "Wallpoet", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    font-size: 16px;
-    margin: 2rem auto;
-    cursor: pointer;
-}
 
+/*styling for any font awesome buttons, such as the basket in the toolbar 
+  in the game */
 .awesome-button {
     background: none;
     color: white;
@@ -141,12 +172,8 @@ body {
     transition: 0.5s;
 }
 
+/* when hovering over a font awesome button, accent it for clarity */
 .awesome-button:hover {
     transition: 0.5s;
     color: cyan;
-}
-
-footer {
-    width: 100%;
-    height: 80px;
 }
