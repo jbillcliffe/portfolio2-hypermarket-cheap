@@ -219,18 +219,24 @@ function changeAisle(aisleId) {
         if (stockItem.aisle === aisleId) {
 
             const aisleItem = document.createElement("DIV");
+            aisleItem.className = "aisle-item";
+            const itemDisplay = document.createElement("DIV");
+            itemDisplay.className = "aisle-item-p-div";
             const basketAdd = document.createElement("BUTTON");
             basketAdd.id = "shop_" + stockItem.id;
+            basketAdd.className = "aisle-item-button";
             basketAdd.data = stockItem.id;
             basketAdd.innerHTML = "+";
             const itemPTag = document.createElement("P");
-            let itemText = document.createTextNode(stockItem.name + ", Stock : " + stockItem.quantity);
-            console.log(itemPTag);
-            console.log(itemText);
-            console.log(basketAdd);
-            console.log(aisleItem);
+            let itemText = document.createTextNode(stockItem.name);
+            const stockPTag = document.createElement("P");
+            let stockText = document.createTextNode("Stock : " + stockItem.quantity);
+
             itemPTag.appendChild(itemText);
-            aisleItem.appendChild(itemPTag);
+            stockPTag.appendChild(stockText);
+            itemDisplay.appendChild(itemPTag);
+            itemDisplay.appendChild(stockPTag);
+            aisleItem.appendChild(itemDisplay);
             aisleItem.appendChild(basketAdd);
 
             shopAisle.appendChild(aisleItem);

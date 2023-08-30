@@ -45,8 +45,10 @@ body {
 
 .the-items {
     display: flex;
+    flex-direction: column;
     width: 80%;
     border-right: 2px solid black;
+    padding: 2rem;
 }
 
 .the-aisles {
@@ -75,6 +77,45 @@ body {
 
 .aisle-button:hover {
     box-shadow: 0 0 4px 100px #073b24 inset;
+}
+
+.aisle-item {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: auto;
+    border: 2px solid black;
+    box-shadow: 0 0 4px 2px black;
+    background-color: #3d9970;
+    justify-content: space-between;
+    margin: 1rem 0 0rem 0rem;
+    padding: 0.5rem;
+}
+
+
+.aisle-item-p-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.aisle-item p {
+    font-family: "Wallpoet", sans-serif;
+    letter-spacing: 1.2px;
+    font-size: large;
+    color: white;
+    margin: auto auto auto 1rem;
+}
+
+.aisle-item-button {
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+    border-radius: 20px;
+    background: none;
+    border: 3px solid white;
+    color: white;
+    font-size: 250%;
+    margin: auto 1rem;
 }
 
 .menu-button {
