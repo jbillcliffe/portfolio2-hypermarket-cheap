@@ -52,10 +52,12 @@ footer {
     display: flex;
     max-width: 1440px;
     width: 100%;
-    justify-content: end;
+    justify-content: space-between;
     background-color: #3d9970;
-    height: 50px;
+    height: 75px;
     border-bottom: 2px solid black;
+    padding: 5px 20px;
+    align-items: center;
 }
 
 /* container for the game below the toolbar */
@@ -121,18 +123,30 @@ item name, the stock and a button to add it to your basket */
     padding: 0.5rem;
 }
 
+/* for the img element which will hold the image of the item in the shop */
+.aisle-item-img {
+    width: 10%;
+    height: auto;
+    border: 2px solid white;
+    box-shadow: 0 0 4px 2px white;
+}
+
 /* for the text container part of the aisle item div (name and stock to be 
 stacked vertically)*/
 .aisle-item-p-div {
     display: flex;
+    justify-content: start;
+    align-content: flex-start;
+    flex-wrap: wrap;
     flex-direction: column;
+    width: 80%;
 }
 
 /*styling for the text inside the aisle item (text styling of name and stock */
 .aisle-item-text {
     font-family: "Wallpoet", sans-serif;
     letter-spacing: 1.2px;
-    font-size: large;
+    font-size: 23px;
     color: white;
     margin: auto auto auto 1rem;
 }
@@ -146,14 +160,14 @@ in this way */
 
 /* styling for the + button inside the aisle item */
 .aisle-item-button {
-    height: 3rem;
-    width: 3rem;
+    height: 5rem;
+    width: 5rem;
     cursor: pointer;
     border-radius: 20px;
     background: none;
     border: 3px solid white;
     color: white;
-    font-size: 250%;
+    font-size: 400%;
     margin: auto 1rem;
 }
 
@@ -168,7 +182,7 @@ in this way */
     cursor: pointer;
     margin-right: 20px;
     padding: 0;
-    font-size: 24px;
+    font-size: 40px;
     transition: 0.5s;
 }
 

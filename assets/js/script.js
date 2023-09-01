@@ -29,6 +29,9 @@ let shopStock = [];
 let specialOffers = [];
 
 /**
+ * * @param {string} customerType - new/same, determines how startGame operates
+ * * @param {string} dayType - new/same, determines how startGame operates
+ * 
  * Function to start the game.
  * customerType and dayType will determine how the function operates, both of
  * these parameters default as "new". These are changed upon request when the
@@ -63,17 +66,14 @@ function createEnvironment() {
     let aisleList = document.getElementById("the-aisles");
 
     for (let aisle of aisles) {
-        console.log(aisle);
         let aisleButton = document.createElement("BUTTON");
         aisleButton.className = "aisle-button";
         aisleButton.id = aisle;
-        aisleButton.onclick = function () { changeAisle(aisle); };
+        aisleButton.onclick = function () { changeAisle(aisle, function () { document.getElementById("fountainG").style.display = "none"; }); };
         aisleButton.innerHTML = aisle;
-        console.log(aisleButton);
         aisleList.appendChild(aisleButton);
     }
 
-    console.log(aisleList);
     document.getElementById("game-menu").style.display = "none";
     document.getElementById("game-screen").style.display = "block";
 }
@@ -86,6 +86,8 @@ function showAbout() {
 }
 
 /**
+ * @param {string} customerType - new/same, determines how startCash operates
+ * 
  * Function for determining player starting cash amount, if customerType="new"
  * then choose a random amount of cash from a range, if customerType="same"
  * then the cash amount is not changed
@@ -103,10 +105,12 @@ function startCash(customerType = "new") {
       for cash.
     */
     playerCash = (Math.random() * (cashHigh - cashLow) + cashLow).toFixed(2);
-    console.log(playerCash);
+
 }
 
 /**
+ * @param {string} dayType - new/same, determines how startStock operates
+ * 
  * Function for determining starting shop stock, if dayType="new"
  * then a new generation of stock is created, new items,amounts and prices. If
  * dayType="same" then no change in prices/stocks for a new game
@@ -166,7 +170,7 @@ function startStock(dayType = "new") {
                 thisSpecial = 1;
             }
             //create the item to go into the shop stock
-            let thisItem = { id: item.id, name: item.name, price: thisItemPrice, quantity: thisItemStock, aisle: item.aisle, special: thisSpecial };
+            let thisItem = { id: item.id, name: item.name, price: thisItemPrice, quantity: thisItemStock, aisle: item.aisle, special: thisSpecial, imageUrl: item.imageUrl };
             shopStock.push(thisItem);
         }
     });
@@ -178,6 +182,8 @@ function startStock(dayType = "new") {
 }
 
 /**
+ * @param {string} requestType - new/same, determines how emptyBasket operates
+ * 
  * Function to remove all items from the basket. If requestType="new", this is
  * an emptying to start a new game. If requestType="customer" then the customer
  * has requested the items be returned and this is not the process of beginning
@@ -195,15 +201,19 @@ function emptyBasket(requestType = "new") {
 }
 
 /**
+ * * @param {number} aisleId - id of the aisle passed to the function eg. "Bakery"
+ * 
  * Function which tells the game to change aisle by sending across the id
  * it can use it to filter the JSON data. Starts by clearing the-items div,
  * then populating it with new divs which have content
  */
-function changeAisle(aisleId) {
+function changeAisle(aisleId, callback) {
 
     //Ensure the shop is emptied each time an aisle button is clicked
     let shopAisle = document.getElementById("the-items");
+
     shopAisle.innerHTML = "";
+    document.getElementById("fountainG").style.display = "block";
 
     //Iterate through the stock options and add when its the right aisle option
     for (let stockItem of shopStock) {
@@ -212,6 +222,7 @@ function changeAisle(aisleId) {
             //Creating the elements for each aisle item
             const aisleItem = document.createElement("DIV");
             const itemDisplay = document.createElement("DIV");
+            const itemImage = document.createElement("IMG");
             const basketAdd = document.createElement("BUTTON");
             const itemPTag = document.createElement("P");
             const stockPTag = document.createElement("P");
@@ -222,9 +233,18 @@ function changeAisle(aisleId) {
 
             //class names for the main div, text div and button for css styling
             aisleItem.className = "aisle-item";
+            itemImage.className = "aisle-item-img";
             itemDisplay.className = "aisle-item-p-div";
             basketAdd.className = "aisle-item-button";
             itemPTag.className = "aisle-item-text";
+
+            checkIfImageExists("assets/images/items/" + stockItem.imageUrl, (exists) => {
+                if (exists) {
+                    itemImage.src = "assets/images/items/" + stockItem.imageUrl;
+                } else {
+                    itemImage.src = "assets/images/items/no-image.webp";
+                }
+            });
 
             //add to basket button element properties
             basketAdd.id = "basket-add_" + stockItem.id;
@@ -252,6 +272,7 @@ function changeAisle(aisleId) {
             stockPTag.appendChild(stockText);
             itemDisplay.appendChild(itemPTag);
             itemDisplay.appendChild(stockPTag);
+            aisleItem.appendChild(itemImage);
             aisleItem.appendChild(itemDisplay);
             aisleItem.appendChild(basketAdd);
 
@@ -264,8 +285,11 @@ function changeAisle(aisleId) {
         }
     }
 
+    callback();
 }
 /**
+ * @param {number} itemId - id of the item passed to the function from shopStock
+ * 
  * Function to add an item to the basket, done on an individual basis. You 
  * only have one hand when you are holding a basket!
  * It checks if the id of the object is already in the basket. If so it needs
@@ -291,4 +315,31 @@ function removeFromBasket(itemId) {
  */
 function checkoutBasket() {
 
+}
+
+/**
+ * 
+ * @param {string} url - url of the image to search
+ * 
+ * This function will use the url provided to determine if it is found on the
+ * website.
+ */
+function checkIfImageExists(url, callback) {
+
+    const img = new Image();
+    img.src = url;
+
+    if (img.complete) {
+
+        callback(true);
+    } else {
+        img.onload = () => {
+            callback(true);
+        };
+
+        img.onerror = () => {
+            callback(false);
+        };
+        callback(false);
+    }
 }
