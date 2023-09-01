@@ -2,370 +2,411 @@
     {
         "id": 1,
         "name": "Bread",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 0.80,
+        "highPrice": 1.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Bakery"
+        "aisle": "Bakery",
+        "image": "bread.webp"
     },
     {
         "id": 2,
         "name": "Milk",
         "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "highPrice": 1.20,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Dairy"
+        "aisle": "Dairy",
+        "image": "milk.webp"
     },
     {
         "id": 3,
         "name": "Cheese",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 2.00,
+        "highPrice": 4.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Dairy"
+        "aisle": "Dairy",
+        "image": "cheese.webp"
     },
     {
         "id": 4,
         "name": "Newspaper",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.00,
+        "highPrice": 1.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Stationary"
+        "aisle": "Stationary",
+        "image": "newspaper.webp"
     },
     {
         "id": 5,
         "name": "Beef Mince",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 2.20,
+        "highPrice": 3.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Meat"
+        "aisle": "Meat",
+        "image": "beef-mince.webp"
     },
     {
         "id": 6,
         "name": "Steak",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 4.00,
+        "highPrice": 8.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Meat"
+        "aisle": "Meat",
+        "image": "steak.webp"
     },
     {
         "id": 7,
         "name": "Pork Chops",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 4.00,
+        "highPrice": 4.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Meat"
+        "aisle": "Meat",
+        "image": "pork-chops.webp"
     },
     {
         "id": 8,
         "name": "Turkey Twizzlers",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 2.00,
+        "highPrice": 3.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Frozen"
+        "aisle": "Frozen",
+        "image": "turkey-twizzlers.webp"
     },
     {
         "id": 9,
         "name": "Ice Creams",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.50,
+        "highPrice": 2.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Frozen"
+        "aisle": "Frozen",
+        "image": "ice-creams.webp"
     },
     {
         "id": 10,
         "name": "Chips",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.40,
+        "highPrice": 2.40,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Frozen"
+        "aisle": "Frozen",
+        "image": "chips.webp"
     },
     {
         "id": 11,
         "name": "Strawberry Yoghurt",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 0.40,
+        "highPrice": 0.70,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Dairy"
+        "aisle": "Dairy",
+        "image": "strawberry-yoghurt.webp"
     },
     {
         "id": 12,
         "name": "Cucumber",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 0.50,
+        "highPrice": 0.80,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Vegetables"
+        "aisle": "Vegetables",
+        "image": "cucumber.webp"
     },
     {
         "id": 13,
         "name": "Peppers",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.20,
+        "highPrice": 1.40,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Vegetables"
+        "aisle": "Vegetables",
+        "image": "peppers.webp"
     },
     {
         "id": 14,
         "name": "Tomatoes",
         "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "highPrice": 1.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Vegetables"
+        "aisle": "Vegetables",
+        "image": "tomatoes.webp"
     },
     {
         "id": 15,
         "name": "Cabbage",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 0.40,
+        "highPrice": 0.70,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Vegetables"
+        "aisle": "Vegetables",
+        "image": "cabbage.webp"
     },
     {
         "id": 16,
         "name": "Iceburg Lettuce",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 0.30,
+        "highPrice": 0.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Vegetables"
+        "aisle": "Vegetables",
+        "image": "iceburg-lettuce.webp"
     },
     {
         "id": 17,
         "name": "Apples",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 0.80,
+        "highPrice": 1.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Fruit"
+        "aisle": "Fruit",
+        "image": "apples.webp"
     },
     {
         "id": 18,
         "name": "Pears",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 0.80,
+        "highPrice": 1.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Fruit"
+        "aisle": "Fruit",
+        "image": "pears.webp"
     },
     {
         "id": 19,
         "name": "Watermelon",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 2.00,
+        "highPrice": 2.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Fruit"
+        "aisle": "Fruit",
+        "image": "watermelon.webp"
     },
     {
         "id": 20,
         "name": "Strawberries",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 2.00,
+        "highPrice": 4.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Fruit"
+        "aisle": "Fruit",
+        "image": "strawberries.webp"
     },
     {
         "id": 21,
         "name": "Corn Flakes",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.00,
+        "highPrice": 2.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Cereal"
+        "aisle": "Cereal",
+        "image": "corn-flakes.webp"
     },
     {
         "id": 22,
         "name": "Weetabix",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.10,
+        "highPrice": 2.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Cereal"
+        "aisle": "Cereal",
+        "image": "weetabix.webp"
     },
     {
         "id": 23,
         "name": "Coco Pops",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 2.00,
+        "highPrice": 2.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Cereal"
+        "aisle": "Cereal",
+        "image": "coco-pops.webp"
     },
     {
         "id": 24,
         "name": "Shredded Wheat",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.20,
+        "highPrice": 2.40,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Cereal"
+        "aisle": "Cereal",
+        "image": "shredded-wheat.webp"
     },
     {
         "id": 25,
         "name": "Laundry Detergent",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 5.00,
+        "highPrice": 9.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Household"
+        "aisle": "Household",
+        "image": "laundry-detergent.webp"
     },
     {
         "id": 26,
         "name": "Fabric Softener",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 5.00,
+        "highPrice": 9.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Household"
+        "aisle": "Household",
+        "image": "fabric-softener.webp"
     },
     {
         "id": 27,
         "name": "Colour Catchers",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 3.00,
+        "highPrice": 3.500,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Household"
+        "aisle": "Household",
+        "image": "colour-catchers.webp"
     },
     {
         "id": 28,
         "name": "Black Bin Bags",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.00,
+        "highPrice": 3.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Household"
+        "aisle": "Household",
+        "image": "black-bin-bags.webp"
     },
     {
         "id": 29,
         "name": "Food Bin Bags",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.00,
+        "highPrice": 1.40,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Household"
+        "aisle": "Household",
+        "image": "food-bin-bags.webp"
     },
     {
         "id": 30,
         "name": "Washing Up Liquid",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.50,
+        "highPrice": 2.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Household"
+        "aisle": "Household",
+        "image": "washing-up-liquid.webp"
     },
     {
         "id": 31,
         "name": "Coca-Cola",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 2.00,
+        "highPrice": 3.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Drinks"
+        "aisle": "Drinks",
+        "image": "coca-cola.webp"
     },
     {
         "id": 32,
         "name": "Lemonade",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 2.00,
+        "highPrice": 3.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Drinks"
+        "aisle": "Drinks",
+        "image": "lemonade.webp"
     },
     {
         "id": 33,
         "name": "Ribena",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.50,
+        "highPrice": 2.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Drinks"
+        "aisle": "Drinks",
+        "image": "ribena.webp"
     },
     {
         "id": 34,
         "name": "Orange Squash",
-        "lowPrice": 0.90,
+        "lowPrice": 1.30,
         "highPrice": 1.80,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Drinks"
+        "aisle": "Drinks",
+        "image": "orange-squash.webp"
     },
     {
         "id": 35,
         "name": "Bottled Water",
         "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "highPrice": 2.20,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Drinks"
+        "aisle": "Drinks",
+        "image": "bottled-water.webp"
     },
     {
         "id": 36,
         "name": "Doughnuts",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.50,
+        "highPrice": 4.50,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Bakery"
+        "aisle": "Bakery",
+        "image": "doughnuts.webp"
     },
     {
         "id": 37,
         "name": "Chicken Nuggets",
         "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "highPrice": 2.20,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Frozen"
+        "aisle": "Frozen",
+        "image": "chicken-nuggets.webp"
     },
     {
         "id": 38,
         "name": "Chicken Breast",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 4.00,
+        "highPrice": 7.00,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Meat"
+        "aisle": "Meat",
+        "image": "chicken-breast.webp"
     },
     {
         "id": 39,
         "name": "Pens",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 0.40,
+        "highPrice": 2.10,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Stationary"
+        "aisle": "Stationary",
+        "image": "pens.webp"
     },
     {
         "id": 40,
         "name": "Pencils",
-        "lowPrice": 0.90,
+        "lowPrice": 0.40,
         "highPrice": 1.80,
         "lowStock": 0,
         "highStock": 10,
-        "aisle": "Stationary"
+        "aisle": "Stationary",
+        "image": "pencils.webp"
     },
     {
         "id": 41,
         "name": "Birthday Card For Partner...",
-        "lowPrice": 0.90,
-        "highPrice": 1.80,
+        "lowPrice": 1.00,
+        "highPrice": 2.50,
         "lowStock": 1,
         "highStock": 10,
-        "aisle": "Stationary"
+        "aisle": "Stationary",
+        "image": "birthday-card.webp"
     }
 ]
