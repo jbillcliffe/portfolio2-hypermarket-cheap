@@ -194,22 +194,20 @@ in this way */
 }
 
 
-/*styling for any font awesome buttons, such as the basket in the toolbar 
-  in the game */
-.awesome-button {
+/* styling for any basket button and quantity text */
+.basket-items {
     background: none;
     color: white;
     border: none;
     outline: none;
     cursor: pointer;
-    margin-right: 20px;
     padding: 0;
-    font-size: 40px;
+    font-size: 30px;
     transition: 0.5s;
 }
 
-/* when hovering over a font awesome button, accent it for clarity */
-.awesome-button:hover {
+/* when hovering over the basket, accent it for clarity */
+#basket-button:hover {
     transition: 0.5s;
     color: cyan;
 }

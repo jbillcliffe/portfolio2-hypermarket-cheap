@@ -29,13 +29,16 @@
       <div class="the-toolbar" id="the-toolbar">
         <button
           data-button="show-basket"
-          class="awesome-button"
+          class="basket-items"
           style="display: none"
           id="basket-button"
         >
-          <i class="fas fa-shopping-cart"></i>
+          <i class="fas fa-shopping-cart"></i>&nbsp;<span
+            id="basket-tally"
+            class="basket-items"
+            >0</span
+          >
         </button>
-        <div id="basket-tally">0</div>
         <!-- loading icon, created in the loading.css-->
         <div id="toolbar-loading" style="display: none">
           <div id="loading_1" class="loading-bar"></div>
@@ -49,7 +52,7 @@
         </div>
       </div>
       <!--Overlay, styled by CSS, default invisible, shown with loading.-->
-      <div id="loading-overlay" style="display:none;"></div>
+      <div id="loading-overlay" style="display: none"></div>
       <div class="game-container" id="game-menu">
         <button data-button="play-new" class="menu-button">
           Play New Game <i class="fas fa-shopping-cart"></i>

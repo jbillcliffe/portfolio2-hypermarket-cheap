@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 startGame("new", "new");
             } else if (this.getAttribute("data-button") === "about") {
                 showAbout();
+            } else if (this.getAttribute("data-button") === "show-basket") {
+                showBasket();
             } else {
                 //further functions?
             }
@@ -91,8 +93,6 @@ function createEnvironment() {
     document.getElementById("the-toolbar").style.justifyContent = "space-between";
     document.getElementById("toolbar-loading").style.display = "none";
     document.getElementById("loading-overlay").style.display = "none";
-
-
 }
 
 /**
@@ -314,7 +314,10 @@ function changeAisle(aisleId, callback) {
  */
 function addToBasket(itemId) {
     console.log(itemId);
+}
 
+function showBasket() {
+    console.log("Hello I am the basket");
 }
 
 /**
