@@ -24,38 +24,46 @@
     <header>
       <!--Header image put in by css-->
     </header>
-    <div class="game-container" id="game-menu">
-      <button data-button="play-new" class="menu-button">
-        Play New Game <i class="fas fa-shopping-cart"></i>
-      </button>
-      <button data-button="about" class="menu-button">
-        About <i class="fas fa-info"></i>
-      </button>
-    </div>
-    <div class="game-container" id="game-screen" style="display: none">
+    <div id="hypermarket-sweep" class="hypermarket-sweep">
       <!--Across the top, like a header-->
-      <div class="the-toolbar">
-        <button data-button="show-basket" class="awesome-button">
+      <div class="the-toolbar" id="the-toolbar">
+        <button
+          data-button="show-basket"
+          class="awesome-button"
+          style="display: none"
+          id="basket-button"
+        >
           <i class="fas fa-shopping-cart"></i>
         </button>
         <!-- loading icon, created in the loading.css-->
-        <div id="fountainG" style="display: none">
-          <div id="fountainG_1" class="fountainG"></div>
-          <div id="fountainG_2" class="fountainG"></div>
-          <div id="fountainG_3" class="fountainG"></div>
-          <div id="fountainG_4" class="fountainG"></div>
-          <div id="fountainG_5" class="fountainG"></div>
-          <div id="fountainG_6" class="fountainG"></div>
-          <div id="fountainG_7" class="fountainG"></div>
-          <div id="fountainG_8" class="fountainG"></div>
+        <div id="toolbar-loading" style="display: none">
+          <div id="loading_1" class="loading-bar"></div>
+          <div id="loading_2" class="loading-bar"></div>
+          <div id="loading_3" class="loading-bar"></div>
+          <div id="loading_4" class="loading-bar"></div>
+          <div id="loading_5" class="loading-bar"></div>
+          <div id="loading_6" class="loading-bar"></div>
+          <div id="loading_7" class="loading-bar"></div>
+          <div id="loading_7" class="loading-bar"></div>
         </div>
       </div>
-      <!--The shop as a whole-->
-      <div class="the-shop">
-        <!--Bulk of game screen, left side-->
-        <div class="the-items" id="the-items"></div>
-        <!--Remaining portion of screen on right to store aisles as links-->
-        <div class="the-aisles" id="the-aisles"></div>
+
+      <div class="game-container" id="game-menu">
+        <button data-button="play-new" class="menu-button">
+          Play New Game <i class="fas fa-shopping-cart"></i>
+        </button>
+        <button data-button="about" class="menu-button">
+          About <i class="fas fa-info"></i>
+        </button>
+      </div>
+      <div class="game-container" id="game-screen" style="display: none">
+        <!--The shop as a whole-->
+        <div class="the-shop">
+          <!--Bulk of game screen, left side-->
+          <div class="the-items" id="the-items"></div>
+          <!--Remaining portion of screen on right to store aisles as links-->
+          <div class="the-aisles" id="the-aisles"></div>
+        </div>
       </div>
     </div>
     <footer>

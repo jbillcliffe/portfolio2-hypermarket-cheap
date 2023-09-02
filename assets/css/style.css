@@ -23,6 +23,21 @@ footer {
     height: 80px;
 }
 
+/* Styling for the toolbar in the game, contains the basket button */
+.the-toolbar {
+    display: flex;
+    flex-direction: row;
+    max-width: 1440px;
+    height: 75px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: flex-end;
+    background-color: #3d9970;
+    border: 2px solid black;
+    padding: 5px 20px;
+    align-items: center;
+}
+
 /* Class for game container, holds menu, about and the game */
 .game-container {
     display: flex;
@@ -45,19 +60,6 @@ footer {
     font-size: 16px;
     margin: 2rem auto;
     cursor: pointer;
-}
-
-/* Styling for the toolbar in the game, contains the basket button */
-.the-toolbar {
-    display: flex;
-    max-width: 1440px;
-    width: 100%;
-    justify-content: space-between;
-    background-color: #3d9970;
-    height: 75px;
-    border-bottom: 2px solid black;
-    padding: 5px 20px;
-    align-items: center;
 }
 
 /* container for the game below the toolbar */

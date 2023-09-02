@@ -40,7 +40,10 @@ let specialOffers = [];
  */
 function startGame(customerType = "new", dayType = "new") {
 
+    document.getElementById("toolbar-loading").style.display = "flex";
+
     if (dayType === "new") {
+
         startCash(customerType);
         startStock(dayType);
         /*
@@ -50,6 +53,7 @@ function startGame(customerType = "new", dayType = "new") {
         */
         setTimeout(createEnvironment, 2000);
         emptyBasket();
+
     }
 }
 
@@ -69,13 +73,17 @@ function createEnvironment() {
         let aisleButton = document.createElement("BUTTON");
         aisleButton.className = "aisle-button";
         aisleButton.id = aisle;
-        aisleButton.onclick = function () { changeAisle(aisle, function () { document.getElementById("fountainG").style.display = "none"; }); };
+        aisleButton.onclick = function () { changeAisle(aisle, function () { document.getElementById("toolbar-loading").style.display = "none"; }); };
         aisleButton.innerHTML = aisle;
         aisleList.appendChild(aisleButton);
     }
 
     document.getElementById("game-menu").style.display = "none";
-    document.getElementById("game-screen").style.display = "block";
+    document.getElementById("game-screen").style.display = "flex";
+    document.getElementById("basket-button").style.display = "flex";
+    document.getElementById("the-toolbar").style.justifyContent = "space-between";
+    document.getElementById("toolbar-loading").style.display = "none";
+
 }
 
 /**
@@ -208,12 +216,11 @@ function emptyBasket(requestType = "new") {
  * then populating it with new divs which have content
  */
 function changeAisle(aisleId, callback) {
-
+    document.getElementById("toolbar-loading").style.display = "flex";
     //Ensure the shop is emptied each time an aisle button is clicked
     let shopAisle = document.getElementById("the-items");
 
     shopAisle.innerHTML = "";
-    document.getElementById("fountainG").style.display = "block";
 
     //Iterate through the stock options and add when its the right aisle option
     for (let stockItem of shopStock) {
