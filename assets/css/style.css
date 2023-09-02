@@ -23,6 +23,22 @@ footer {
     height: 80px;
 }
 
+#hypermarket-sweep {
+    max-width: 1440px;
+    max-height: 1024px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#loading-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(37, 37, 37, 0.3);
+}
+
 /* Styling for the toolbar in the game, contains the basket button */
 .the-toolbar {
     display: flex;
@@ -38,16 +54,17 @@ footer {
     align-items: center;
 }
 
-/* Class for game container, holds menu, about and the game */
+/* Class for game container, holds menu, about and the game. This container
+   needs to be 4px taller than "the-shop" and "the-items" to allow for the
+   scrollbar to not overlap the border. */
 .game-container {
     display: flex;
     flex-direction: column;
     max-width: 1440px;
-    max-height: 1024px;
+    max-height: 675px;
     margin-left: auto;
     margin-right: auto;
     border: 2px solid black;
-    height: 100%;
 }
 
 /* styling for the buttons on the main menu */
@@ -66,8 +83,7 @@ footer {
 .the-shop {
     display: flex;
     flex-direction: row;
-    max-width: 1440px;
-    width: 100%;
+    max-height: 671px;
 }
 
 /* container for the items which are available */
@@ -75,8 +91,11 @@ footer {
     display: flex;
     flex-direction: column;
     width: 80%;
+    max-height: 671px;
     border-right: 2px solid black;
     padding: 2rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 /* container to hold the aisle options */
@@ -87,6 +106,7 @@ footer {
     background-color: black;
     border-left: 2px solid black;
     padding-left: 2px;
+    height: 100%;
 }
 
 /* styling for the button which has each aisle option */

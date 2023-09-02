@@ -36,11 +36,13 @@ let specialOffers = [];
  * customerType and dayType will determine how the function operates, both of
  * these parameters default as "new". These are changed upon request when the
  * function is called. 
- * Cash, stock and the environment are initated here
+ * Cash, stock and the environment are initated here. The function will also
+ * show the loading animation in the toolbar while running
  */
 function startGame(customerType = "new", dayType = "new") {
 
     document.getElementById("toolbar-loading").style.display = "flex";
+    document.getElementById("loading-overlay").style.display = "block";
 
     if (dayType === "new") {
 
@@ -73,7 +75,12 @@ function createEnvironment() {
         let aisleButton = document.createElement("BUTTON");
         aisleButton.className = "aisle-button";
         aisleButton.id = aisle;
-        aisleButton.onclick = function () { changeAisle(aisle, function () { document.getElementById("toolbar-loading").style.display = "none"; }); };
+        aisleButton.onclick = function () {
+            changeAisle(aisle, function () {
+                document.getElementById("toolbar-loading").style.display = "none";
+                document.getElementById("loading-overlay").style.display = "none";
+            });
+        };
         aisleButton.innerHTML = aisle;
         aisleList.appendChild(aisleButton);
     }
@@ -83,6 +90,8 @@ function createEnvironment() {
     document.getElementById("basket-button").style.display = "flex";
     document.getElementById("the-toolbar").style.justifyContent = "space-between";
     document.getElementById("toolbar-loading").style.display = "none";
+    document.getElementById("loading-overlay").style.display = "none";
+
 
 }
 
@@ -217,6 +226,7 @@ function emptyBasket(requestType = "new") {
  */
 function changeAisle(aisleId, callback) {
     document.getElementById("toolbar-loading").style.display = "flex";
+    document.getElementById("loading-overlay").style.display = "block";
     //Ensure the shop is emptied each time an aisle button is clicked
     let shopAisle = document.getElementById("the-items");
 
