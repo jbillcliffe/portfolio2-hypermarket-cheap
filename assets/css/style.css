@@ -113,9 +113,9 @@ footer {
 .aisle-button {
     height: 4rem;
     width: 100%;
-    font-family: "Wallpoet", sans-serif;
-    letter-spacing: 1.2px;
-    font-size: large;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
     margin: 0.1rem auto;
     background-color: #3d9970;
     color: white;
@@ -164,19 +164,34 @@ stacked vertically)*/
     width: 80%;
 }
 
+.price-div {
+    width: 50%;
+}
+
 /*styling for the text inside the aisle item (text styling of name and stock */
 .aisle-item-text {
-    font-family: "Wallpoet", sans-serif;
-    letter-spacing: 1.2px;
-    font-size: 23px;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.8rem;
     color: white;
     margin: auto auto auto 1rem;
+    font-weight: bold;
+}
+
+/*style to add the strikethrough when a price is on a special offer, this 
+strikethrough will be applied to the RRP.*/
+.strikethrough-text {
+    color: red;
+    text-decoration: line-through red 1px;
 }
 
 /*Colour assignment for stock text, can also be used elsewhere when declared
 in this way */
-.no-stock {
+.negative-text {
     color: red;
+}
+
+.positive-text {
+    color: lightgreen;
 }
 
 
@@ -202,7 +217,9 @@ in this way */
     outline: none;
     cursor: pointer;
     padding: 0;
-    font-size: 30px;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
     transition: 0.5s;
 }
 
