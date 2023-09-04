@@ -89,8 +89,9 @@ function createEnvironment() {
 
     document.getElementById("game-menu").style.display = "none";
     document.getElementById("game-screen").style.display = "flex";
+    document.getElementById("wallet-icon").style.display = "flex";
     document.getElementById("basket-button").style.display = "flex";
-    document.getElementById("the-toolbar").style.justifyContent = "space-between";
+    document.getElementById("the-toolbar").style.justifyContent = "flex-start";
     document.getElementById("toolbar-loading").style.display = "none";
     document.getElementById("loading-overlay").style.display = "none";
 }
@@ -330,8 +331,7 @@ function changeAisle(aisleId, callback) {
                 priceAmountText = document.createTextNode("£" + stockItem.price);
                 priceAmountSpan.appendChild(priceAmountText);
                 pricePTag.appendChild(priceAmountSpan);
-
-                specialText = document.createTextNode(" ");
+                specialText = document.createTextNode("&nbsp");
 
             } else {
                 let calculatedAmount = (stockItem.price * stockItem.special).toFixed(2);
@@ -357,9 +357,6 @@ function changeAisle(aisleId, callback) {
                 }
 
             }
-
-
-
 
             /* ----- ADD TO BASKET BUTTON -----
             Define the ID, put a + inside the button and assign the onClick to

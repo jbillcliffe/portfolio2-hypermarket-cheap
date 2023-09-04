@@ -161,11 +161,11 @@ stacked vertically)*/
     align-content: flex-start;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 80%;
+    width: 40%;
 }
 
 .price-div {
-    width: 50%;
+    width: 30%;
 }
 
 /*styling for the text inside the aisle item (text styling of name and stock */
@@ -206,25 +206,45 @@ in this way */
     color: white;
     font-size: 400%;
     margin: auto 1rem;
+    transition: all 0.7s ease;
 }
 
 
 /* styling for any basket button and quantity text */
-.basket-items {
+.toolbar-items {
     background: none;
     color: white;
     border: none;
     outline: none;
-    cursor: pointer;
     padding: 0;
     font-family: "Roboto", sans-serif;
     font-size: 1.8rem;
     font-weight: bold;
-    transition: 0.5s;
+}
+
+#wallet-icon::after {
+    content: attr(wallet-count);
+    margin-left: 0.5rem;
+    margin-right: 3rem;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.8rem;
+    color: white;
+    font-weight: bold;
+}
+
+#basket-button {
+    cursor: pointer;
 }
 
 /* when hovering over the basket, accent it for clarity */
 #basket-button:hover {
     transition: 0.5s;
     color: cyan;
+}
+
+.aisle-item-button:hover {
+    /*transition: 0.5s;*/
+    color: black;
+    /*background-color: #3d9970;*/
+    box-shadow: 0 0 4px 100px lightgreen inset;
 }

@@ -27,15 +27,21 @@
     <div id="hypermarket-sweep" class="hypermarket-sweep">
       <!--Across the top, like a header-->
       <div class="the-toolbar" id="the-toolbar">
+        <i
+          id="wallet-icon"
+          class="fas fa-wallet toolbar-items"
+          style="display: none"
+          wallet-count="0.00"
+        ></i>
         <button
           data-button="show-basket"
-          class="basket-items"
+          class="toolbar-items"
           style="display: none"
           id="basket-button"
         >
           <i class="fas fa-shopping-cart"></i>&nbsp;<span
             id="basket-tally"
-            class="basket-items"
+            class="toolbar-items"
             >0</span
           >
         </button>
