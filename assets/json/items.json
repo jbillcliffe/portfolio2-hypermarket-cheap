@@ -7,7 +7,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Bakery",
-        "imageUrl": "bread.webp"
+        "imageUrl": "bread.webp",
+        "alertText": "is no bread today."
     },
     {
         "id": 2,
@@ -17,7 +18,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Dairy",
-        "imageUrl": "milk.webp"
+        "imageUrl": "milk.webp",
+        "alertText": "is no milk today."
     },
     {
         "id": 3,
@@ -27,7 +29,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Dairy",
-        "imageUrl": "cheese.webp"
+        "imageUrl": "cheese.webp",
+        "alertText": "is no cheese today."
     },
     {
         "id": 4,
@@ -37,7 +40,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Stationary",
-        "imageUrl": "newspaper.webp"
+        "imageUrl": "newspaper.webp",
+        "alertText": "are no newspapers today."
     },
     {
         "id": 5,
@@ -47,7 +51,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Meat",
-        "imageUrl": "beef-mince.webp"
+        "imageUrl": "beef-mince.webp",
+        "alertText": "is no beef mince today."
     },
     {
         "id": 6,
@@ -57,7 +62,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Meat",
-        "imageUrl": "steak.webp"
+        "imageUrl": "steak.webp",
+        "alertText": "is no steak today."
     },
     {
         "id": 7,
@@ -67,7 +73,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Meat",
-        "imageUrl": "pork-chops.webp"
+        "imageUrl": "pork-chops.webp",
+        "alertText": "are no pork chops today."
     },
     {
         "id": 8,
@@ -77,7 +84,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Frozen",
-        "imageUrl": "turkey-twizzlers.webp"
+        "imageUrl": "turkey-twizzlers.webp",
+        "alertText": "are no Turkey Twizzlers today."
     },
     {
         "id": 9,
@@ -87,7 +95,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Frozen",
-        "imageUrl": "ice-creams.webp"
+        "imageUrl": "ice-creams.webp",
+        "alertText": "are no ice creams today."
     },
     {
         "id": 10,
@@ -97,7 +106,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Frozen",
-        "imageUrl": "chips.webp"
+        "imageUrl": "chips.webp",
+        "alertText": "are no chips today."
     },
     {
         "id": 11,
@@ -107,7 +117,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Dairy",
-        "imageUrl": "strawberry-yoghurt.webp"
+        "imageUrl": "strawberry-yoghurt.webp",
+        "alertText": "are no strawberry yoghurts today."
     },
     {
         "id": 12,
@@ -117,7 +128,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Vegetables",
-        "imageUrl": "cucumber.webp"
+        "imageUrl": "cucumber.webp",
+        "alertText": "is no cucumber today."
     },
     {
         "id": 13,
@@ -127,7 +139,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Vegetables",
-        "imageUrl": "peppers.webp"
+        "imageUrl": "peppers.webp",
+        "alertText": "are no peppers today."
     },
     {
         "id": 14,
@@ -137,7 +150,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Vegetables",
-        "imageUrl": "tomatoes.webp"
+        "imageUrl": "tomatoes.webp",
+        "alertText": "are no tomatoes today."
     },
     {
         "id": 15,
@@ -147,7 +161,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Vegetables",
-        "imageUrl": "cabbage.webp"
+        "imageUrl": "cabbage.webp",
+        "alertText": "is no cabbage today."
     },
     {
         "id": 16,
@@ -157,7 +172,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Vegetables",
-        "imageUrl": "iceburg-lettuce.webp"
+        "imageUrl": "iceburg-lettuce.webp",
+        "alertText": "is no iceburg lettuce today."
     },
     {
         "id": 17,
@@ -167,7 +183,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Fruit",
-        "imageUrl": "apples.webp"
+        "imageUrl": "apples.webp",
+        "alertText": "are no apples today."
     },
     {
         "id": 18,
@@ -177,7 +194,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Fruit",
-        "imageUrl": "pears.webp"
+        "imageUrl": "pears.webp",
+        "alertText": "are no pears today."
     },
     {
         "id": 19,
@@ -187,7 +205,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Fruit",
-        "imageUrl": "watermelon.webp"
+        "imageUrl": "watermelon.webp",
+        "alertText": "is no watermelon today."
     },
     {
         "id": 20,
@@ -197,7 +216,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Fruit",
-        "imageUrl": "strawberries.webp"
+        "imageUrl": "strawberries.webp",
+        "alertText": "are no strawberries today."
     },
     {
         "id": 21,
@@ -207,7 +227,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Cereal",
-        "imageUrl": "corn-flakes.webp"
+        "imageUrl": "corn-flakes.webp",
+        "alertText": "are no cornflakes today."
     },
     {
         "id": 22,
@@ -217,7 +238,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Cereal",
-        "imageUrl": "weetabix.webp"
+        "imageUrl": "weetabix.webp",
+        "alertText": "is no Weetabix today."
     },
     {
         "id": 23,
@@ -227,7 +249,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Cereal",
-        "imageUrl": "coco-pops.webp"
+        "imageUrl": "coco-pops.webp",
+        "alertText": "are no Coco Pops today."
     },
     {
         "id": 24,
@@ -237,7 +260,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Cereal",
-        "imageUrl": "shredded-wheat.webp"
+        "imageUrl": "shredded-wheat.webp",
+        "alertText": "is no Shredded Wheat today."
     },
     {
         "id": 25,
@@ -247,7 +271,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Household",
-        "imageUrl": "laundry-detergent.webp"
+        "imageUrl": "laundry-detergent.webp",
+        "alertText": "is no laundry detergent today."
     },
     {
         "id": 26,
@@ -257,7 +282,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Household",
-        "imageUrl": "fabric-softener.webp"
+        "imageUrl": "fabric-softener.webp",
+        "alertText": "is no fabric softener today."
     },
     {
         "id": 27,
@@ -267,7 +293,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Household",
-        "imageUrl": "colour-catchers.webp"
+        "imageUrl": "colour-catchers.webp",
+        "alertText": "are no colour catchers today."
     },
     {
         "id": 28,
@@ -277,7 +304,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Household",
-        "imageUrl": "black-bin-bags.webp"
+        "imageUrl": "black-bin-bags.webp",
+        "alertText": "are no black bin bags today."
     },
     {
         "id": 29,
@@ -287,7 +315,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Household",
-        "imageUrl": "food-bin-bags.webp"
+        "imageUrl": "food-bin-bags.webp",
+        "alertText": "are no food bin bags today."
     },
     {
         "id": 30,
@@ -297,7 +326,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Household",
-        "imageUrl": "washing-up-liquid.webp"
+        "imageUrl": "washing-up-liquid.webp",
+        "alertText": "is no washing up liquid today."
     },
     {
         "id": 31,
@@ -307,7 +337,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Drinks",
-        "imageUrl": "coca-cola.webp"
+        "imageUrl": "coca-cola.webp",
+        "alertText": "is no Coca-Cola today."
     },
     {
         "id": 32,
@@ -317,7 +348,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Drinks",
-        "imageUrl": "lemonade.webp"
+        "imageUrl": "lemonade.webp",
+        "alertText": "is no lemonade today."
     },
     {
         "id": 33,
@@ -327,7 +359,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Drinks",
-        "imageUrl": "ribena.webp"
+        "imageUrl": "ribena.webp",
+        "alertText": "is no Ribena today."
     },
     {
         "id": 34,
@@ -337,7 +370,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Drinks",
-        "imageUrl": "orange-squash.webp"
+        "imageUrl": "orange-squash.webp",
+        "alertText": "is no orange squash today."
     },
     {
         "id": 35,
@@ -347,7 +381,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Drinks",
-        "imageUrl": "bottled-water.webp"
+        "imageUrl": "bottled-water.webp",
+        "alertText": "is no bottled water today."
     },
     {
         "id": 36,
@@ -357,7 +392,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Bakery",
-        "imageUrl": "doughnuts.webp"
+        "imageUrl": "doughnuts.webp",
+        "alertText": "are no doughnuts today."
     },
     {
         "id": 37,
@@ -367,7 +403,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Frozen",
-        "imageUrl": "chicken-nuggets.webp"
+        "imageUrl": "chicken-nuggets.webp",
+        "alertText": "are no chicken nuggets today."
     },
     {
         "id": 38,
@@ -377,7 +414,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Meat",
-        "imageUrl": "chicken-breast.webp"
+        "imageUrl": "chicken-breast.webp",
+        "alertText": "are no chicken breasts today."
     },
     {
         "id": 39,
@@ -387,7 +425,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Stationary",
-        "imageUrl": "pens.webp"
+        "imageUrl": "pens.webp",
+        "alertText": "are no pens today."
     },
     {
         "id": 40,
@@ -397,7 +436,8 @@
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Stationary",
-        "imageUrl": "pencils.webp"
+        "imageUrl": "pencils.webp",
+        "alertText": "are no pencils today."
     },
     {
         "id": 41,
@@ -407,6 +447,7 @@
         "lowStock": 1,
         "highStock": 10,
         "aisle": "Stationary",
-        "imageUrl": "birthday-card.webp"
+        "imageUrl": "birthday-card.webp",
+        "alertText": "are no birthday cards today. I really hope it wasn't for someone important!!"
     }
 ]

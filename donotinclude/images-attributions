@@ -45,3 +45,8 @@ Image Not Found : <a href="https://www.vecteezy.com/vector-art/5337799-icon-imag
 Check if image exists function : https://codepen.io/kallil-belmonte/pen/KKKRoyx
 
 CSS Loader : https://cssload.net/
+
+Create Element References : https://www.w3schools.com/jsref/
+Change an ::after : https://geeksforgeeks.org/how-to-update-properties-of-pseudo-element-after-and-before-using-javascript/
+
+for finding object by property value : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find

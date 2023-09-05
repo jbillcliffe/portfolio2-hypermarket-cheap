@@ -123,7 +123,8 @@ function startCash(customerType = "new") {
       for cash.
     */
     playerCash = (Math.random() * (cashHigh - cashLow) + cashLow).toFixed(2);
-
+    document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toString());
+    console.log(playerCash);
 }
 
 /**
@@ -148,7 +149,7 @@ function startStock(dayType = "new") {
     //getJSON gets the data from the items.json file to then work with each item
     $.getJSON("assets/json/items.json", function (data) {
         for (item of data) {
-
+            console.log(item);
             //adding aisle options
             aisles.indexOf(item.aisle) >= 0 ? null : aisles.push(item.aisle);
 
@@ -188,7 +189,16 @@ function startStock(dayType = "new") {
                 thisSpecial = 1;
             }
             //create the item to go into the shop stock
-            let thisItem = { id: item.id, name: item.name, price: thisItemPrice, quantity: thisItemStock, aisle: item.aisle, special: thisSpecial, imageUrl: item.imageUrl };
+            let thisItem = {
+                id: item.id,
+                name: item.name,
+                price: thisItemPrice,
+                quantity: thisItemStock,
+                aisle: item.aisle,
+                special: thisSpecial,
+                imageUrl: item.imageUrl,
+                alertText: item.alertText
+            };
             shopStock.push(thisItem);
         }
     });
@@ -264,6 +274,9 @@ function changeAisle(aisleId, callback) {
             let itemText = document.createTextNode(stockItem.name);
             let innerPriceText;
 
+            //The amount paid to pass to the addToBasket function
+            let calculatedAmount;
+
             itemPTag.appendChild(itemText);
             /*
             Define class names for the divs that are all present within a
@@ -332,9 +345,10 @@ function changeAisle(aisleId, callback) {
                 priceAmountSpan.appendChild(priceAmountText);
                 pricePTag.appendChild(priceAmountSpan);
                 specialText = document.createTextNode("&nbsp");
+                calculatedAmount = stockItem.price;
 
             } else {
-                let calculatedAmount = (stockItem.price * stockItem.special).toFixed(2);
+                calculatedAmount = (stockItem.price * stockItem.special).toFixed(2);
                 priceAmountText = document.createTextNode("£" + calculatedAmount.toString());
                 priceAmountSpan.appendChild(priceAmountText);
                 pricePTag.appendChild(priceAmountSpan);
@@ -361,11 +375,22 @@ function changeAisle(aisleId, callback) {
             /* ----- ADD TO BASKET BUTTON -----
             Define the ID, put a + inside the button and assign the onClick to
             each button. Each button is then given the id of the item to send to
-            the basket when it is clicked.
+            the basket when it is clicked. If there is no stock it will fire an
+            alert to remind the user there is none on the shelf
             */
             basketAdd.id = "basket-add_" + stockItem.id;
-            basketAdd.onclick = function () { addToBasket(stockItem.id); };
-            basketAdd.innerHTML = "+";
+
+            if (stockItem.quantity > 0) {
+
+                basketAdd.onclick = function () { addToBasket(stockItem, calculatedAmount); };
+                basketAdd.innerHTML = "+";
+            } else {
+
+                basketAdd.onclick = function () { noStockToAdd(stockItem); };
+                basketAdd.innerHTML = `<i class="fas fa-times negative-text"></i>`;
+
+            }
+
 
             /*
             Appending to the document. Text nodes to paragraphs, paragraphs
@@ -395,15 +420,64 @@ function changeAisle(aisleId, callback) {
 }
 
 /**
- * @param {number} itemId - id of the item passed to the function from shopStock
+ * @param {object} item - the whole item object passed to the function from shopStock
+ * {
+ *      id:number, 
+ *      name:string, 
+ *      price: number, 
+ *      quantity: number,
+ *      aisle: string,
+ *      special: number, 
+ *      imageUrl: string,
+ *      alertText: string
+ * }
  * 
+ * An alert to be fired reminding the user that there is no stock of this item
+ * and to try again another time.
+ */
+function noStockToAdd(item) {
+    console.log(item);
+    alert("I'm sorry, there " + item.alertText);
+}
+
+/**
+ * @param {object} item - the whole item object passed to the function from shopStock
+ * @param {number} amountPaid - the amount "paid" attached to the basket button
+ * {
+ *      id:number, 
+ *      name:string, 
+ *      price: number, 
+ *      quantity: number,
+ *      aisle: string,
+ *      special: number, 
+ *      imageUrl: string ,
+ *      alertText: string
+ * }
  * Function to add an item to the basket, done on an individual basis. You 
  * only have one hand when you are holding a basket!
  * It checks if the id of the object is already in the basket. If so it needs
  * to alter the quantity rather than
  */
-function addToBasket(itemId) {
-    console.log(itemId);
+function addToBasket(item, amountPaid) {
+
+    /*
+        subtract the cost from the wallet and set the "wallet-count" data
+        attached to the wallet icon to change
+    */
+    console.log(playerCash);
+    playerCash = (playerCash - amountPaid).toFixed(2);
+    console.log(playerCash);
+    console.log(amountPaid);
+    document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toString());
+
+    /*
+        get the stock from the shopStock and adjust its quantity. 
+    */
+    let shopObject = shopStock.find(({ id }) => id === item.id);
+    console.log(shopObject);
+
+
+
 }
 
 function showBasket() {
