@@ -486,8 +486,11 @@ function addToBasket(item, amountPaid) {
         } else {
             stockTextSpan.innerHTML = shopObject.quantity;
         }
-    }
 
+        let basketTally = document.getElementById("basket-tally");
+        basketTally.innerHTML = parseInt(basketTally.innerHTML) + 1;
+
+    }
 }
 
 function showBasket() {
