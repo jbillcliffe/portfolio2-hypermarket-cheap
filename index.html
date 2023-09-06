@@ -15,7 +15,7 @@
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Wallpoet&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Roboto:wght@300&family=Wallpoet&display=swap"
       rel="stylesheet"
     />
     <title>Hypermarket Cheap - A Shopping Simulator</title>
@@ -39,9 +39,9 @@
           style="display: none"
           id="basket-button"
         >
-          <i class="fas fa-shopping-cart" style="line-height: inherit;"></i>
+          <i class="fas fa-shopping-cart" style="line-height: inherit"></i>
           &nbsp;
-          <span id="basket-tally" class="toolbar-items" >0</span>
+          <span id="basket-tally" class="toolbar-items">0</span>
         </button>
         <!-- loading icon, created in the loading.css-->
         <div id="toolbar-loading" style="display: none">
@@ -75,7 +75,11 @@
         </div>
       </div>
       <!--Window 3 contains the basket. To be manipulated to show what has been added-->
-      <div class="game-container" id="the-basket" style="display: none"></div>
+      <div class="game-container" id="the-basket" style="display: none">
+        <div class="the-toolbar" id="basket-return">
+          <p>Return To Shop</p>
+        </div>
+      </div>
     </div>
     <footer>
       <!--Footer content, social links-->

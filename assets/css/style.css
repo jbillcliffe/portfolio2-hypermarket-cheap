@@ -75,6 +75,12 @@ footer {
     align-items: center;
 }
 
+#basket-return {
+    background-color: black;
+    color: white;
+    justify-content: flex-start;
+}
+
 /* Class for game container, holds menu, about and the game. This container
    needs to be 4px taller than "the-shop" and "the-items" to allow for the
    scrollbar to not overlap the border. */
@@ -92,6 +98,10 @@ footer {
 
 #game-menu {
     justify-content: center;
+}
+
+#the-basket {
+    background-color: black;
 }
 
 /* styling for the buttons on the main menu */
