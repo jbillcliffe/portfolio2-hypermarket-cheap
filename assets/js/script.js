@@ -90,6 +90,7 @@ function createEnvironment() {
 
     document.getElementById("game-menu").style.display = "none";
     document.getElementById("game-screen").style.display = "flex";
+    document.getElementById("the-basket").style.display = "none";
     document.getElementById("wallet-icon").style.display = "flex";
     document.getElementById("basket-button").style.display = "flex";
     document.getElementById("the-toolbar").style.justifyContent = "flex-start";
@@ -506,7 +507,6 @@ function addToBasket(itemForBasket, amountPaid) {
         Remove unnecessary data from the object to go into the basket.
         Then add other values which speed up any further processes
         */
-
         let itemToGoToBasket = {
             id: itemForBasket.id,
             name: itemForBasket.name,
@@ -526,13 +526,17 @@ function addToBasket(itemForBasket, amountPaid) {
         } else {
             itemExistingInBasket.quantity++;
         }
-
-        console.log(basketStock);
     }
 }
 
 function showBasket() {
-    console.log("Hello I am the basket");
+    let gameWindow = document.getElementById("game-screen");
+    let basketWindow = document.getElementById("the-basket");
+    let gameHeight = gameWindow.offsetHeight;
+    gameWindow.style.display = "none";
+    basketWindow.style.display = "flex";
+    basketWindow.style.height = gameHeight + "px";
+
 }
 
 /**
