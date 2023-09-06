@@ -19,16 +19,17 @@ document.addEventListener("DOMContentLoaded", function () {
 /*
     --- Global Variables --- 
     Values that are required across the game. Therefore they are declared at
-    the top of the script
+    the top of the script.
 */
 
 let aisles = [];
 let basketStock = [];
+let shopStock = [];
+let specialOffers = [];
 let cashHigh = 100.00;
 let cashLow = 30.00;
 let playerCash = 0.00;
-let shopStock = [];
-let specialOffers = [];
+
 
 /**
  * * @param {string} customerType - new/same, determines how startGame operates
@@ -48,11 +49,11 @@ function startGame(customerType = "new", dayType = "new") {
 
     if (dayType === "new") {
 
-        startCash(customerType);
-        startStock(dayType);
+        startingPlayerCash(customerType);
+        gameStartingStock(dayType);
         /*
             A delay of 2s gives time to for the 
-            arrays of data to populate during the startStock function before
+            arrays of data to populate during the gameStartingStock function before
             performing createEnvironment which relies on these variables
         */
         setTimeout(createEnvironment, 2000);
@@ -104,13 +105,13 @@ function showAbout() {
 }
 
 /**
- * @param {string} customerType - new/same, determines how startCash operates
+ * @param {string} customerType - new/same, determines how startingPlayerCash operates
  * 
  * Function for determining player starting cash amount, if customerType="new"
  * then choose a random amount of cash from a range, if customerType="same"
  * then the cash amount is not changed
  */
-function startCash(customerType = "new") {
+function startingPlayerCash(customerType = "new") {
 
     /*
       eg. 0.5 * 70 + 30 = 35 + 30
@@ -127,32 +128,38 @@ function startCash(customerType = "new") {
 }
 
 /**
- * @param {string} dayType - new/same, determines how startStock operates
+ * @param {string} dayType - new/same, determines how gameStartingStock operates
  * 
  * Function for determining starting shop stock, if dayType="new"
  * then a new generation of stock is created, new items,amounts and prices. If
  * dayType="same" then no change in prices/stocks for a new game
  */
-function startStock(dayType = "new") {
+function gameStartingStock(dayType = "new") {
     /*
       Go through each item in items.json and beginning setting stock levels
       also applying specieals as necessary
     */
     //getJSON gets the data from the specials.json file and holds them for stock creation
-    $.getJSON("assets/json/specials.json", function (json) {
-        for (offer of json) {
-            specialOffers.push({ id: offer.id, name: offer.name, chance: offer.chance, factor: offer.factor, occurance: offer.occurance });
+    $.getJSON("assets/json/specials.json", function (jsonSpecialOfferList) {
+        for (jsonSpecialOffer of jsonSpecialOfferList) {
+            specialOffers.push({
+                id: jsonSpecialOffer.id,
+                name: jsonSpecialOffer.name,
+                chance: jsonSpecialOffer.chance,
+                factor: jsonSpecialOffer.factor,
+                occurance: jsonSpecialOffer.occurance
+            });
         }
     });
 
     //getJSON gets the data from the items.json file to then work with each item
-    $.getJSON("assets/json/items.json", function (data) {
-        for (item of data) {
+    $.getJSON("assets/json/items.json", function (jsonItemsList) {
+        for (jsonItem of jsonItemsList) {
             //adding aisle options
-            aisles.indexOf(item.aisle) >= 0 ? null : aisles.push(item.aisle);
+            aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
 
-            let thisItemStock = Math.round(Math.random() * (item.highStock - item.lowStock) + item.lowStock);
-            let thisItemPrice = (Math.random() * (item.highPrice - item.lowPrice) + item.lowPrice).toFixed(2);
+            let thisItemStock = Math.round(Math.random() * (jsonItem.highStock - jsonItem.lowStock) + jsonItem.lowStock);
+            let thisItemPrice = (Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2);
 
             /*
               Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
@@ -188,14 +195,14 @@ function startStock(dayType = "new") {
             }
             //create the item to go into the shop stock
             let thisItem = {
-                id: item.id,
-                name: item.name,
+                id: jsonItem.id,
+                name: jsonItem.name,
                 price: thisItemPrice,
                 quantity: thisItemStock,
-                aisle: item.aisle,
+                aisle: jsonItem.aisle,
                 special: thisSpecial,
-                imageUrl: item.imageUrl,
-                alertText: item.alertText
+                imageUrl: jsonItem.imageUrl,
+                alertText: jsonItem.alertText
             };
             shopStock.push(thisItem);
         }
@@ -365,6 +372,7 @@ function changeAisle(aisleId, callback) {
                     if (eachSpecial.factor === stockItem.special) {
                         specialText = document.createTextNode(eachSpecial.name);
                         specialPTag.appendChild(specialText);
+                        break;
                     } else {
                         continue;
                     }
@@ -430,7 +438,7 @@ function noStockToAdd(alertingText) {
 }
 
 /**
- * @param {object} item - the whole item object passed to the function from shopStock
+ * @param {object} itemForBasket - the whole item object passed to the function from shopStock
  * @param {number} amountPaid - the amount "paid" attached to the basket button
  * {
  *      id:number, 
@@ -447,13 +455,12 @@ function noStockToAdd(alertingText) {
  * It checks if the id of the object is already in the basket. If so it needs
  * to alter the quantity rather than
  */
-function addToBasket(item, amountPaid) {
+function addToBasket(itemForBasket, amountPaid) {
 
     /*
     First, it needs to be determined if the player has enough money. Otherwise,
     they cannot addToBasket.
     */
-
     if (playerCash - amountPaid < 0) {
         alert("I'm sorry, you do not have enough money to purchase this");
     } else {
@@ -466,20 +473,22 @@ function addToBasket(item, amountPaid) {
         document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toString());
 
         /*
-        If after taking one off the shelf the quantity left is 0, it needs to now
+        - If after taking one off the shelf the quantity left is 0, it needs to now
         be marked as out of stock. Otherwise, it is a straightforward quantity 
         adjustment.
-        The ADD button needs to be considered for alteration, as does the text for the stock.
+        - The ADD button needs to be considered for alteration, as does the text for the stock.
+        - Basket tally needs to be altered by +1.
+        - basketStock array needs to be altered to include the new item added
         */
-        let shopObject = shopStock.find(({ id }) => id === item.id);
+        let shopObject = shopStock.find(({ id }) => id === itemForBasket.id);
         shopObject.quantity--;
 
-        let stockTextSpan = document.getElementById("stock_" + item.id).children[0];
-        let basketButton = document.getElementById("basket-add_" + item.id);
+        let stockTextSpan = document.getElementById("stock_" + itemForBasket.id).children[0];
+        let basketButton = document.getElementById("basket-add_" + itemForBasket.id);
 
         if (shopObject.quantity === 0) {
 
-            basketButton.onclick = function () { noStockToAdd(item.alertText); };
+            basketButton.onclick = function () { noStockToAdd(itemForBasket.alertText); };
             basketButton.innerHTML = `<i class="fas fa-times negative-text"></i>`;
             stockTextSpan.className = "aisle-item-text negative-text";
             stockTextSpan.innerHTML = "Out Of Stock";
@@ -488,8 +497,37 @@ function addToBasket(item, amountPaid) {
         }
 
         let basketTally = document.getElementById("basket-tally");
-        basketTally.innerHTML = parseInt(basketTally.innerHTML) + 1;
+        basketTally.innerHTML = (parseInt(basketTally.innerHTML) + 1).toString();
 
+        /*
+        After checking if this item already exists in the basket. It needs to
+        add 1 to the quantity of it, or if not found it needs to create a new
+        object into the array based on the initial object with a quantity of 1.
+        Remove unnecessary data from the object to go into the basket.
+        Then add other values which speed up any further processes
+        */
+
+        let itemToGoToBasket = {
+            id: itemForBasket.id,
+            name: itemForBasket.name,
+            price: itemForBasket.price,
+            amountPaid: amountPaid,
+            quantity: 1,
+            aisle: itemForBasket.aisle,
+            special: itemForBasket.special,
+            imageUrl: itemForBasket.imageUrl
+        };
+
+        let itemExistingInBasket = basketStock.find(({ id }) => id === itemToGoToBasket.id);
+        console.log(itemExistingInBasket);
+
+        if (!(basketStock.find(({ id }) => id === itemToGoToBasket.id))) {
+            basketStock.push(itemToGoToBasket);
+        } else {
+            itemExistingInBasket.quantity++;
+        }
+
+        console.log(basketStock);
     }
 }
 
