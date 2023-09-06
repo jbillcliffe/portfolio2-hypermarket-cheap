@@ -124,7 +124,6 @@ function startCash(customerType = "new") {
     */
     playerCash = (Math.random() * (cashHigh - cashLow) + cashLow).toFixed(2);
     document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toString());
-    console.log(playerCash);
 }
 
 /**
@@ -149,7 +148,6 @@ function startStock(dayType = "new") {
     //getJSON gets the data from the items.json file to then work with each item
     $.getJSON("assets/json/items.json", function (data) {
         for (item of data) {
-            console.log(item);
             //adding aisle options
             aisles.indexOf(item.aisle) >= 0 ? null : aisles.push(item.aisle);
 
@@ -277,6 +275,7 @@ function changeAisle(aisleId, callback) {
             //The amount paid to pass to the addToBasket function
             let calculatedAmount;
 
+            //add the item name to the p element.
             itemPTag.appendChild(itemText);
             /*
             Define class names for the divs that are all present within a
@@ -325,6 +324,7 @@ function changeAisle(aisleId, callback) {
             innerStockSpan.appendChild(stockText);
             stockPTag.appendChild(stockStart);
             stockPTag.appendChild(innerStockSpan);
+
             /* ----- PRICING -----
             { id, name, price, quantity, aisle, special, imageUrl };
             the "special" of each object in the shopStock array defines its
@@ -386,7 +386,7 @@ function changeAisle(aisleId, callback) {
                 basketAdd.innerHTML = "+";
             } else {
 
-                basketAdd.onclick = function () { noStockToAdd(stockItem); };
+                basketAdd.onclick = function () { noStockToAdd(stockItem.alertText); };
                 basketAdd.innerHTML = `<i class="fas fa-times negative-text"></i>`;
 
             }
@@ -420,24 +420,13 @@ function changeAisle(aisleId, callback) {
 }
 
 /**
- * @param {object} item - the whole item object passed to the function from shopStock
- * {
- *      id:number, 
- *      name:string, 
- *      price: number, 
- *      quantity: number,
- *      aisle: string,
- *      special: number, 
- *      imageUrl: string,
- *      alertText: string
- * }
+ * @param {string} alertingText - the alertText string from the shopStock item
  * 
  * An alert to be fired reminding the user that there is no stock of this item
  * and to try again another time.
  */
-function noStockToAdd(item) {
-    console.log(item);
-    alert("I'm sorry, there " + item.alertText);
+function noStockToAdd(alertingText) {
+    alert("I'm sorry, there " + alertingText);
 }
 
 /**
@@ -461,22 +450,43 @@ function noStockToAdd(item) {
 function addToBasket(item, amountPaid) {
 
     /*
+    First, it needs to be determined if the player has enough money. Otherwise,
+    they cannot addToBasket.
+    */
+
+    if (playerCash - amountPaid < 0) {
+        alert("I'm sorry, you do not have enough money to purchase this");
+    } else {
+
+        /*
         subtract the cost from the wallet and set the "wallet-count" data
-        attached to the wallet icon to change
-    */
-    console.log(playerCash);
-    playerCash = (playerCash - amountPaid).toFixed(2);
-    console.log(playerCash);
-    console.log(amountPaid);
-    document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toString());
+        attached to the wallet icon to change.
+        */
+        playerCash = (playerCash - amountPaid).toFixed(2);
+        document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toString());
 
-    /*
-        get the stock from the shopStock and adjust its quantity. 
-    */
-    let shopObject = shopStock.find(({ id }) => id === item.id);
-    console.log(shopObject);
+        /*
+        If after taking one off the shelf the quantity left is 0, it needs to now
+        be marked as out of stock. Otherwise, it is a straightforward quantity 
+        adjustment.
+        The ADD button needs to be considered for alteration, as does the text for the stock.
+        */
+        let shopObject = shopStock.find(({ id }) => id === item.id);
+        shopObject.quantity--;
 
+        let stockTextSpan = document.getElementById("stock_" + item.id).children[0];
+        let basketButton = document.getElementById("basket-add_" + item.id);
 
+        if (shopObject.quantity === 0) {
+
+            basketButton.onclick = function () { noStockToAdd(item.alertText); };
+            basketButton.innerHTML = `<i class="fas fa-times negative-text"></i>`;
+            stockTextSpan.className = "aisle-item-text negative-text";
+            stockTextSpan.innerHTML = "Out Of Stock";
+        } else {
+            stockTextSpan.innerHTML = shopObject.quantity;
+        }
+    }
 
 }
 
