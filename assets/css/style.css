@@ -89,6 +89,7 @@ footer {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    background: none;
     /* max-width: 1440px; */
     max-height: 675px;
     /* margin-left: auto; */
@@ -173,7 +174,7 @@ footer {
 
 /* styling for the container which has each item in the shop, which has the 
 item name, the stock and a button to add it to your basket */
-.aisle-item {
+.item-container {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -186,8 +187,13 @@ item name, the stock and a button to add it to your basket */
     padding: 0.5rem;
 }
 
+.item-container.basket-item {
+    border: 2px solid white;
+    box-shadow: 0 0 4px 2px white;
+}
+
 /* for the img element which will hold the image of the item in the shop */
-.aisle-item-img {
+.item-container-img {
     width: 10%;
     height: auto;
     border: 2px solid white;
@@ -196,7 +202,7 @@ item name, the stock and a button to add it to your basket */
 
 /* for the text container part of the aisle item div (name and stock to be 
 stacked vertically)*/
-.aisle-item-p-div {
+.item-container-p-div {
     display: flex;
     justify-content: start;
     align-content: flex-start;
@@ -210,7 +216,7 @@ stacked vertically)*/
 }
 
 /*styling for the text inside the aisle item (text styling of name and stock */
-.aisle-item-text {
+.item-container-text {
     font-family: "Roboto", sans-serif;
     font-size: 1.8rem;
     color: white;
@@ -237,7 +243,7 @@ in this way */
 
 
 /* styling for the + button inside the aisle item */
-.aisle-item-button {
+.item-container-button {
     height: 5rem;
     width: 5rem;
     cursor: pointer;
@@ -251,7 +257,6 @@ in this way */
 }
 
 #return-to-shop-button {
-
     cursor: pointer;
     font-family: 'Courier Prime', monospace;
     border-radius: 20px;
@@ -301,7 +306,7 @@ in this way */
     border-color: cyan;
 }
 
-.aisle-item-button:hover {
+.item-container-button:hover {
     /*transition: 0.5s;*/
     color: black;
     /*background-color: #3d9970;*/

@@ -253,7 +253,6 @@ function changeAisle(aisleId, callback) {
     for (let stockItem of shopStock) {
 
         if (stockItem.aisle === aisleId) {
-
             //Creating the elements for each aisle item
             const aisleItem = document.createElement("DIV");
             const itemDisplay = document.createElement("DIV");
@@ -267,7 +266,6 @@ function changeAisle(aisleId, callback) {
             const innerPriceSpan = document.createElement("SPAN");
             const priceAmountSpan = document.createElement("SPAN");
             const specialPTag = document.createElement("P");
-
             /*
             Variable text nodes for stock, item, price and 
             (if necessary) special text
@@ -279,28 +277,25 @@ function changeAisle(aisleId, callback) {
             let specialText;
             let itemText = document.createTextNode(stockItem.name);
             let innerPriceText;
-
             //The amount paid to pass to the addToBasket function
             let calculatedAmount;
-
             //add the item name to the p element.
             itemPTag.appendChild(itemText);
             /*
             Define class names for the divs that are all present within a
             singular item div in the shop 
             */
-            aisleItem.className = "aisle-item";
-            itemImage.className = "aisle-item-img";
-            itemDisplay.className = "aisle-item-p-div";
-            priceDisplay.className = "aisle-item-p-div price-div";
-            itemPTag.className = "aisle-item-text";
-            stockPTag.className = "aisle-item-text";
-            pricePTag.className = "aisle-item-text";
-            innerPriceSpan.className = "aisle-item-text strikethrough-text";
-            priceAmountSpan.className = "aisle-item-text";
-            specialPTag.className = "aisle-item-text positive-text";
-            basketAdd.className = "aisle-item-button";
-
+            aisleItem.className = "item-container";
+            itemImage.className = "item-container-img";
+            itemDisplay.className = "item-container-p-div";
+            priceDisplay.className = "item-container-p-div price-div";
+            itemPTag.className = "item-container-text";
+            stockPTag.className = "item-container-text";
+            pricePTag.className = "item-container-text";
+            innerPriceSpan.className = "item-container-text strikethrough-text";
+            priceAmountSpan.className = "item-container-text";
+            specialPTag.className = "item-container-text positive-text";
+            basketAdd.className = "item-container-button";
             /*
             ----- IMAGE -----
             Search for the image in the directory, if found put it in the box,
@@ -313,7 +308,6 @@ function changeAisle(aisleId, callback) {
                     itemImage.src = "assets/images/items/no-image.webp";
                 }
             });
-
             /* ----- STOCK -----
             Setting an id for the stock text area, then setting its text dependant
             on whether the stock is 0, or more. If it is 0, the element is given
@@ -324,15 +318,14 @@ function changeAisle(aisleId, callback) {
 
             if (stockItem.quantity > 0) {
                 stockText = document.createTextNode(stockItem.quantity);
-                innerStockSpan.className = "aisle-item-text";
+                innerStockSpan.className = "item-container-text";
             } else {
                 stockText = document.createTextNode("Out Of Stock");
-                innerStockSpan.className = "aisle-item-text negative-text";
+                innerStockSpan.className = "item-container-text negative-text";
             }
             innerStockSpan.appendChild(stockText);
             stockPTag.appendChild(stockStart);
             stockPTag.appendChild(innerStockSpan);
-
             /* ----- PRICING -----
             { id, name, price, quantity, aisle, special, imageUrl };
             the "special" of each object in the shopStock array defines its
@@ -344,7 +337,6 @@ function changeAisle(aisleId, callback) {
             price and special offer name. Including css formatting for the offer.
             Also ids for the elements are created here.
             */
-
             pricePTag.appendChild(priceStartText);
 
             if (stockItem.special == 1) {
@@ -380,7 +372,6 @@ function changeAisle(aisleId, callback) {
                 }
 
             }
-
             /* ----- ADD TO BASKET BUTTON -----
             Define the ID, put a + inside the button and assign the onClick to
             each button. Each button is then given the id of the item to send to
@@ -388,19 +379,14 @@ function changeAisle(aisleId, callback) {
             alert to remind the user there is none on the shelf
             */
             basketAdd.id = "basket-add_" + stockItem.id;
-
             if (stockItem.quantity > 0) {
-
                 basketAdd.onclick = function () { addToBasket(stockItem, calculatedAmount); };
                 basketAdd.innerHTML = "+";
             } else {
 
                 basketAdd.onclick = function () { noStockToAdd(stockItem.alertText); };
                 basketAdd.innerHTML = `<i class="fas fa-times negative-text"></i>`;
-
             }
-
-
             /*
             Appending to the document. Text nodes to paragraphs, paragraphs
             to text div, the text div to the aisle div and then the button to 
@@ -410,21 +396,16 @@ function changeAisle(aisleId, callback) {
             itemDisplay.appendChild(stockPTag);
             priceDisplay.appendChild(pricePTag);
             priceDisplay.appendChild(specialPTag);
-
             aisleItem.appendChild(itemImage);
             aisleItem.appendChild(itemDisplay);
             aisleItem.appendChild(priceDisplay);
             aisleItem.appendChild(basketAdd);
-
             //add the item to the shop
             shopAisle.appendChild(aisleItem);
-
         } else {
-            //skip this iteration and move to next
             continue;
         }
     }
-
     callback();
 }
 
@@ -441,6 +422,7 @@ function noStockToAdd(alertingText) {
 /**
  * @param {object} itemForBasket - the whole item object passed to the function from shopStock
  * @param {number} amountPaid - the amount "paid" attached to the basket button
+ * ```
  * {
  *      id:number, 
  *      name:string, 
@@ -451,13 +433,13 @@ function noStockToAdd(alertingText) {
  *      imageUrl: string ,
  *      alertText: string
  * }
+ * ```
  * Function to add an item to the basket, done on an individual basis. You 
  * only have one hand when you are holding a basket!
  * It checks if the id of the object is already in the basket. If so it needs
  * to alter the quantity rather than
  */
 function addToBasket(itemForBasket, amountPaid) {
-
     /*
     First, it needs to be determined if the player has enough money. Otherwise,
     they cannot addToBasket.
@@ -472,7 +454,6 @@ function addToBasket(itemForBasket, amountPaid) {
         */
         playerCash = (playerCash - amountPaid).toFixed(2);
         document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toString());
-
         /*
         - If after taking one off the shelf the quantity left is 0, it needs to now
         be marked as out of stock. Otherwise, it is a straightforward quantity 
@@ -488,10 +469,9 @@ function addToBasket(itemForBasket, amountPaid) {
         let basketButton = document.getElementById("basket-add_" + itemForBasket.id);
 
         if (shopObject.quantity === 0) {
-
             basketButton.onclick = function () { noStockToAdd(itemForBasket.alertText); };
             basketButton.innerHTML = `<i class="fas fa-times negative-text"></i>`;
-            stockTextSpan.className = "aisle-item-text negative-text";
+            stockTextSpan.className = "item-container-text negative-text";
             stockTextSpan.innerHTML = "Out Of Stock";
         } else {
             stockTextSpan.innerHTML = shopObject.quantity;
@@ -499,7 +479,6 @@ function addToBasket(itemForBasket, amountPaid) {
 
         let basketTally = document.getElementById("basket-tally");
         basketTally.innerHTML = (parseInt(basketTally.innerHTML) + 1).toString();
-
         /*
         After checking if this item already exists in the basket. It needs to
         add 1 to the quantity of it, or if not found it needs to create a new
@@ -528,8 +507,26 @@ function addToBasket(itemForBasket, amountPaid) {
         }
     }
 }
-
+/**
+ * ### A function to load and populate the basket window 
+ * - Sort basket by item names
+ * - Iterate through aisle array and populate as necessary by aisle category
+ * - With each iteration, add the item to the basket window, id assigned to container
+ * - Container (Image - Name - Price Per - (+) Quantity (-) - Total Price)
+ * - When all items added. Need to add a basket total and checkout option.
+ */
 function showBasket() {
+
+    basketStock.sort(function (a, b) {
+        let x = a.name.toLowerCase();
+        let y = b.name.toLowerCase();
+        if (x < y) { return -1; }
+        if (x > y) { return 1; }
+        return 0;
+    });
+
+    let orderedAisles = aisles.sort();
+
     let gameWindow = document.getElementById("game-screen");
     let basketWindow = document.getElementById("the-basket");
 
@@ -538,10 +535,9 @@ function showBasket() {
     gameWindow.style.display = "none";
     basketWindow.style.display = "flex";
 
-    /*<button class="the-toolbar" id="basket-return"></button>*/
-
     const basketReturnToShopDiv = document.createElement("DIV");
     const basketReturnToShopButton = document.createElement("BUTTON");
+    const basketItemDisplayDiv = document.createElement("DIV");
 
     basketReturnToShopDiv.style.padding = "20px";
 
@@ -549,8 +545,123 @@ function showBasket() {
     basketReturnToShopButton.onclick = function () { returnToShop(); };
     basketReturnToShopButton.innerHTML = `<span style="font-family:'Courier Prime', monospace;"><i class="fas fa-angle-double-left"></i> Return To Shop</span>`;
 
+    basketItemDisplayDiv.id = "basket-item-display";
+    basketItemDisplayDiv.className = "game-container";
+
+    /*
+    For each aisle, check what matches that aisle in the basket
+    Each aisle needs to look through the basket array. This then ensures that
+    the aisles are alphabetical and the items within the aisles are alphabetical
+    aswell. 
+    */
+    for (let aisleOption of aisles) {
+
+        const basketAisleContainer = document.createElement("DIV");
+
+        for (let basketItem of basketStock) {
+
+            const basketItemContainer = document.createElement("DIV");
+            const basketItemImage = document.createElement("IMG");
+            const basketItemName = document.createElement("P");
+            const basketItemNameText = document.createTextNode(basketItem.name);
+            const basketItemPriceP = document.createElement("P");
+            const basketItemPricePer = document.createElement("SPAN");
+            const basketItemPricePerRrp = document.createElement("SPAN");
+            const basketItemQuantityContainer = document.createElement("DIV");
+            const basketItemQuantityPlus = document.createElement("BUTTON");
+            const basketItemQuantity = document.createElement("P");
+            const basketItemQuantityMinus = document.createElement("BUTTON");
+            const basketItemTotalPriceP = document.createElement("P");
+            const basketItemTotalPrice = document.createElement("SPAN");
+            const basketItemTotalRrp = document.createElement("SPAN");
+
+
+            if (basketItem.aisle === aisleOption) {
+                checkIfImageExists("assets/images/items/" + basketItem.imageUrl, (exists) => {
+                    if (exists) {
+                        basketItemImage.src = "assets/images/items/" + basketItem.imageUrl;
+                    } else {
+                        basketItemImage.src = "assets/images/items/no-image.webp";
+                    }
+                });
+
+                basketItemName.appendChild(basketItemNameText);
+                /*
+                 const basketItemTotalPriceP = document.createElement("P");
+            const basketItemTotalPrice = document.createElement("SPAN");
+            const basketItemTotalRRP = document.createElement("SPAN");
+                */
+                let calculateTotal = (basketItem.amountPaid * basketItem.quantity).toFixed(2);
+                let calculateTotalRrp = (basketItem.price * basketItem.quantity).toFixed(2);
+
+                if (basketItem.price === basketItem.amountPaid) {
+                    basketItemPricePer.appendChild(document.createTextNode("£" + basketItem.price));
+                    basketItemTotalPrice.appendChild(document.createTextNode("£" + calculateTotal));
+
+                    basketItemPriceP.className = "item-container-text";
+                    basketItemPricePer.className = "item-container-text";
+                    basketItemTotalPriceP.className = "item-container-text";
+                    basketItemTotalPrice.className = "item-container-text";
+
+                    basketItemPriceP.appendChild(basketItemPricePer);
+                    basketItemTotalPriceP.appendChild(basketItemTotalPrice);
+
+                } else {
+                    basketItemPricePerRrp.appendChild(document.createTextNode("£" + basketItem.price));
+                    basketItemPricePer.appendChild(document.createTextNode("£" + basketItem.amountPaid));
+                    basketItemTotalRrp.appendChild(document.createTextNode("£" + calculateTotalRrp));
+                    basketItemTotalPrice.appendChild(document.createTextNode("£" + calculateTotal));
+
+                    basketItemPriceP.className = "item-container-text";
+                    basketItemPricePer.className = "item-container-text";
+                    basketItemPricePerRrp.className = "item-container-text strikethrough-text";
+
+                    basketItemTotalPriceP.className = "item-container-text";
+                    basketItemTotalPrice.className = "item-container-text";
+                    basketItemTotalRrp.className = "item-container-text strikethrough-text";
+
+                    basketItemPriceP.appendChild(basketItemPricePer);
+                    basketItemPriceP.appendChild(basketItemPricePerRrp);
+
+                    basketItemTotalPriceP.appendChild(basketItemTotalPrice);
+                    basketItemTotalPriceP.appendChild(basketItemTotalRrp);
+                }
+
+
+                basketItemQuantityPlus.innerHTML = "+";
+                basketItemQuantity.appendChild(document.createTextNode(basketItem.quantity));
+                basketItemQuantityMinus.innerHTML = "-";
+
+                basketItemQuantityContainer.appendChild(basketItemQuantityPlus);
+                basketItemQuantityContainer.appendChild(basketItemQuantity);
+                basketItemQuantityContainer.appendChild(basketItemQuantityMinus);
+
+                basketItemContainer.appendChild(basketItemImage);
+                basketItemContainer.appendChild(basketItemName);
+                basketItemContainer.appendChild(basketItemPriceP);
+                basketItemContainer.appendChild(basketItemQuantityContainer);
+                basketItemContainer.appendChild(basketItemTotalPriceP);
+
+                basketItemContainer.className = "item-container";
+                basketItemImage.className = "item-container-img";
+                basketItemName.className = "item-container-text";
+                basketItemQuantityContainer.className = "item-container-p-div";
+                basketItemQuantity.className = "item-container-text";
+
+                basketItemDisplayDiv.appendChild(basketItemContainer);
+
+            } else {
+                continue;
+            }
+        }
+    }
+
+
+
     basketReturnToShopDiv.appendChild(basketReturnToShopButton);
+
     basketWindow.appendChild(basketReturnToShopDiv);
+    basketWindow.appendChild(basketItemDisplayDiv);
     /*const basketAdd = document.createElement("BUTTON");
     const itemPTag = document.createElement("P");*/
 }
@@ -566,6 +677,8 @@ function removeFromBasket(itemId) {
 function returnToShop() {
     let gameWindow = document.getElementById("game-screen");
     let basketWindow = document.getElementById("the-basket");
+
+    basketWindow.innerHTML = "";
 
     gameWindow.style.display = "flex";
     basketWindow.style.display = "none";
@@ -606,3 +719,58 @@ function checkIfImageExists(url, callback) {
         callback(false);
     }
 }
+/*
+function pricesForSingleItemDisplay(specialVal, itemPrice, pricePaid, callback) {
+    let rrpElement;
+    let specialText;
+    let specialElement;
+    let paidText;
+    let paidElement;
+
+    if (specialVal === 1) {
+        rrpElement = appendChild(document.createTextNode("£" + itemPrice));
+        specialElement = appendChild(document.createTextNode("&nbsp"));
+        paidText = document.createTextNote("£" + itemPrice);
+    } else {
+        
+
+    }
+}
+
+
+let specialText;
+let rrpText
+let paidText;
+
+
+    if (specialVal == 1) {
+
+                **priceAmountText = document.createTextNode("£" + itemPrice);
+                //priceAmountSpan.appendChild(priceAmountText);
+                //pricePTag.appendChild(priceAmountSpan);
+                **specialText = document.createTextNode("&nbsp");
+                **calculatedAmount = stockItem.price;
+
+            } else {
+                **let innerPriceSpan = document.createElement("SPAN");
+                **calculatedAmount = (stockItem.price * stockItem.special).toFixed(2);
+                **priceAmountText = document.createTextNode("£" + calculatedAmount.toString());
+                **priceAmountSpan.appendChild(priceAmountText);
+                pricePTag.appendChild(priceAmountSpan);
+
+
+                **innerPriceText = document.createTextNode("£" + stockItem.price);
+                innerPriceSpan.appendChild(innerPriceText);
+                pricePTag.appendChild(innerPriceSpan);
+
+                for (let eachSpecial of specialOffers) {
+                    if (eachSpecial.factor === stockItem.special) {
+                        specialText = document.createTextNode(eachSpecial.name);
+                        specialPTag.appendChild(specialText);
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
+
+            }*/
