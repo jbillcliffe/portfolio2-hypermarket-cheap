@@ -102,6 +102,8 @@ footer {
 
 #the-basket {
     background-color: black;
+    font-family: 'Courier Prime', monospace;
+    font-size: 2rem;
 }
 
 /* styling for the buttons on the main menu */
@@ -248,6 +250,18 @@ in this way */
     transition: all 0.7s ease;
 }
 
+#return-to-shop-button {
+
+    cursor: pointer;
+    font-family: 'Courier Prime', monospace;
+    border-radius: 20px;
+    background: none;
+    border: 3px solid white;
+    color: white;
+    font-size: 30px;
+    transition: all 0.7s ease;
+}
+
 
 /* styling for any basket button and quantity text */
 .toolbar-items {
@@ -279,6 +293,12 @@ in this way */
 #basket-button:hover {
     transition: 0.5s;
     color: cyan;
+}
+
+#return-to-shop-button:hover {
+    transition: 0.5s;
+    color: cyan;
+    border-color: cyan;
 }
 
 .aisle-item-button:hover {

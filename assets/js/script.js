@@ -532,11 +532,24 @@ function addToBasket(itemForBasket, amountPaid) {
 function showBasket() {
     let gameWindow = document.getElementById("game-screen");
     let basketWindow = document.getElementById("the-basket");
-    let gameHeight = gameWindow.offsetHeight;
+
     gameWindow.style.display = "none";
     basketWindow.style.display = "flex";
-    basketWindow.style.height = gameHeight + "px";
 
+    /*<button class="the-toolbar" id="basket-return"></button>*/
+
+    const basketReturnToShopDiv = document.createElement("DIV");
+    const basketReturnToShopButton = document.createElement("BUTTON");
+
+    basketReturnToShopDiv.style.padding = "20px";
+
+    basketReturnToShopButton.id = "return-to-shop-button";
+    basketReturnToShopButton.innerHTML = `<span style="font-family:'Courier Prime', monospace;"><i class="fas fa-angle-double-left"></i> Return To Shop</span>`;
+
+    basketReturnToShopDiv.appendChild(basketReturnToShopButton);
+    basketWindow.appendChild(basketReturnToShopDiv);
+    /*const basketAdd = document.createElement("BUTTON");
+    const itemPTag = document.createElement("P");*/
 }
 
 /**
