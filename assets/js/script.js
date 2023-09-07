@@ -533,6 +533,8 @@ function showBasket() {
     let gameWindow = document.getElementById("game-screen");
     let basketWindow = document.getElementById("the-basket");
 
+    basketWindow.innerHTML = "";
+
     gameWindow.style.display = "none";
     basketWindow.style.display = "flex";
 
@@ -544,6 +546,7 @@ function showBasket() {
     basketReturnToShopDiv.style.padding = "20px";
 
     basketReturnToShopButton.id = "return-to-shop-button";
+    basketReturnToShopButton.onclick = function () { returnToShop(); };
     basketReturnToShopButton.innerHTML = `<span style="font-family:'Courier Prime', monospace;"><i class="fas fa-angle-double-left"></i> Return To Shop</span>`;
 
     basketReturnToShopDiv.appendChild(basketReturnToShopButton);
@@ -558,6 +561,14 @@ function showBasket() {
  */
 function removeFromBasket(itemId) {
 
+}
+
+function returnToShop() {
+    let gameWindow = document.getElementById("game-screen");
+    let basketWindow = document.getElementById("the-basket");
+
+    gameWindow.style.display = "flex";
+    basketWindow.style.display = "none";
 }
 
 /**
