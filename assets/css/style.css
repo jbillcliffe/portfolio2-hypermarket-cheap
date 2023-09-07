@@ -101,6 +101,7 @@ footer {
     justify-content: center;
 }
 
+#basket-screen,
 #the-basket {
     background-color: black;
     font-family: 'Courier Prime', monospace;
@@ -138,6 +139,10 @@ footer {
     padding: 2rem;
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+.the-basket {
+    width: 75%;
 }
 
 /* container to hold the aisle options */
@@ -187,9 +192,17 @@ item name, the stock and a button to add it to your basket */
     padding: 0.5rem;
 }
 
-.item-container.basket-item {
-    border: 2px solid white;
-    box-shadow: 0 0 4px 2px white;
+.basket-item-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    /* border: 2px solid white; */
+    /* box-shadow: 0 0 4px 2px white; */
+    background-color: black;
+    align-items: center;
+    /* margin: 0.5rem 0; */
+    /* padding: 0.3rem; */
 }
 
 /* for the img element which will hold the image of the item in the shop */
@@ -198,6 +211,14 @@ item name, the stock and a button to add it to your basket */
     height: auto;
     border: 2px solid white;
     box-shadow: 0 0 4px 2px white;
+}
+
+.basket-item-container-img {
+    width: 10%;
+    height: auto;
+    border: 2px solid white;
+    box-shadow: 0 0 4px 2px white;
+    margin: 0.5rem;
 }
 
 /* for the text container part of the aisle item div (name and stock to be 
@@ -211,6 +232,24 @@ stacked vertically)*/
     width: 40%;
 }
 
+.basket-item-container-quantity-div {
+    font-family: 'Courier Prime', monospace;
+    /* font-size: 2rem; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 10%;
+    /* height: 3%; */
+    padding: 0.5rem;
+    /* text-align: center; */
+    align-items: center;
+}
+
+.basket-item-quantity-button {
+    width: 75%;
+    aspect-ratio: 1/1;
+}
+
 .price-div {
     width: 30%;
 }
@@ -222,6 +261,17 @@ stacked vertically)*/
     color: white;
     margin: auto auto auto 1rem;
     font-weight: bold;
+}
+
+.basket-item-container-text {
+    display: flex;
+    font-family: 'Courier Prime', monospace;
+    width: 45%;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+    justify-content: flex-start;
+    padding-left: 0.7rem;
 }
 
 /*style to add the strikethrough when a price is on a special offer, this 
@@ -254,6 +304,24 @@ in this way */
     font-size: 400%;
     margin: auto 1rem;
     transition: all 0.7s ease;
+}
+
+.basket-item-quantity-button {
+        height: 3rem;
+            display: flex;
+            width: 3rem;
+            cursor: pointer;
+            border-radius: 10px;
+            background: none;
+            border: 3px solid white;
+            color: white;
+            font-size: 2.3rem;
+            /* font-weight: bold; */
+            /* margin: auto 1rem; */
+            /* padding-bottom: 1.2rem; */
+            transition: all 0.7s ease;
+            /* align-items: baseline; */
+            justify-content: space-evenly;
 }
 
 #return-to-shop-button {

@@ -90,7 +90,7 @@ function createEnvironment() {
 
     document.getElementById("game-menu").style.display = "none";
     document.getElementById("game-screen").style.display = "flex";
-    document.getElementById("the-basket").style.display = "none";
+    document.getElementById("basket-screen").style.display = "none";
     document.getElementById("wallet-icon").style.display = "flex";
     document.getElementById("basket-button").style.display = "flex";
     document.getElementById("the-toolbar").style.justifyContent = "flex-start";
@@ -324,8 +324,11 @@ function changeAisle(aisleId, callback) {
                 innerStockSpan.className = "item-container-text negative-text";
             }
             innerStockSpan.appendChild(stockText);
-            stockPTag.appendChild(stockStart);
-            stockPTag.appendChild(innerStockSpan);
+            addElementsToContainer(stockPTag, [stockStart, innerStockSpan]);
+
+            //stockPTag.appendChild(stockStart);
+            //stockPTag.appendChild(innerStockSpan);
+
             /* ----- PRICING -----
             { id, name, price, quantity, aisle, special, imageUrl };
             the "special" of each object in the shopStock array defines its
@@ -393,14 +396,19 @@ function changeAisle(aisleId, callback) {
             to text div, the text div to the aisle div and then the button to 
             the aisle div
             */
-            itemDisplay.appendChild(itemPTag);
-            itemDisplay.appendChild(stockPTag);
-            priceDisplay.appendChild(pricePTag);
-            priceDisplay.appendChild(specialPTag);
-            aisleItem.appendChild(itemImage);
-            aisleItem.appendChild(itemDisplay);
-            aisleItem.appendChild(priceDisplay);
-            aisleItem.appendChild(basketAdd);
+
+            // itemDisplay.appendChild(itemPTag);
+            // itemDisplay.appendChild(stockPTag);
+            // priceDisplay.appendChild(pricePTag);
+            // priceDisplay.appendChild(specialPTag);
+            // aisleItem.appendChild(itemImage);
+            // aisleItem.appendChild(itemDisplay);
+            // aisleItem.appendChild(priceDisplay);
+            // aisleItem.appendChild(basketAdd);
+
+            addElementsToContainer(itemDisplay, [itemPTag, stockPTag]);
+            addElementsToContainer(priceDisplay, [pricePTag, specialPTag]);
+            addElementsToContainer(aisleItem, [itemImage, itemDisplay, priceDisplay, basketAdd]);
             //add the item to the shop
             shopAisle.appendChild(aisleItem);
         } else {
@@ -528,26 +536,27 @@ function showBasket() {
 
     let orderedAisles = aisles.sort();
 
-    let gameWindow = document.getElementById("game-screen");
-    let basketWindow = document.getElementById("the-basket");
+    const gameWindow = document.getElementById("game-screen");
+    const basketWindow = document.getElementById("basket-screen");
+    const basketItemDisplayDiv = document.getElementById("the-basket");
 
-    basketWindow.innerHTML = "";
+    basketItemDisplayDiv.innerHTML = "";
 
     gameWindow.style.display = "none";
     basketWindow.style.display = "flex";
 
     const basketReturnToShopDiv = document.createElement("DIV");
     const basketReturnToShopButton = document.createElement("BUTTON");
-    const basketItemDisplayDiv = document.createElement("DIV");
 
+    basketReturnToShopDiv.innerHTML = "";
     basketReturnToShopDiv.style.padding = "20px";
 
     basketReturnToShopButton.id = "return-to-shop-button";
     basketReturnToShopButton.onclick = function () { returnToShop(); };
     basketReturnToShopButton.innerHTML = `<span style="font-family:'Courier Prime', monospace;"><i class="fas fa-angle-double-left"></i> Return To Shop</span>`;
 
-    basketItemDisplayDiv.id = "basket-item-display";
-    basketItemDisplayDiv.className = "game-container";
+    basketReturnToShopDiv.appendChild(basketReturnToShopButton);
+    basketItemDisplayDiv.appendChild(basketReturnToShopDiv);
 
     /*
     For each aisle, check what matches that aisle in the basket
@@ -587,14 +596,7 @@ function showBasket() {
                 });
 
                 basketItemName.appendChild(basketItemNameText);
-                /*
-                 const basketItemTotalPriceP = document.createElement("P");
-            const basketItemTotalPrice = document.createElement("SPAN");
-            const basketItemTotalRRP = document.createElement("SPAN");
-                */
 
-                //let calculateTotal = (basketItem.amountPaid * basketItem.quantity).toFixed(2);
-                //let calculateTotalRrp = (basketItem.price * basketItem.quantity).toFixed(2);
                 let calculateTotal = calculateNumberTimes(basketItem.amountPaid, basketItem.quantity);
                 let calculateTotalRrp = calculateNumberTimes(basketItem.price, basketItem.quantity);
 
@@ -602,10 +604,10 @@ function showBasket() {
                     basketItemPricePer.appendChild(document.createTextNode("£" + basketItem.price));
                     basketItemTotalPrice.appendChild(document.createTextNode("£" + calculateTotal));
 
-                    basketItemPriceP.className = "item-container-text";
-                    basketItemPricePer.className = "item-container-text";
-                    basketItemTotalPriceP.className = "item-container-text";
-                    basketItemTotalPrice.className = "item-container-text";
+                    basketItemPriceP.className = "basket-item-container-text basket-price-div";
+                    basketItemPricePer.className = "basket-item-container-text";
+                    basketItemTotalPriceP.className = "basket-item-container-text basket-price-div";
+                    basketItemTotalPrice.className = "basket-item-container-text";
 
                     basketItemPriceP.appendChild(basketItemPricePer);
                     basketItemTotalPriceP.appendChild(basketItemTotalPrice);
@@ -616,42 +618,53 @@ function showBasket() {
                     basketItemTotalRrp.appendChild(document.createTextNode("£" + calculateTotalRrp));
                     basketItemTotalPrice.appendChild(document.createTextNode("£" + calculateTotal));
 
-                    basketItemPriceP.className = "item-container-text";
-                    basketItemPricePer.className = "item-container-text";
-                    basketItemPricePerRrp.className = "item-container-text strikethrough-text";
+                    basketItemPriceP.className = "basket-item-container-text basket-price-div";
+                    basketItemPricePer.className = "basket-item-container-text";
+                    basketItemPricePerRrp.className = "basket-item-container-text strikethrough-text";
 
-                    basketItemTotalPriceP.className = "item-container-text";
-                    basketItemTotalPrice.className = "item-container-text";
-                    basketItemTotalRrp.className = "item-container-text strikethrough-text";
+                    basketItemTotalPriceP.className = "basket-item-container-text basket-price-div";
+                    basketItemTotalPrice.className = "basket-item-container-text";
+                    basketItemTotalRrp.className = "basket-item-container-text strikethrough-text";
 
-                    basketItemPriceP.appendChild(basketItemPricePer);
-                    basketItemPriceP.appendChild(basketItemPricePerRrp);
-
-                    basketItemTotalPriceP.appendChild(basketItemTotalPrice);
-                    basketItemTotalPriceP.appendChild(basketItemTotalRrp);
+                    addElementsToContainer(basketItemPriceP, [basketItemPricePer, basketItemPricePerRrp]);
+                    //basketItemPriceP.appendChild(basketItemPricePer);
+                    //basketItemPriceP.appendChild(basketItemPricePerRrp);
+                    addElementsToContainer(basketItemTotalPriceP, [basketItemTotalPrice, basketItemTotalRrp]);
+                    //basketItemTotalPriceP.appendChild(basketItemTotalPrice);
+                    //basketItemTotalPriceP.appendChild(basketItemTotalRrp);
                 }
 
-
                 basketItemQuantityPlus.innerHTML = "+";
-                basketItemQuantity.appendChild(document.createTextNode(basketItem.quantity));
                 basketItemQuantityMinus.innerHTML = "-";
 
-                basketItemQuantityContainer.appendChild(basketItemQuantityPlus);
-                basketItemQuantityContainer.appendChild(basketItemQuantity);
-                basketItemQuantityContainer.appendChild(basketItemQuantityMinus);
+                basketItemQuantityPlus.id = "plus-qty_" + basketItem.id;
+                basketItemQuantityMinus.id = "minus-qty_" + basketItem.id;
 
-                basketItemContainer.appendChild(basketItemImage);
-                basketItemContainer.appendChild(basketItemName);
-                basketItemContainer.appendChild(basketItemPriceP);
-                basketItemContainer.appendChild(basketItemQuantityContainer);
-                basketItemContainer.appendChild(basketItemTotalPriceP);
+                basketItemQuantityPlus.className = "basket-item-quantity-button";
+                basketItemQuantityMinus.className = "basket-item-quantity-button";
 
-                basketItemContainer.className = "item-container";
-                basketItemImage.className = "item-container-img";
-                basketItemName.className = "item-container-text";
-                basketItemQuantityContainer.className = "item-container-p-div";
-                basketItemQuantity.className = "item-container-text";
+                basketItemQuantity.appendChild(document.createTextNode(basketItem.quantity));
 
+                addElementsToContainer(basketItemQuantityContainer, [basketItemQuantityPlus, basketItemQuantity, basketItemQuantityMinus]);
+                //basketItemQuantityContainer.appendChild(basketItemQuantityPlus);
+                //basketItemQuantityContainer.appendChild(basketItemQuantity);
+                //basketItemQuantityContainer.appendChild(basketItemQuantityMinus);
+
+                addElementsToContainer(basketItemContainer, [basketItemImage, basketItemName, basketItemPriceP, basketItemQuantityContainer, basketItemTotalPriceP]);
+                // basketItemContainer.appendChild(basketItemImage);
+                // basketItemContainer.appendChild(basketItemName);
+                // basketItemContainer.appendChild(basketItemPriceP);
+                // basketItemContainer.appendChild(basketItemQuantityContainer);
+                // basketItemContainer.appendChild(basketItemTotalPriceP);
+
+                basketItemContainer.className = "basket-item-container";
+                basketItemContainer.setAttribute("data-basket-item", JSON.stringify(basketItem));
+                basketItemContainer.id = "basket-item-container_" + basketItem.id;
+                basketItemImage.className = "basket-item-container-img";
+                basketItemName.className = "basket-item-container-text";
+                basketItemQuantityContainer.className = "basket-item-container-quantity-div";
+                basketItemQuantity.className = "basket-item-container-text";
+                basketItemQuantity.id = "basket-item-quantity_" + basketItem.id;
                 basketItemDisplayDiv.appendChild(basketItemContainer);
 
             } else {
@@ -659,13 +672,6 @@ function showBasket() {
             }
         }
     }
-
-
-
-    basketReturnToShopDiv.appendChild(basketReturnToShopButton);
-
-    basketWindow.appendChild(basketReturnToShopDiv);
-    basketWindow.appendChild(basketItemDisplayDiv);
 }
 
 /**
@@ -678,9 +684,7 @@ function removeFromBasket(itemId) {
 
 function returnToShop() {
     let gameWindow = document.getElementById("game-screen");
-    let basketWindow = document.getElementById("the-basket");
-
-    basketWindow.innerHTML = "";
+    let basketWindow = document.getElementById("basket-screen");
 
     gameWindow.style.display = "flex";
     basketWindow.style.display = "none";
@@ -724,4 +728,13 @@ function checkIfImageExists(url, callback) {
 
 function calculateNumberTimes(a, b) {
     return (a * b).toFixed(2);
+}
+
+function addElementsToContainer(container, elements) {
+
+    console.log(container + " : " + elements);
+
+    for (let element of elements) {
+        container.appendChild(element);
+    }
 }
