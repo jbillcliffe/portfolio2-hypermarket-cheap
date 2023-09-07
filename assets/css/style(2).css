@@ -270,8 +270,8 @@ stacked vertically)*/
     font-size: 1.5rem;
     color: white;
     font-weight: bold;
-    justify-content: center;
-    /* padding-left: 0.7rem; */
+    justify-content: flex-start;
+    padding-left: 0.7rem;
 }
 
 /*style to add the strikethrough when a price is on a special offer, this 
@@ -307,21 +307,21 @@ in this way */
 }
 
 .basket-item-quantity-button {
-    height: 2rem;
-    display: flex;
-    width: 2rem;
-    cursor: pointer;
-    border-radius: 10px;
-    background: none;
-    border: 3px solid white;
-    color: white;
-    font-size: 1.3rem;
-    /* font-weight: bold; */
-    /* margin: auto 1rem; */
-    /* padding-bottom: 1.2rem; */
-    transition: all 0.7s ease;
-    /* align-items: baseline; */
-    justify-content: space-evenly;
+        height: 3rem;
+            display: flex;
+            width: 3rem;
+            cursor: pointer;
+            border-radius: 10px;
+            background: none;
+            border: 3px solid white;
+            color: white;
+            font-size: 2.3rem;
+            /* font-weight: bold; */
+            /* margin: auto 1rem; */
+            /* padding-bottom: 1.2rem; */
+            transition: all 0.7s ease;
+            /* align-items: baseline; */
+            justify-content: space-evenly;
 }
 
 #return-to-shop-button {
