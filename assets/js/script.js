@@ -348,8 +348,9 @@ function changeAisle(aisleId, callback) {
                 calculatedAmount = stockItem.price;
 
             } else {
-                calculatedAmount = (stockItem.price * stockItem.special).toFixed(2);
-                priceAmountText = document.createTextNode("£" + calculatedAmount.toString());
+
+                calculatedAmount = calculateNumberTimes(stockItem.price, stockItem.special);
+                priceAmountText = document.createTextNode("£" + calculatedAmount);
                 priceAmountSpan.appendChild(priceAmountText);
                 pricePTag.appendChild(priceAmountSpan);
 
@@ -591,8 +592,11 @@ function showBasket() {
             const basketItemTotalPrice = document.createElement("SPAN");
             const basketItemTotalRRP = document.createElement("SPAN");
                 */
-                let calculateTotal = (basketItem.amountPaid * basketItem.quantity).toFixed(2);
-                let calculateTotalRrp = (basketItem.price * basketItem.quantity).toFixed(2);
+
+                //let calculateTotal = (basketItem.amountPaid * basketItem.quantity).toFixed(2);
+                //let calculateTotalRrp = (basketItem.price * basketItem.quantity).toFixed(2);
+                let calculateTotal = calculateNumberTimes(basketItem.amountPaid, basketItem.quantity);
+                let calculateTotalRrp = calculateNumberTimes(basketItem.price, basketItem.quantity);
 
                 if (basketItem.price === basketItem.amountPaid) {
                     basketItemPricePer.appendChild(document.createTextNode("£" + basketItem.price));
@@ -662,8 +666,6 @@ function showBasket() {
 
     basketWindow.appendChild(basketReturnToShopDiv);
     basketWindow.appendChild(basketItemDisplayDiv);
-    /*const basketAdd = document.createElement("BUTTON");
-    const itemPTag = document.createElement("P");*/
 }
 
 /**
@@ -719,58 +721,7 @@ function checkIfImageExists(url, callback) {
         callback(false);
     }
 }
-/*
-function pricesForSingleItemDisplay(specialVal, itemPrice, pricePaid, callback) {
-    let rrpElement;
-    let specialText;
-    let specialElement;
-    let paidText;
-    let paidElement;
 
-    if (specialVal === 1) {
-        rrpElement = appendChild(document.createTextNode("£" + itemPrice));
-        specialElement = appendChild(document.createTextNode("&nbsp"));
-        paidText = document.createTextNote("£" + itemPrice);
-    } else {
-        
-
-    }
+function calculateNumberTimes(a, b) {
+    return (a * b).toFixed(2);
 }
-
-
-let specialText;
-let rrpText
-let paidText;
-
-
-    if (specialVal == 1) {
-
-                **priceAmountText = document.createTextNode("£" + itemPrice);
-                //priceAmountSpan.appendChild(priceAmountText);
-                //pricePTag.appendChild(priceAmountSpan);
-                **specialText = document.createTextNode("&nbsp");
-                **calculatedAmount = stockItem.price;
-
-            } else {
-                **let innerPriceSpan = document.createElement("SPAN");
-                **calculatedAmount = (stockItem.price * stockItem.special).toFixed(2);
-                **priceAmountText = document.createTextNode("£" + calculatedAmount.toString());
-                **priceAmountSpan.appendChild(priceAmountText);
-                pricePTag.appendChild(priceAmountSpan);
-
-
-                **innerPriceText = document.createTextNode("£" + stockItem.price);
-                innerPriceSpan.appendChild(innerPriceText);
-                pricePTag.appendChild(innerPriceSpan);
-
-                for (let eachSpecial of specialOffers) {
-                    if (eachSpecial.factor === stockItem.special) {
-                        specialText = document.createTextNode(eachSpecial.name);
-                        specialPTag.appendChild(specialText);
-                        break;
-                    } else {
-                        continue;
-                    }
-                }
-
-            }*/
