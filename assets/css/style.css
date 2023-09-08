@@ -9,41 +9,56 @@
 /*Header Styling for the logo */
 header {
     display: flex;
-    flex-direction: row;
-    max-width: 1440px;
+    /* flex-direction: row; */
+    max-width: 750px;
+    height: auto;
+    /* width: 100%; */
+    margin-left: auto;
+    margin-right: auto;
+    /* background: url('../images/header-logo.webp') no-repeat center center; */
+    padding: 0.3rem 0;
+}
+
+header>img {
+    /* max-width: 750px; */
+    display: flex;
     width: 100%;
-    height: 10vh;
-    /* margin-left: auto; */
-    /* margin-right: auto; */
-    background: url('../images/header-logo.webp') no-repeat center center;
+    /* height: auto; */
+    /* padding: 0.2rem 3rem; */
 }
 
 /* Little to no body styling, as it occurs in the game-container and beyond */
+
 body {
     display: flex;
+    flex-direction: column;
     background-color: white;
     margin-left: auto;
     margin-right: auto;
     max-width: 1440px;
-    width: 100vw;
-    flex-wrap: wrap;
-    /* height: 100vh; */
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    flex-wrap: nowrap;
 }
 
 /* footer styling */
 footer {
     /* max-width: 1440px; */
     width: 100%;
-    height: 80px;
+    height: 10vh;
     background-color: #3d9970;
+    border: 2px solid black;
 }
 
 #hypermarket-cheap {
     max-width: 1440px;
-    height: 75vh;
+    max-height: 80vh;
+    /* box-sizing: border-box; */
     /* margin-right: auto; */
     /* margin-left: auto; */
     /* margin-top: 0; */
+    /* height: auto; */
     width: 100%;
     flex-direction: column;
     display: flex;
@@ -56,7 +71,8 @@ footer {
     right: 0;
     bottom: 0;
     background-color: rgba(37, 37, 37, 0.3);
-    height: 100vh;
+    width: 100%;
+    height: auto;
 }
 
 /* Styling for the toolbar in the game, contains the basket button */
@@ -65,7 +81,7 @@ footer {
     flex-direction: row;
     width: 100%;
     max-width: 1440px;
-    height: 65px;
+    height: 4rem;
     margin-left: auto;
     margin-right: auto;
     /* margin-bottom: 0; */
@@ -89,37 +105,43 @@ footer {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 4rem);
     background: none;
     /* max-width: 1440px; */
-    max-height: 675px;
+    max-height: calc(100% - 4rem);
     /* margin-left: auto; */
     /* margin-right: auto; */
-    border: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
 
 #game-menu {
     justify-content: center;
 }
 
-#basket-screen,
-#the-basket {
+#basket-screen {
     background-color: black;
     font-family: 'Courier Prime', monospace;
     font-size: 2rem;
 }
 
+#the-basket {
+    border-right: 2px solid white;
+}
+
 .return-to-shop-div {
     display: flex;
     width: 100%;
-    height: 12%;
-    padding: 1rem;
+    height: 4rem;
+    padding: 0.5rem;
+    /* height: 3.5rem; */
     border-bottom: 2px solid white;
 }
 
 .basket-split {
     display: flex;
-    height: 88%;
+    /* max-height: inherit; */
+    height: calc(100% - 3.3rem);
     flex-direction: row;
     width: inherit;
 }
@@ -150,9 +172,11 @@ footer {
 .the-shop {
     display: flex;
     flex-direction: row;
-    /* width: 100%; */
-    height: inherit;
-    /* overflow: hidden; */
+    width: 100%;
+    /* height: inherit; */
+    /* overflow-y: scroll; */
+    /* max-height: inherit; */
+    height: 100%;
 }
 
 /* container for the items which are available */
@@ -160,15 +184,12 @@ footer {
     display: flex;
     flex-direction: column;
     width: 80%;
-    height: 100%;
+    /* height: auto; */
+    /* max-height: inherit; */
     border-right: 2px solid black;
     padding: 2rem;
     overflow-x: hidden;
     overflow-y: scroll;
-}
-
-.the-basket {
-    width: 75%;
 }
 
 .the-receipt {
@@ -185,11 +206,10 @@ footer {
 
 .the-receipt-header {
     display: flex;
-    font-family: "Wallpoet", sans-serif;
-    text-transform: uppercase;
     width: 100%;
-    font-size: 1.3rem;
     justify-content: center;
+    border-bottom: 2px dashed white;
+    padding: 1rem;
 }
 
 .basket-receipt-line {
@@ -198,8 +218,13 @@ footer {
     justify-content: space-between;
     width: 100%;
     font-family: 'Courier Prime', monospace;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     padding: 0 0.5rem;
+}
+
+.total-line {
+    border-top: 2px dashed white;
+    border-bottom: 2px dashed white;
 }
 
 /* container to hold the aisle options */
@@ -209,8 +234,8 @@ footer {
     width: 30%;
     background-color: black;
     border-left: 2px solid black;
-    padding-left: 2px;
-    height: 100%;
+    padding: 1px;
+    height: auto;
 }
 
 /* styling for the button which has each aisle option */
@@ -226,7 +251,7 @@ footer {
     cursor: pointer;
     box-shadow: 0 0 4px 2px #073b24 inset;
     transition: all 0.3s ease;
-    border-radius: 25px;
+    border-radius: 1rem;
 }
 
 /* when hovering over an aisle option, accent it for clarity */
@@ -387,14 +412,17 @@ in this way */
 }
 
 #return-to-shop-button {
+    display: flex;
     cursor: pointer;
     font-family: 'Courier Prime', monospace;
-    border-radius: 20px;
+    border-radius: 1rem;
+    height: 2.2rem;
     background: none;
     border: 3px solid white;
     color: white;
-    font-size: 30px;
+    font-size: 1.4rem;
     transition: all 0.7s ease;
+    align-items: center;
 }
 
 

@@ -160,7 +160,7 @@ function gameStartingStock(dayType = "new") {
             aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
 
             let thisItemStock = Math.round(Math.random() * (jsonItem.highStock - jsonItem.lowStock) + jsonItem.lowStock);
-            let thisItemPrice = (Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2);
+            let thisItemPrice = Number((Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2));
 
             /*
               Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
@@ -278,7 +278,7 @@ function changeAisle(aisleId, callback) {
             let itemText = document.createTextNode(stockItem.name);
             let innerPriceText;
             //The amount paid to pass to the addToBasket function
-            let calculatedAmount;
+            let calculatedAmount = 0.00;
             //add the item name to the p element.
             itemPTag.appendChild(itemText);
             /*
@@ -341,24 +341,16 @@ function changeAisle(aisleId, callback) {
             Also ids for the elements are created here.
             */
             pricePTag.appendChild(priceStartText);
+            calculatedAmount = calculateNumberTimes(stockItem.price, stockItem.special);
+            priceAmountText = document.createTextNode("£" + (calculatedAmount).toFixed(2));
+            priceAmountSpan.appendChild(priceAmountText);
+            pricePTag.appendChild(priceAmountSpan);
 
             if (stockItem.special == 1) {
-
-                priceAmountText = document.createTextNode("£" + stockItem.price);
-                priceAmountSpan.appendChild(priceAmountText);
-                pricePTag.appendChild(priceAmountSpan);
                 specialText = document.createTextNode("&nbsp");
-                calculatedAmount = stockItem.price;
 
             } else {
-
-                calculatedAmount = calculateNumberTimes(stockItem.price, stockItem.special);
-                priceAmountText = document.createTextNode("£" + calculatedAmount);
-                priceAmountSpan.appendChild(priceAmountText);
-                pricePTag.appendChild(priceAmountSpan);
-
-
-                innerPriceText = document.createTextNode("£" + stockItem.price);
+                innerPriceText = document.createTextNode("£" + (stockItem.price).toFixed(2));
                 innerPriceSpan.appendChild(innerPriceText);
                 pricePTag.appendChild(innerPriceSpan);
                 /*
@@ -507,7 +499,6 @@ function addToBasket(itemForBasket, amountPaid) {
         };
 
         let itemExistingInBasket = basketStock.find(({ id }) => id === itemToGoToBasket.id);
-        console.log(itemExistingInBasket);
 
         if (!(basketStock.find(({ id }) => id === itemToGoToBasket.id))) {
             basketStock.push(itemToGoToBasket);
@@ -540,27 +531,56 @@ function showBasket() {
     const basketWindow = document.getElementById("basket-screen");
     const basketItemDisplayDiv = document.getElementById("the-basket");
     const basketReceiptDiv = document.getElementById("the-receipt");
-
-    const basketReceiptHeader = document.createElement("H3");
-    basketReceiptHeader.appendChild(document.createTextNode("HYPERMARKET CHEAP"));
-    basketReceiptHeader.className = "the-receipt-header";
-    basketReceiptDiv.appendChild(basketReceiptHeader);
-
-    basketItemDisplayDiv.innerHTML = "";
-
-    gameWindow.style.display = "none";
-    basketWindow.style.display = "flex";
-
+    const basketReceiptHeader = document.createElement("IMG");
     const basketReturnToShopDiv = document.getElementById("return-to-shop-div");
     const basketReturnToShopButton = document.createElement("BUTTON");
 
     basketReturnToShopDiv.innerHTML = "";
+    basketItemDisplayDiv.innerHTML = "";
+    basketReceiptDiv.innerHTML = "";
+
+    gameWindow.style.display = "none";
+    basketWindow.style.display = "flex";
 
     basketReturnToShopButton.id = "return-to-shop-button";
     basketReturnToShopButton.onclick = function () { returnToShop(); };
-    basketReturnToShopButton.innerHTML = `<span style="font-family:'Courier Prime', monospace;"><i class="fas fa-angle-double-left"></i> Return To Shop</span>`;
+    basketReturnToShopButton.innerHTML =
+        `<span style="display:flex; align-items:stretch; flex-direction:row;"><i class="fas fa-angle-double-left"></i>&nbspReturn To Shop</span>`;
 
     basketReturnToShopDiv.appendChild(basketReturnToShopButton);
+
+    basketReceiptHeader.src = "assets/images/logo-white-350.webp";
+    basketReceiptHeader.className = "the-receipt-header";
+    basketReceiptDiv.appendChild(basketReceiptHeader);
+
+    let basketTotalCost = 0;
+
+    for (let a = 0; a < basketStock.length; a++) {
+        for (let b = 0; b < basketStock[a].quantity; b++) {
+            const receiptDivLine = document.createElement("DIV");
+            const receiptNameP = document.createElement("P");
+            const receiptPriceP = document.createElement("P");
+            receiptDivLine.className = "basket-receipt-line";
+            receiptNameP.appendChild(document.createTextNode(basketStock[a].name));
+            receiptPriceP.appendChild(document.createTextNode("£" + (basketStock[a].amountPaid).toFixed(2)));
+            addElementsToContainer(receiptDivLine, [receiptNameP, receiptPriceP]);
+            basketReceiptDiv.appendChild(receiptDivLine);
+            console.log("RECEIPTAMOUNT:" + typeof (basketStock[a].amountPaid) + ", " + basketStock[a].amountPaid + ". ");
+            basketTotalCost += basketStock[a].amountPaid;
+            console.log(basketTotalCost);
+        }
+    }
+
+    console.log(typeof (basketTotalCost));
+
+    const receiptTotalDivLine = document.createElement("DIV");
+    receiptTotalDivLine.className = "basket-receipt-line total-line";
+    const receiptTotalP = document.createElement("P");
+    const receiptTotalPriceP = document.createElement("P");
+    receiptTotalP.appendChild(document.createTextNode("Total : "));
+    receiptTotalPriceP.appendChild(document.createTextNode("£" + basketTotalCost.toFixed(2)));
+    addElementsToContainer(receiptTotalDivLine, [receiptTotalP, receiptTotalPriceP]);
+    basketReceiptDiv.appendChild(receiptTotalDivLine);
 
     /*
     For each aisle, check what matches that aisle in the basket
@@ -578,18 +598,6 @@ function showBasket() {
         }
 
         for (let basketItem of basketStock) {
-
-            for (let i = 0; i < basketItem.quantity; i++) {
-                const receiptDivLine = document.createElement("DIV");
-                const receiptNameP = document.createElement("P");
-                const receiptPriceP = document.createElement("P");
-                receiptDivLine.className = "basket-receipt-line";
-                receiptNameP.appendChild(document.createTextNode(basketItem.name));
-                receiptPriceP.appendChild(document.createTextNode("£" + basketItem.amountPaid));
-                addElementsToContainer(receiptDivLine, [receiptNameP, receiptPriceP]);
-                basketReceiptDiv.appendChild(receiptDivLine);
-            }
-
             const basketItemContainer = document.createElement("DIV");
             const basketItemImage = document.createElement("IMG");
             const basketItemName = document.createElement("P");
@@ -619,10 +627,10 @@ function showBasket() {
 
                 let calculateTotal = calculateNumberTimes(basketItem.amountPaid, basketItem.quantity);
                 let calculateTotalRrp = calculateNumberTimes(basketItem.price, basketItem.quantity);
-
+                console.log("COMPARE : " + "price:" + typeof (basketItem.price) + ", " + "paid:" + basketItem.amountPaid);
                 if (basketItem.price === basketItem.amountPaid) {
-                    basketItemPricePer.appendChild(document.createTextNode("£" + basketItem.price));
-                    basketItemTotalPrice.appendChild(document.createTextNode("£" + calculateTotal));
+                    basketItemPricePer.appendChild(document.createTextNode("£" + (basketItem.price).toFixed(2)));
+                    basketItemTotalPrice.appendChild(document.createTextNode("£" + (calculateTotal).toFixed(2)));
 
                     basketItemPriceP.className = "basket-item-container-text basket-price-div";
                     basketItemPricePer.className = "basket-item-container-text";
@@ -633,10 +641,10 @@ function showBasket() {
                     basketItemTotalPriceP.appendChild(basketItemTotalPrice);
 
                 } else {
-                    basketItemPricePerRrp.appendChild(document.createTextNode("£" + basketItem.price));
-                    basketItemPricePer.appendChild(document.createTextNode("£" + basketItem.amountPaid));
-                    basketItemTotalRrp.appendChild(document.createTextNode("£" + calculateTotalRrp));
-                    basketItemTotalPrice.appendChild(document.createTextNode("£" + calculateTotal));
+                    basketItemPricePerRrp.appendChild(document.createTextNode("£" + (basketItem.price).toFixed(2)));
+                    basketItemPricePer.appendChild(document.createTextNode("£" + (basketItem.amountPaid).toFixed(2)));
+                    basketItemTotalRrp.appendChild(document.createTextNode("£" + (calculateTotalRrp).toFixed(2)));
+                    basketItemTotalPrice.appendChild(document.createTextNode("£" + (calculateTotal).toFixed(2)));
 
                     basketItemPriceP.className = "basket-item-container-text basket-price-div";
                     basketItemPricePer.className = "basket-item-container-text";
@@ -753,13 +761,10 @@ function checkIfImageExists(url, callback) {
 }
 
 function calculateNumberTimes(a, b) {
-    return (a * b).toFixed(2);
+    return Number((a * b).toFixed(2));
 }
 
 function addElementsToContainer(container, elements) {
-
-    console.log(container + " : " + elements);
-
     for (let element of elements) {
         container.appendChild(element);
     }
