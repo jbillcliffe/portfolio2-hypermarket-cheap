@@ -245,11 +245,6 @@ stacked vertically)*/
     align-items: center;
 }
 
-.basket-item-quantity-button {
-    width: 75%;
-    aspect-ratio: 1/1;
-}
-
 .price-div {
     width: 30%;
 }
@@ -307,7 +302,7 @@ in this way */
 }
 
 .basket-item-quantity-button {
-        height: 2rem;
+    height: 2rem;
     display: flex;
     width: 2rem;
     cursor: pointer;

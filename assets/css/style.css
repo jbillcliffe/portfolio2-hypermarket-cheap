@@ -35,6 +35,7 @@ footer {
     /* max-width: 1440px; */
     width: 100%;
     height: 80px;
+    background-color: #3d9970;
 }
 
 #hypermarket-cheap {
@@ -108,6 +109,30 @@ footer {
     font-size: 2rem;
 }
 
+.return-to-shop-div {
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    border-bottom: 2px solid white;
+}
+
+.basket-split {
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+}
+
+.basket-aisle-title {
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    color: #3d9970;
+    border-bottom: 2px dashed white;
+    font-size: 3rem;
+}
+
 /* styling for the buttons on the main menu */
 .menu-button {
     width: 250px;
@@ -143,6 +168,37 @@ footer {
 
 .the-basket {
     width: 75%;
+}
+
+.the-receipt {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: inherit;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    color: white;
+    background-color: black;
+
+}
+
+.the-receipt-header {
+    display: flex;
+    font-family: "Wallpoet", sans-serif;
+    text-transform: uppercase;
+    width: 100%;
+    font-size: 1.3rem;
+    justify-content: center;
+}
+
+.basket-receipt-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.8rem;
+    padding: 0 0.5rem;
 }
 
 /* container to hold the aisle options */
@@ -238,16 +294,11 @@ stacked vertically)*/
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 10%;
+    width: 15%;
     /* height: 3%; */
     padding: 0.5rem;
     /* text-align: center; */
     align-items: center;
-}
-
-.basket-item-quantity-button {
-    width: 75%;
-    aspect-ratio: 1/1;
 }
 
 .price-div {
@@ -266,12 +317,21 @@ stacked vertically)*/
 .basket-item-container-text {
     display: flex;
     font-family: 'Courier Prime', monospace;
-    width: 45%;
+    width: 100%;
     font-size: 1.5rem;
     color: white;
     font-weight: bold;
     justify-content: center;
+    /* padding: 0.2rem 0.2rem; */
     /* padding-left: 0.7rem; */
+    margin: 0;
+}
+
+.basket-price-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
 }
 
 /*style to add the strikethrough when a price is on a special offer, this 
@@ -322,6 +382,7 @@ in this way */
     transition: all 0.7s ease;
     /* align-items: baseline; */
     justify-content: space-evenly;
+    margin: 5px;
 }
 
 #return-to-shop-button {
@@ -370,8 +431,8 @@ in this way */
 
 #return-to-shop-button:hover {
     transition: 0.5s;
-    color: cyan;
-    border-color: cyan;
+    color: #3d9970;
+    border-color: #3d9970;
 }
 
 .item-container-button:hover {

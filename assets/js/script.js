@@ -534,29 +534,33 @@ function showBasket() {
         return 0;
     });
 
-    let orderedAisles = aisles.sort();
+    aisles.sort();
 
     const gameWindow = document.getElementById("game-screen");
     const basketWindow = document.getElementById("basket-screen");
     const basketItemDisplayDiv = document.getElementById("the-basket");
+    const basketReceiptDiv = document.getElementById("the-receipt");
+
+    const basketReceiptHeader = document.createElement("H3");
+    basketReceiptHeader.appendChild(document.createTextNode("HYPERMARKET CHEAP"));
+    basketReceiptHeader.className = "the-receipt-header";
+    basketReceiptDiv.appendChild(basketReceiptHeader);
 
     basketItemDisplayDiv.innerHTML = "";
 
     gameWindow.style.display = "none";
     basketWindow.style.display = "flex";
 
-    const basketReturnToShopDiv = document.createElement("DIV");
+    const basketReturnToShopDiv = document.getElementById("return-to-shop-div");
     const basketReturnToShopButton = document.createElement("BUTTON");
 
     basketReturnToShopDiv.innerHTML = "";
-    basketReturnToShopDiv.style.padding = "20px";
 
     basketReturnToShopButton.id = "return-to-shop-button";
     basketReturnToShopButton.onclick = function () { returnToShop(); };
     basketReturnToShopButton.innerHTML = `<span style="font-family:'Courier Prime', monospace;"><i class="fas fa-angle-double-left"></i> Return To Shop</span>`;
 
     basketReturnToShopDiv.appendChild(basketReturnToShopButton);
-    basketItemDisplayDiv.appendChild(basketReturnToShopDiv);
 
     /*
     For each aisle, check what matches that aisle in the basket
@@ -566,9 +570,25 @@ function showBasket() {
     */
     for (let aisleOption of aisles) {
 
-        const basketAisleContainer = document.createElement("DIV");
+        if (basketStock.some(x => x.aisle === aisleOption)) {
+            const basketAisleTitleDiv = document.createElement("DIV");
+            basketAisleTitleDiv.appendChild(document.createTextNode(aisleOption));
+            basketAisleTitleDiv.className = "basket-aisle-title";
+            basketItemDisplayDiv.appendChild(basketAisleTitleDiv);
+        }
 
         for (let basketItem of basketStock) {
+
+            for (let i = 0; i < basketItem.quantity; i++) {
+                const receiptDivLine = document.createElement("DIV");
+                const receiptNameP = document.createElement("P");
+                const receiptPriceP = document.createElement("P");
+                receiptDivLine.className = "basket-receipt-line";
+                receiptNameP.appendChild(document.createTextNode(basketItem.name));
+                receiptPriceP.appendChild(document.createTextNode("£" + basketItem.amountPaid));
+                addElementsToContainer(receiptDivLine, [receiptNameP, receiptPriceP]);
+                basketReceiptDiv.appendChild(receiptDivLine);
+            }
 
             const basketItemContainer = document.createElement("DIV");
             const basketItemImage = document.createElement("IMG");
@@ -585,7 +605,6 @@ function showBasket() {
             const basketItemTotalPrice = document.createElement("SPAN");
             const basketItemTotalRrp = document.createElement("SPAN");
 
-
             if (basketItem.aisle === aisleOption) {
                 checkIfImageExists("assets/images/items/" + basketItem.imageUrl, (exists) => {
                     if (exists) {
@@ -596,6 +615,7 @@ function showBasket() {
                 });
 
                 basketItemName.appendChild(basketItemNameText);
+                basketItemName.id = "basket-item-name_" + basketItem.id;
 
                 let calculateTotal = calculateNumberTimes(basketItem.amountPaid, basketItem.quantity);
                 let calculateTotalRrp = calculateNumberTimes(basketItem.price, basketItem.quantity);
@@ -626,6 +646,9 @@ function showBasket() {
                     basketItemTotalPrice.className = "basket-item-container-text";
                     basketItemTotalRrp.className = "basket-item-container-text strikethrough-text";
 
+                    basketItemPricePerRrp.id = "basket-per-special_" + basketItem.id;
+                    basketItemTotalRrp.id = "basket-per-total-special_" + basketItem.id;
+
                     addElementsToContainer(basketItemPriceP, [basketItemPricePer, basketItemPricePerRrp]);
                     //basketItemPriceP.appendChild(basketItemPricePer);
                     //basketItemPriceP.appendChild(basketItemPricePerRrp);
@@ -634,14 +657,18 @@ function showBasket() {
                     //basketItemTotalPriceP.appendChild(basketItemTotalRrp);
                 }
 
-                basketItemQuantityPlus.innerHTML = "+";
-                basketItemQuantityMinus.innerHTML = "-";
+                basketItemPricePer.id = "basket-per_" + basketItem.id;
+                basketItemTotalPrice.id = "basket-per-total-_" + basketItem.id;
 
-                basketItemQuantityPlus.id = "plus-qty_" + basketItem.id;
-                basketItemQuantityMinus.id = "minus-qty_" + basketItem.id;
-
+                basketItemQuantityPlus.id = "basket-add_" + basketItem.id;
                 basketItemQuantityPlus.className = "basket-item-quantity-button";
+                basketItemQuantityPlus.innerHTML = "+";
+                basketItemQuantityPlus.onclick = function () { removeFromBasket(itemForBasket.alertText); };
+
+                basketItemQuantityMinus.id = "basket-sub_" + basketItem.id;
                 basketItemQuantityMinus.className = "basket-item-quantity-button";
+                basketItemQuantityMinus.innerHTML = "-";
+                basketItemQuantityMinus.onclick = function () { removeFromBasket(basketItem.id); };
 
                 basketItemQuantity.appendChild(document.createTextNode(basketItem.quantity));
 
@@ -658,8 +685,6 @@ function showBasket() {
                 // basketItemContainer.appendChild(basketItemTotalPriceP);
 
                 basketItemContainer.className = "basket-item-container";
-                basketItemContainer.setAttribute("data-basket-item", JSON.stringify(basketItem));
-                basketItemContainer.id = "basket-item-container_" + basketItem.id;
                 basketItemImage.className = "basket-item-container-img";
                 basketItemName.className = "basket-item-container-text";
                 basketItemQuantityContainer.className = "basket-item-container-quantity-div";
@@ -676,7 +701,8 @@ function showBasket() {
 
 /**
  * Function to remove an item to the basket (including its quantity). itemId is
- * passed to the function
+ * passed to the function. From here it is possible to get DOMElements which
+ * contain this number based on set fields
  */
 function removeFromBasket(itemId) {
 
