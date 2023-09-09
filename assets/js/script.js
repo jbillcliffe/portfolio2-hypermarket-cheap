@@ -58,7 +58,7 @@ function startGame(customerType = "new", dayType = "new") {
             arrays of data to populate during the gameStartingStock function before
             performing createEnvironment which relies on these variables
         */
-        setTimeout(createEnvironment, 3000);
+        setTimeout(createEnvironment, 5000);
         emptyBasket();
     }
 }
@@ -510,8 +510,6 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
             itemExistingInBasket.quantity++;
         }
 
-        console.log(itemExistingInBasket);
-        console.log(JSON.stringify(itemExistingInBasket));
         if (whichScreen === "in-shop") {
             let stockTextSpan = document.getElementById("stock_" + itemForBasket.id).children[0];
             let basketButton = document.getElementById("basket-add_" + itemForBasket.id);
@@ -525,32 +523,27 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
                 stockTextSpan.innerHTML = shopObject.quantity;
             }
         } else if (whichScreen === "in-basket") {
-            //const receiptLineReference = document.getElementsByName("span")[0];
             let receiptLineReference = document.getElementsByName("receipt-line_" + itemForBasket.id)[0];
             let newReceiptLine = createNewReceiptLine(itemForBasket.id, itemForBasket.name, itemForBasket.amountPaid, "no");
-            console.log(newReceiptLine);
             receiptLineReference.insertAdjacentElement("beforebegin", newReceiptLine);
             document.getElementById("basket-receipt-total-price").innerHTML = "£" + basketTotalCost.toFixed(2);
             document.getElementById("basket-item-quantity_" + itemExistingInBasket.id).innerHTML = itemExistingInBasket.quantity;
             let totalPaid = calculateNumberTimes(itemExistingInBasket.amountPaid, itemExistingInBasket.quantity);
             document.getElementById("basket-per-total-_" + itemExistingInBasket.id).innerHTML = "£" + totalPaid.toFixed(2);
             let rrpAmount = calculateNumberTimes(itemExistingInBasket.price, itemExistingInBasket.quantity);
-            console.log(itemExistingInBasket.amountPaid + ", " + itemExistingInBasket.quantity + ", " + typeof (itemExistingInBasket.amountPaid) + ", " + typeof (itemExistingInBasket.quantity));
-            console.log(itemExistingInBasket.special);
+
             if (itemExistingInBasket.special < 1) {
                 document.getElementById("basket-per-total-special_" + itemExistingInBasket.id).innerHTML = "£" + rrpAmount.toFixed(2);
             } else {
-
             }
 
+            //stock validation for + button removal if necessary
+            if (shopObject.quantity === 0) {
+                console.log("Remove button");
+                removePlusQuantityButton(itemForBasket.id);
 
-            //document.getElementById("the-receipt").innerHTML = "";
-            /*for (let a = 0; a < basketStock.length; a++) {
-                for (let b = 0; b < basketStock[a].quantity; b++) {
-                    createNewReceiptLine(basketStock[a].id, basketStock[a].name, basketStock[a].amountPaid);
-                }
+
             }
-            createNewReceiptLine(itemForBasket.id, itemForBasket.name, itemForBasket.amountPaid);*/
         } else {
             //Any other locations?
         }
@@ -657,7 +650,6 @@ function showBasket(lastAisle) {
             const basketItemPricePer = document.createElement("SPAN");
             const basketItemPricePerRrp = document.createElement("SPAN");
             const basketItemQuantityContainer = document.createElement("DIV");
-            const basketItemQuantityPlus = document.createElement("BUTTON");
             const basketItemQuantity = document.createElement("P");
             const basketItemQuantityMinus = document.createElement("BUTTON");
             const basketItemTotalPriceP = document.createElement("P");
@@ -678,7 +670,7 @@ function showBasket(lastAisle) {
 
                 let calculateTotal = calculateNumberTimes(basketItem.amountPaid, basketItem.quantity);
                 let calculateTotalRrp = calculateNumberTimes(basketItem.price, basketItem.quantity);
-                console.log("COMPARE : " + "price:" + typeof (basketItem.price) + ", " + "paid:" + basketItem.amountPaid);
+
                 if (basketItem.price === basketItem.amountPaid) {
                     basketItemPricePer.appendChild(document.createTextNode("£" + (basketItem.price).toFixed(2)));
                     basketItemTotalPrice.appendChild(document.createTextNode("£" + (calculateTotal).toFixed(2)));
@@ -735,15 +727,20 @@ function showBasket(lastAisle) {
                 - Otherwise with two, (qty|-)
                 - this function will create the basketItemQuantityContainer
                 */
+                let basketItemQuantityPlus;
                 let shopStockItem = shopStock.find(({ id }) => id === basketItem.id);
+
                 if (shopStockItem.quantity > 0) {
+                    basketItemQuantityPlus = document.createElement("BUTTON");
                     basketItemQuantityPlus.id = "basket-add_" + basketItem.id;
-                    basketItemQuantityPlus.className = "basket-item-quantity-button";
                     basketItemQuantityPlus.innerHTML = "+";
+                    basketItemQuantityPlus.className = "basket-item-quantity-button";
                     basketItemQuantityPlus.onclick = function () { addToBasket(basketItem, basketItem.amountPaid, "in-basket"); };
-                   
                 } else {
-                    //basketItemQuantityPlus.setAttribute()
+                    basketItemQuantityPlus = document.createElement("P");
+                    basketItemQuantityPlus.className = "basket-item-quantity-button-blank";
+                    basketItemQuantityPlus.appendChild(document.createTextNode("+"));
+
                 }
                 addElementsToContainer(basketItemQuantityContainer, [basketItemQuantityPlus, basketItemQuantity, basketItemQuantityMinus]);
                 addElementsToContainer(basketItemContainer, [basketItemImage, basketItemName, basketItemPriceP, basketItemQuantityContainer, basketItemTotalPriceP]);
@@ -788,10 +785,8 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
     basketTally.innerHTML = (parseInt(basketTally.innerHTML) - 1).toString();
     console.log("remove 2. " + basketStock);
 
-
     //get all lines that match the id, remove the first, they all are the same
     let receiptLines = document.getElementsByName("receipt-line_" + removeId);
-    console.log(receiptLines);
     receiptLines[0].remove();
     document.getElementById("basket-receipt-total-price").innerHTML = "£" + basketTotalCost.toFixed(2);
 
@@ -826,6 +821,15 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
 
         }
     } else {
+    }
+
+    /*
+    If after returning the item to the shop, the quantity is 1. It means that
+    the previous quantity was 0 and therefore there would have been no + button,
+    now there is stock in the shop, the + needs to return
+    */
+    if (shopStockItem.quantity === 1) {
+        addPlusQuantityButton(basketStockItem.id, basketStockItem, basketStockItem.amountPaid);
     }
 }
 
@@ -879,7 +883,6 @@ function checkIfImageExists(url, callback) {
 }
 
 function calculateNumberTimes(a, b) {
-    console.log(a + " * " + b);
     return Number((a * b).toFixed(2));
 }
 
@@ -908,4 +911,39 @@ function createNewReceiptLine(receiptid, receiptname, receiptpaid, goOrNo = "go"
     } else {
         return receiptDivLine;
     }
+}
+
+function addPlusQuantityButton(buttonId, item, paid) {
+    const basketItemQuantityPlus = document.createElement("BUTTON");
+    basketItemQuantityPlus.id = "basket-add_" + buttonId;
+    basketItemQuantityPlus.innerHTML = "+";
+    basketItemQuantityPlus.className = "basket-item-quantity-button";
+    basketItemQuantityPlus.onclick = function () { addToBasket(item, paid, "in-basket"); };
+    const currentQuantityText = document.getElementById("basket-item-quantity_" + buttonId);
+    const currentBlankSpace = currentQuantityText.previousElementSibling;
+    currentQuantityText.insertAdjacentElement("beforebegin", basketItemQuantityPlus);
+    currentBlankSpace.remove();
+}
+
+function removePlusQuantityButton(buttonId) {
+
+    const basketItemQuantityPlus = document.createElement("P");
+    basketItemQuantityPlus.className = "basket-item-quantity-button-blank";
+    basketItemQuantityPlus.appendChild(document.createTextNode("+"));
+    const currentQuantityText = document.getElementById("basket-item-quantity_" + buttonId);
+    currentQuantityText.insertAdjacentElement("beforebegin", basketItemQuantityPlus);
+    console.log(currentQuantityText.parentElement.children[0]);
+    currentQuantityText.parentElement.removeChild(currentQuantityText.parentElement.children[0]);
+
+    //list.removeChild(list.firstChild);
+    //list.removeChild(list.firstChild);
+
+    //buttonToRemove.remove();
+    /*let buttonString = "basket-add_" + buttonId.toString();
+    console.log(buttonString);
+    let currentButton = document.getElementById(buttonString);
+    console.log(typeof (currentButton));
+    console.log(typeof (currentQuantityText));
+    this.remove();
+    console.log(currentButton);*/
 }

@@ -420,6 +420,19 @@ in this way */
     margin: 5px;
 }
 
+.basket-item-quantity-button-blank {
+    height: 2rem;
+    display: flex;
+    width: 2rem;
+    border-radius: 10px;
+    background: none;
+    border: 3px solid none;
+    color: black;
+    font-size: 1.3rem;
+    justify-content: space-evenly;
+    margin: 5px;
+}
+
 #return-to-shop-button,
 #checkout-button {
     display: flex;
