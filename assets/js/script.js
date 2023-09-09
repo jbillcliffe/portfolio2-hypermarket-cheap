@@ -58,9 +58,8 @@ function startGame(customerType = "new", dayType = "new") {
             arrays of data to populate during the gameStartingStock function before
             performing createEnvironment which relies on these variables
         */
-        setTimeout(createEnvironment, 2000);
+        setTimeout(createEnvironment, 3000);
         emptyBasket();
-
     }
 }
 
@@ -588,6 +587,7 @@ function showBasket(lastAisle) {
     const basketReturnToShopDiv = document.getElementById("return-to-shop-div");
     const basketReceiptHeader = document.createElement("IMG");
     const basketReturnToShopButton = document.createElement("BUTTON");
+    const basketCheckoutButton = document.createElement("BUTTON");
 
     basketReturnToShopDiv.innerHTML = "";
     basketItemDisplayDiv.innerHTML = "";
@@ -600,8 +600,13 @@ function showBasket(lastAisle) {
     basketReturnToShopButton.onclick = function () { returnToShop(lastAisle); };
     basketReturnToShopButton.innerHTML =
         `<span style="display:flex; align-items:stretch; flex-direction:row;"><i class="fas fa-angle-double-left"></i>&nbspReturn To Shop</span>`;
-
     basketReturnToShopDiv.appendChild(basketReturnToShopButton);
+
+    basketCheckoutButton.id = "checkout-button";
+    basketCheckoutButton.onclick = function () { checkoutBasket(); };
+    basketCheckoutButton.innerHTML =
+        `<span style="display:flex; align-items:stretch; flex-direction:row;">Checkout! &nbsp<i class="fas fa-angle-double-right"></i></span>`;
+    basketReturnToShopDiv.appendChild(basketCheckoutButton);
 
     basketReceiptHeader.src = "assets/images/logo-white-350.webp";
     basketReceiptHeader.className = "the-receipt-header";
@@ -816,7 +821,6 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
 
         }
     } else {
-
     }
 }
 

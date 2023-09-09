@@ -59,3 +59,7 @@ some : https://www.w3schools.com/jsref/jsref_some.asp
 Longstanding issues caused by LINE 163 (at time of resolution) : let thisItemPrice = (Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2);
 Issue was toFixed(2) creates a string and later that was an issue. So turned into : let thisItemPrice = Number((Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2));
 Using typeof() really helped me trace the issue back.
+
+insertAdjacentELement() : https://www.w3schools.com/jsref/met_node_insertadjacentelement.asp
+
+classList : https://www.w3schools.com/jsref/prop_element_classlist.asp

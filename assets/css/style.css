@@ -132,6 +132,8 @@ footer {
 
 .return-to-shop-div {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 100%;
     height: 4rem;
     padding: 0.5rem;
@@ -418,7 +420,8 @@ in this way */
     margin: 5px;
 }
 
-#return-to-shop-button {
+#return-to-shop-button,
+#checkout-button {
     display: flex;
     cursor: pointer;
     font-family: 'Courier Prime', monospace;
@@ -465,7 +468,8 @@ in this way */
     color: cyan;
 }
 
-#return-to-shop-button:hover {
+#return-to-shop-button:hover,
+#checkout-button:hover {
     transition: 0.5s;
     color: #3d9970;
     border-color: #3d9970;
