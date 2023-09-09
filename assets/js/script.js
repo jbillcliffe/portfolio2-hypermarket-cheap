@@ -934,16 +934,4 @@ function removePlusQuantityButton(buttonId) {
     currentQuantityText.insertAdjacentElement("beforebegin", basketItemQuantityPlus);
     console.log(currentQuantityText.parentElement.children[0]);
     currentQuantityText.parentElement.removeChild(currentQuantityText.parentElement.children[0]);
-
-    //list.removeChild(list.firstChild);
-    //list.removeChild(list.firstChild);
-
-    //buttonToRemove.remove();
-    /*let buttonString = "basket-add_" + buttonId.toString();
-    console.log(buttonString);
-    let currentButton = document.getElementById(buttonString);
-    console.log(typeof (currentButton));
-    console.log(typeof (currentQuantityText));
-    this.remove();
-    console.log(currentButton);*/
 }
