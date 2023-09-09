@@ -54,6 +54,7 @@ footer {
 #hypermarket-cheap {
     max-width: 1440px;
     max-height: 80vh;
+    min-height: 80vh;
     /* box-sizing: border-box; */
     /* margin-right: auto; */
     /* margin-left: auto; */
@@ -134,7 +135,7 @@ footer {
     width: 100%;
     height: 4rem;
     padding: 0.5rem;
-    /* height: 3.5rem; */
+    align-items: center;
     border-bottom: 2px solid white;
 }
 
@@ -231,6 +232,7 @@ footer {
 .the-aisles {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     width: 30%;
     background-color: black;
     border-left: 2px solid black;
@@ -257,6 +259,11 @@ footer {
 /* when hovering over an aisle option, accent it for clarity */
 .aisle-button:hover {
     box-shadow: 0 0 4px 100px #2500cac4 inset;
+}
+
+.aisle-button-active {
+    color: black;
+    box-shadow: 0 0 4px 100px cyan inset;
 }
 
 /* styling for the container which has each item in the shop, which has the 

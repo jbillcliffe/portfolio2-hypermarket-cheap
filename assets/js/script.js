@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (this.getAttribute("data-button") === "about") {
                 showAbout();
             } else if (this.getAttribute("data-button") === "show-basket") {
-                showBasket();
+                showBasket(lastAisle);
             } else {
                 //further functions?
             }
@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     the top of the script.
 */
 
+let lastAisle;
 let aisles = [];
 let basketStock = [];
 let shopStock = [];
@@ -29,6 +30,7 @@ let specialOffers = [];
 let cashHigh = 100.00;
 let cashLow = 30.00;
 let playerCash = 0.00;
+let basketTotalCost = 0.00;
 
 
 /**
@@ -77,7 +79,7 @@ function createEnvironment() {
     for (let aisle of aisles) {
         let aisleButton = document.createElement("BUTTON");
         aisleButton.className = "aisle-button";
-        aisleButton.id = aisle;
+        aisleButton.id = aisle + "_btn";
         aisleButton.onclick = function () {
             changeAisle(aisle, function () {
                 document.getElementById("toolbar-loading").style.display = "none";
@@ -242,8 +244,24 @@ function emptyBasket(requestType = "new") {
  * then populating it with new divs which have content
  */
 function changeAisle(aisleId, callback) {
+
+    lastAisle = aisleId;
+
     document.getElementById("toolbar-loading").style.display = "flex";
     document.getElementById("loading-overlay").style.display = "block";
+
+    for (let aisleButton of aisles) {
+
+        let thisAisleButton = document.getElementById(aisleButton + "_btn");
+
+        if (aisleButton == aisleId) {
+            thisAisleButton.classList.toggle("aisle-button-active");
+        } else {
+            if (thisAisleButton.classList.contains("aisle-button-active")) {
+                thisAisleButton.classList.toggle("aisle-button-active");
+            }
+        }
+    }
 
     //Ensure the shop is emptied each time an aisle button is clicked
     let shopAisle = document.getElementById("the-items");
@@ -326,9 +344,6 @@ function changeAisle(aisleId, callback) {
             innerStockSpan.appendChild(stockText);
             addElementsToContainer(stockPTag, [stockStart, innerStockSpan]);
 
-            //stockPTag.appendChild(stockStart);
-            //stockPTag.appendChild(innerStockSpan);
-
             /* ----- PRICING -----
             { id, name, price, quantity, aisle, special, imageUrl };
             the "special" of each object in the shopStock array defines its
@@ -376,7 +391,7 @@ function changeAisle(aisleId, callback) {
             */
             basketAdd.id = "basket-add_" + stockItem.id;
             if (stockItem.quantity > 0) {
-                basketAdd.onclick = function () { addToBasket(stockItem, calculatedAmount); };
+                basketAdd.onclick = function () { addToBasket(stockItem, calculatedAmount, "in-shop"); };
                 basketAdd.innerHTML = "+";
             } else {
 
@@ -440,7 +455,7 @@ function noStockToAdd(alertingText) {
  * It checks if the id of the object is already in the basket. If so it needs
  * to alter the quantity rather than
  */
-function addToBasket(itemForBasket, amountPaid) {
+function addToBasket(itemForBasket, amountPaid, whichScreen) {
     /*
     First, it needs to be determined if the player has enough money. Otherwise,
     they cannot addToBasket.
@@ -453,8 +468,9 @@ function addToBasket(itemForBasket, amountPaid) {
         subtract the cost from the wallet and set the "wallet-count" data
         attached to the wallet icon to change.
         */
-        playerCash = (playerCash - amountPaid).toFixed(2);
-        document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toString());
+
+        playerCash = playerCash - amountPaid;
+        document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
         /*
         - If after taking one off the shelf the quantity left is 0, it needs to now
         be marked as out of stock. Otherwise, it is a straightforward quantity 
@@ -465,18 +481,6 @@ function addToBasket(itemForBasket, amountPaid) {
         */
         let shopObject = shopStock.find(({ id }) => id === itemForBasket.id);
         shopObject.quantity--;
-
-        let stockTextSpan = document.getElementById("stock_" + itemForBasket.id).children[0];
-        let basketButton = document.getElementById("basket-add_" + itemForBasket.id);
-
-        if (shopObject.quantity === 0) {
-            basketButton.onclick = function () { noStockToAdd(itemForBasket.alertText); };
-            basketButton.innerHTML = `<i class="fas fa-times negative-text"></i>`;
-            stockTextSpan.className = "item-container-text negative-text";
-            stockTextSpan.innerHTML = "Out Of Stock";
-        } else {
-            stockTextSpan.innerHTML = shopObject.quantity;
-        }
 
         let basketTally = document.getElementById("basket-tally");
         basketTally.innerHTML = (parseInt(basketTally.innerHTML) + 1).toString();
@@ -505,6 +509,38 @@ function addToBasket(itemForBasket, amountPaid) {
         } else {
             itemExistingInBasket.quantity++;
         }
+
+        if (whichScreen === "in-shop") {
+            let stockTextSpan = document.getElementById("stock_" + itemForBasket.id).children[0];
+            let basketButton = document.getElementById("basket-add_" + itemForBasket.id);
+
+            if (shopObject.quantity === 0) {
+                basketButton.onclick = function () { noStockToAdd(itemForBasket.alertText); };
+                basketButton.innerHTML = `<i class="fas fa-times negative-text"></i>`;
+                stockTextSpan.className = "item-container-text negative-text";
+                stockTextSpan.innerHTML = "Out Of Stock";
+            } else {
+                stockTextSpan.innerHTML = shopObject.quantity;
+            }
+        } else if (whichScreen === "in-basket") {
+            //const receiptLineReference = document.getElementsByName("span")[0];
+            let receiptLineReference = document.getElementsByName("receipt-line_" + itemForBasket.id)[0];
+            let newReceiptLine = createNewReceiptLine(itemForBasket.id, itemForBasket.name, itemForBasket.amountPaid, "no");
+            console.log(newReceiptLine);
+            receiptLineReference.insertAdjacentElement("beforebegin", newReceiptLine);
+            document.getElementById("basket-receipt-total-price").innerHTML = "£" + basketTotalCost.toFixed(2);
+
+            //document.getElementById("the-receipt").innerHTML = "";
+            /*for (let a = 0; a < basketStock.length; a++) {
+                for (let b = 0; b < basketStock[a].quantity; b++) {
+                    createNewReceiptLine(basketStock[a].id, basketStock[a].name, basketStock[a].amountPaid);
+                }
+            }
+            createNewReceiptLine(itemForBasket.id, itemForBasket.name, itemForBasket.amountPaid);*/
+        } else {
+            //Any other locations?
+        }
+
     }
 }
 /**
@@ -515,7 +551,7 @@ function addToBasket(itemForBasket, amountPaid) {
  * - Container (Image - Name - Price Per - (+) Quantity (-) - Total Price)
  * - When all items added. Need to add a basket total and checkout option.
  */
-function showBasket() {
+function showBasket(lastAisle) {
 
     basketStock.sort(function (a, b) {
         let x = a.name.toLowerCase();
@@ -525,14 +561,17 @@ function showBasket() {
         return 0;
     });
 
-    aisles.sort();
+    let basketAisles = aisles;
+    basketAisles.sort();
+
+    basketTotalCost = 0.00;
 
     const gameWindow = document.getElementById("game-screen");
     const basketWindow = document.getElementById("basket-screen");
     const basketItemDisplayDiv = document.getElementById("the-basket");
     const basketReceiptDiv = document.getElementById("the-receipt");
-    const basketReceiptHeader = document.createElement("IMG");
     const basketReturnToShopDiv = document.getElementById("return-to-shop-div");
+    const basketReceiptHeader = document.createElement("IMG");
     const basketReturnToShopButton = document.createElement("BUTTON");
 
     basketReturnToShopDiv.innerHTML = "";
@@ -543,7 +582,7 @@ function showBasket() {
     basketWindow.style.display = "flex";
 
     basketReturnToShopButton.id = "return-to-shop-button";
-    basketReturnToShopButton.onclick = function () { returnToShop(); };
+    basketReturnToShopButton.onclick = function () { returnToShop(lastAisle); };
     basketReturnToShopButton.innerHTML =
         `<span style="display:flex; align-items:stretch; flex-direction:row;"><i class="fas fa-angle-double-left"></i>&nbspReturn To Shop</span>`;
 
@@ -553,31 +592,21 @@ function showBasket() {
     basketReceiptHeader.className = "the-receipt-header";
     basketReceiptDiv.appendChild(basketReceiptHeader);
 
-    let basketTotalCost = 0;
 
-    for (let a = 0; a < basketStock.length; a++) {
-        for (let b = 0; b < basketStock[a].quantity; b++) {
-            const receiptDivLine = document.createElement("DIV");
-            const receiptNameP = document.createElement("P");
-            const receiptPriceP = document.createElement("P");
-            receiptDivLine.className = "basket-receipt-line";
-            receiptNameP.appendChild(document.createTextNode(basketStock[a].name));
-            receiptPriceP.appendChild(document.createTextNode("£" + (basketStock[a].amountPaid).toFixed(2)));
-            addElementsToContainer(receiptDivLine, [receiptNameP, receiptPriceP]);
-            basketReceiptDiv.appendChild(receiptDivLine);
-            console.log("RECEIPTAMOUNT:" + typeof (basketStock[a].amountPaid) + ", " + basketStock[a].amountPaid + ". ");
-            basketTotalCost += basketStock[a].amountPaid;
-            console.log(basketTotalCost);
-        }
-    }
-
-    console.log(typeof (basketTotalCost));
 
     const receiptTotalDivLine = document.createElement("DIV");
     receiptTotalDivLine.className = "basket-receipt-line total-line";
     const receiptTotalP = document.createElement("P");
     const receiptTotalPriceP = document.createElement("P");
+    receiptTotalPriceP.id = "basket-receipt-total-price";
     receiptTotalP.appendChild(document.createTextNode("Total : "));
+
+    for (let a = 0; a < basketStock.length; a++) {
+        for (let b = 0; b < basketStock[a].quantity; b++) {
+            createNewReceiptLine(basketStock[a].id, basketStock[a].name, basketStock[a].amountPaid);
+        }
+    }
+
     receiptTotalPriceP.appendChild(document.createTextNode("£" + basketTotalCost.toFixed(2)));
     addElementsToContainer(receiptTotalDivLine, [receiptTotalP, receiptTotalPriceP]);
     basketReceiptDiv.appendChild(receiptTotalDivLine);
@@ -588,17 +617,19 @@ function showBasket() {
     the aisles are alphabetical and the items within the aisles are alphabetical
     aswell. 
     */
-    for (let aisleOption of aisles) {
+    for (let aisleOption of basketAisles) {
 
         if (basketStock.some(x => x.aisle === aisleOption)) {
             const basketAisleTitleDiv = document.createElement("DIV");
             basketAisleTitleDiv.appendChild(document.createTextNode(aisleOption));
             basketAisleTitleDiv.className = "basket-aisle-title";
+            basketAisleTitleDiv.id = "basket-aisle_" + aisleOption;
             basketItemDisplayDiv.appendChild(basketAisleTitleDiv);
         }
 
         for (let basketItem of basketStock) {
             const basketItemContainer = document.createElement("DIV");
+            basketItemContainer.id = "basket-item_" + basketItem.id;
             const basketItemImage = document.createElement("IMG");
             const basketItemName = document.createElement("P");
             const basketItemNameText = document.createTextNode(basketItem.name);
@@ -671,12 +702,12 @@ function showBasket() {
                 basketItemQuantityPlus.id = "basket-add_" + basketItem.id;
                 basketItemQuantityPlus.className = "basket-item-quantity-button";
                 basketItemQuantityPlus.innerHTML = "+";
-                basketItemQuantityPlus.onclick = function () { removeFromBasket(itemForBasket.alertText); };
+                basketItemQuantityPlus.onclick = function () { addToBasket(basketItem, basketItem.amountPaid, "in-basket"); };
 
                 basketItemQuantityMinus.id = "basket-sub_" + basketItem.id;
                 basketItemQuantityMinus.className = "basket-item-quantity-button";
                 basketItemQuantityMinus.innerHTML = "-";
-                basketItemQuantityMinus.onclick = function () { removeFromBasket(basketItem.id); };
+                basketItemQuantityMinus.onclick = function () { removeFromBasket(basketItem.id, basketItemContainer.id, basketItemQuantity.id); };
 
                 basketItemQuantity.appendChild(document.createTextNode(basketItem.quantity));
 
@@ -708,20 +739,77 @@ function showBasket() {
 }
 
 /**
- * Function to remove an item to the basket (including its quantity). itemId is
- * passed to the function. From here it is possible to get DOMElements which
- * contain this number based on set fields
+ * Function to remove an item to the basket (including its quantity). Whjole 
+ * object is passed to the function. It is the manipulated in the basketStock
+ * and returned to shopStock. 
+ * NOTE : shopStock can have quantity of 0, the basketStock cannot. If this
+ * results in basketStock having a quantity of 0 on the item, it needs removing
+ * from the array entirely. If the shopStock was out of stock prior, it would 
+ * become In Stock as its quantity will increase
  */
-function removeFromBasket(itemId) {
+function removeFromBasket(removeId, removeContainer, removeQuantity) {
 
+    let shopStockItem = shopStock.find(({ id }) => id === removeId);
+    shopStockItem.quantity++;
+    let basketStockItem = basketStock.find(({ id }) => id === removeId);
+    let basketItemAisle = "basket-aisle_" + basketStockItem.aisle;
+    basketStockItem.quantity--;
+    basketTotalCost -= basketStockItem.amountPaid;
+    playerCash += basketStockItem.amountPaid;
+
+    document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
+
+    let basketTally = document.getElementById("basket-tally");
+    basketTally.innerHTML = (parseInt(basketTally.innerHTML) - 1).toString();
+    console.log("remove 2. " + basketStock);
+
+
+    //get all lines that match the id, remove the first, they all are the same
+    let receiptLines = document.getElementsByName("receipt-line_" + removeId);
+    console.log(receiptLines);
+    receiptLines[0].remove();
+    document.getElementById("basket-receipt-total-price").innerHTML = "£" + basketTotalCost.toFixed(2);
+
+    if (basketStockItem.quantity === 0) {
+
+        let basketContainer = document.getElementById(removeContainer);
+
+        const removeIndex = basketStock.findIndex(({ id }) => id === removeId);
+        basketStock.splice(removeIndex, 1);
+        console.log("remove 3. " + basketStock);
+        console.log(JSON.parse(JSON.stringify(basketStock)));
+
+        if (basketStock.some(x => x.aisle === basketStockItem.aisle)) {
+            //if any found, do not delete the header
+        } else {
+            let aisleHeader = document.getElementById(basketItemAisle);
+            console.log(aisleHeader);
+            aisleHeader.remove();
+        }
+        basketContainer.remove();
+
+    } else if (basketStockItem.quantity > 0) {
+        let quantityContainer = document.getElementById(removeQuantity);
+        quantityContainer.innerHTML = basketStockItem.quantity;
+        let basketPerTotalContainer = document.getElementById("basket-per-total-_" + removeId);
+        console.log(typeof (basketStockItem.amountPaid) + "," + basketStockItem.quantity);
+        basketPerTotalContainer.innerHTML = "£" + calculateNumberTimes(basketStockItem.amountPaid, basketStockItem.quantity);
+    } else {
+
+    }
 }
 
-function returnToShop() {
+function returnToShop(lastAisle) {
     let gameWindow = document.getElementById("game-screen");
     let basketWindow = document.getElementById("basket-screen");
 
     gameWindow.style.display = "flex";
     basketWindow.style.display = "none";
+
+    changeAisle(lastAisle, function () {
+        document.getElementById("toolbar-loading").style.display = "none";
+        document.getElementById("loading-overlay").style.display = "none";
+    });
 }
 
 /**
@@ -767,5 +855,26 @@ function calculateNumberTimes(a, b) {
 function addElementsToContainer(container, elements) {
     for (let element of elements) {
         container.appendChild(element);
+    }
+}
+
+function createNewReceiptLine(receiptid, receiptname, receiptpaid, goOrNo = "go") {
+    const receiptDivLine = document.createElement("DIV");
+    const receiptNameP = document.createElement("P");
+    const receiptPriceP = document.createElement("P");
+    receiptDivLine.className = "basket-receipt-line";
+    receiptDivLine.setAttribute("name", "receipt-line_" + receiptid);
+
+    receiptNameP.appendChild(document.createTextNode(receiptname));
+    receiptPriceP.appendChild(document.createTextNode("£" + (receiptpaid).toFixed(2)));
+    addElementsToContainer(receiptDivLine, [receiptNameP, receiptPriceP]);
+
+    basketTotalCost += receiptpaid;
+    //document.getElementById("basket-receipt-total-price").innerHTML = "£" + basketTotalCost.toFixed(2);
+
+    if (goOrNo === "go") {
+        document.getElementById("the-receipt").appendChild(receiptDivLine);
+    } else {
+        return receiptDivLine;
     }
 }
