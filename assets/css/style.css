@@ -153,7 +153,7 @@ footer {
     display: flex;
     width: 100%;
     height: auto;
-    padding: 1rem;
+    padding: 0.5rem;
     color: #3d9970;
     border-bottom: 2px dashed white;
     font-size: 3rem;
@@ -462,7 +462,7 @@ in this way */
     cursor: pointer;
 }
 
-/* when hovering over the basket, accent it for clarity */
+/* when hovering over the buttons, accent them for clarity */
 #basket-button:hover {
     transition: 0.5s;
     color: cyan;

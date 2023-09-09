@@ -719,11 +719,6 @@ function showBasket(lastAisle) {
                 basketItemPricePer.id = "basket-per_" + basketItem.id;
                 basketItemTotalPrice.id = "basket-per-total-_" + basketItem.id;
 
-                basketItemQuantityPlus.id = "basket-add_" + basketItem.id;
-                basketItemQuantityPlus.className = "basket-item-quantity-button";
-                basketItemQuantityPlus.innerHTML = "+";
-                basketItemQuantityPlus.onclick = function () { addToBasket(basketItem, basketItem.amountPaid, "in-basket"); };
-
                 basketItemQuantityMinus.id = "basket-sub_" + basketItem.id;
                 basketItemQuantityMinus.className = "basket-item-quantity-button";
                 basketItemQuantityMinus.innerHTML = "-";
@@ -731,17 +726,27 @@ function showBasket(lastAisle) {
 
                 basketItemQuantity.appendChild(document.createTextNode(basketItem.quantity));
 
+                /*
+                Shop stock needs checking to make sure something that is 
+                out of stock cannot be further added. Adding something which
+                theoretically does not exist. 
+                - Check if quantity > 0.
+                - If yes, run addElementsToContainer with 3 elements (+|qty|-)
+                - Otherwise with two, (qty|-)
+                - this function will create the basketItemQuantityContainer
+                */
+                let shopStockItem = shopStock.find(({ id }) => id === basketItem.id);
+                if (shopStockItem.quantity > 0) {
+                    basketItemQuantityPlus.id = "basket-add_" + basketItem.id;
+                    basketItemQuantityPlus.className = "basket-item-quantity-button";
+                    basketItemQuantityPlus.innerHTML = "+";
+                    basketItemQuantityPlus.onclick = function () { addToBasket(basketItem, basketItem.amountPaid, "in-basket"); };
+                   
+                } else {
+                    //basketItemQuantityPlus.setAttribute()
+                }
                 addElementsToContainer(basketItemQuantityContainer, [basketItemQuantityPlus, basketItemQuantity, basketItemQuantityMinus]);
-                //basketItemQuantityContainer.appendChild(basketItemQuantityPlus);
-                //basketItemQuantityContainer.appendChild(basketItemQuantity);
-                //basketItemQuantityContainer.appendChild(basketItemQuantityMinus);
-
                 addElementsToContainer(basketItemContainer, [basketItemImage, basketItemName, basketItemPriceP, basketItemQuantityContainer, basketItemTotalPriceP]);
-                // basketItemContainer.appendChild(basketItemImage);
-                // basketItemContainer.appendChild(basketItemName);
-                // basketItemContainer.appendChild(basketItemPriceP);
-                // basketItemContainer.appendChild(basketItemQuantityContainer);
-                // basketItemContainer.appendChild(basketItemTotalPriceP);
 
                 basketItemContainer.className = "basket-item-container";
                 basketItemImage.className = "basket-item-container-img";
