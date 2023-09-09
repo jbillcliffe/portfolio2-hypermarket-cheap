@@ -535,12 +535,13 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
             document.getElementById("basket-item-quantity_" + itemExistingInBasket.id).innerHTML = itemExistingInBasket.quantity;
             let totalPaid = calculateNumberTimes(itemExistingInBasket.amountPaid, itemExistingInBasket.quantity);
             document.getElementById("basket-per-total-_" + itemExistingInBasket.id).innerHTML = "£" + totalPaid.toFixed(2);
-            let rrpAmount = calculateNumberTimes(itemExistingInBasket.price, (itemExistingInBasket.special).toFixed(2));
+            let rrpAmount = calculateNumberTimes(itemExistingInBasket.price, itemExistingInBasket.quantity);
             console.log(itemExistingInBasket.amountPaid + ", " + itemExistingInBasket.quantity + ", " + typeof (itemExistingInBasket.amountPaid) + ", " + typeof (itemExistingInBasket.quantity));
             console.log(itemExistingInBasket.special);
-            if (itemExistingInBasket.special === 1) {
-            } else {
+            if (itemExistingInBasket.special < 1) {
                 document.getElementById("basket-per-total-special_" + itemExistingInBasket.id).innerHTML = "£" + rrpAmount.toFixed(2);
+            } else {
+
             }
 
 
@@ -806,8 +807,14 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
         let quantityContainer = document.getElementById(removeQuantity);
         quantityContainer.innerHTML = basketStockItem.quantity;
         let basketPerTotalContainer = document.getElementById("basket-per-total-_" + removeId);
-        console.log(typeof (basketStockItem.amountPaid) + "," + basketStockItem.quantity);
-        basketPerTotalContainer.innerHTML = "£" + calculateNumberTimes(basketStockItem.amountPaid, basketStockItem.quantity);
+        basketPerTotalContainer.innerHTML = "£" + calculateNumberTimes(basketStockItem.amountPaid, basketStockItem.quantity).toFixed(2);
+
+        let rrpAmount = calculateNumberTimes(basketStockItem.price, basketStockItem.quantity);
+        if (basketStockItem.special < 1) {
+            document.getElementById("basket-per-total-special_" + basketStockItem.id).innerHTML = "£" + rrpAmount.toFixed(2);
+        } else {
+
+        }
     } else {
 
     }
@@ -863,6 +870,7 @@ function checkIfImageExists(url, callback) {
 }
 
 function calculateNumberTimes(a, b) {
+    console.log(a + " * " + b);
     return Number((a * b).toFixed(2));
 }
 
