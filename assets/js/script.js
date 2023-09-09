@@ -506,10 +506,13 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
 
         if (!(basketStock.find(({ id }) => id === itemToGoToBasket.id))) {
             basketStock.push(itemToGoToBasket);
+            itemExistingInBasket = itemToGoToBasket;
         } else {
             itemExistingInBasket.quantity++;
         }
 
+        console.log(itemExistingInBasket);
+        console.log(JSON.stringify(itemExistingInBasket));
         if (whichScreen === "in-shop") {
             let stockTextSpan = document.getElementById("stock_" + itemForBasket.id).children[0];
             let basketButton = document.getElementById("basket-add_" + itemForBasket.id);
@@ -529,6 +532,17 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
             console.log(newReceiptLine);
             receiptLineReference.insertAdjacentElement("beforebegin", newReceiptLine);
             document.getElementById("basket-receipt-total-price").innerHTML = "£" + basketTotalCost.toFixed(2);
+            document.getElementById("basket-item-quantity_" + itemExistingInBasket.id).innerHTML = itemExistingInBasket.quantity;
+            let totalPaid = calculateNumberTimes(itemExistingInBasket.amountPaid, itemExistingInBasket.quantity);
+            document.getElementById("basket-per-total-_" + itemExistingInBasket.id).innerHTML = "£" + totalPaid.toFixed(2);
+            let rrpAmount = calculateNumberTimes(itemExistingInBasket.price, (itemExistingInBasket.special).toFixed(2));
+            console.log(itemExistingInBasket.amountPaid + ", " + itemExistingInBasket.quantity + ", " + typeof (itemExistingInBasket.amountPaid) + ", " + typeof (itemExistingInBasket.quantity));
+            console.log(itemExistingInBasket.special);
+            if (itemExistingInBasket.special === 1) {
+            } else {
+                document.getElementById("basket-per-total-special_" + itemExistingInBasket.id).innerHTML = "£" + rrpAmount.toFixed(2);
+            }
+
 
             //document.getElementById("the-receipt").innerHTML = "";
             /*for (let a = 0; a < basketStock.length; a++) {
