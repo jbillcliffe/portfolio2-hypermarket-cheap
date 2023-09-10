@@ -746,7 +746,7 @@ function showBasket(lastAisle) {
                 addElementsToContainer(basketItemContainer, [basketItemImage, basketItemName, basketItemPriceP, basketItemQuantityContainer, basketItemTotalPriceP]);
 
                 basketItemContainer.className = "basket-item-container";
-                basketItemImage.className = "basket-item-container-img";
+                basketItemImage.className = "item-container-img";
                 basketItemName.className = "basket-item-container-text";
                 basketItemQuantityContainer.className = "basket-item-container-quantity-div";
                 basketItemQuantity.className = "basket-item-container-text";

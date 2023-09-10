@@ -1,34 +1,27 @@
 * {
     /* Stop border issues with overlapping */
-    /* max-width: 1440px; */
     box-sizing: border-box;
-    /* margin-right: auto; */
-    /* display: flex; */
 }
 
 /*Header Styling for the logo */
 header {
     display: flex;
-    /* flex-direction: row; */
     max-width: 750px;
     height: auto;
-    /* width: 100%; */
     margin-left: auto;
     margin-right: auto;
-    /* background: url('../images/header-logo.webp') no-repeat center center; */
     padding: 0.3rem 0;
 }
 
+/* logo in header styling */
 header>img {
-    /* max-width: 750px; */
     display: flex;
     width: 100%;
-    /* height: auto; */
-    /* padding: 0.2rem 3rem; */
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 /* Little to no body styling, as it occurs in the game-container and beyond */
-
 body {
     display: flex;
     flex-direction: column;
@@ -42,29 +35,19 @@ body {
     flex-wrap: nowrap;
 }
 
-/* footer styling */
-footer {
-    /* max-width: 1440px; */
-    width: 100%;
-    height: 10vh;
-    background-color: #3d9970;
-    border: 2px solid black;
-}
 
+/* CORE STYLING */
+/* the main game window */
 #hypermarket-cheap {
     max-width: 1440px;
     max-height: 80vh;
     min-height: 80vh;
-    /* box-sizing: border-box; */
-    /* margin-right: auto; */
-    /* margin-left: auto; */
-    /* margin-top: 0; */
-    /* height: auto; */
     width: 100%;
     flex-direction: column;
     display: flex;
 }
 
+/* shows when moving from menu to game */
 #loading-overlay {
     position: absolute;
     left: 0;
@@ -85,7 +68,6 @@ footer {
     height: 4rem;
     margin-left: auto;
     margin-right: auto;
-    /* margin-bottom: 0; */
     justify-content: flex-end;
     background-color: #3d9970;
     border: 2px solid black;
@@ -93,14 +75,6 @@ footer {
     align-items: center;
     box-shadow: 1px 1px 3px 0px rgba(57, 61, 63, 0.8);
 }
-
-/*
-#basket-return {
-    background-color: black;
-    color: white;
-    text-shadow: 0px 1px 5px #000000;
-    justify-content: flex-start;
-}*/
 
 /* Class for game container, holds menu, about and the game. This container
    needs to be 4px taller than "the-shop" and "the-items" to allow for the
@@ -111,57 +85,30 @@ footer {
     width: 100%;
     height: calc(100% - 4rem);
     background: none;
-    /* max-width: 1440px; */
     max-height: calc(100% - 4rem);
-    /* margin-left: auto; */
-    /* margin-right: auto; */
     border-left: 2px solid black;
     border-right: 2px solid black;
 }
 
+/* SUB-CLASSES OF .game-container */
+/* specifically for game-menu id, carries .game-container class too */
 #game-menu {
     justify-content: center;
 }
 
+/* specifically for basket-screen id, carries .game-container class too */
 #basket-screen {
     background-color: black;
     font-family: 'Courier Prime', monospace;
     font-size: 2rem;
 }
 
+/* carries the-items class too, this is left hand split in the basket window */
 #the-basket {
     border-right: 2px solid white;
 }
 
-.return-to-shop-div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    height: 4rem;
-    padding: 0.5rem;
-    align-items: center;
-    border-bottom: 2px solid white;
-}
-
-.basket-split {
-    display: flex;
-    /* max-height: inherit; */
-    height: calc(100% - 3.3rem);
-    flex-direction: row;
-    width: inherit;
-}
-
-.basket-aisle-title {
-    display: flex;
-    width: 100%;
-    height: auto;
-    padding: 0.5rem;
-    color: #3d9970;
-    border-bottom: 2px dashed white;
-    font-size: 3rem;
-}
-
+/* MENU WINDOW*/
 /* styling for the buttons on the main menu */
 .menu-button {
     width: 250px;
@@ -174,14 +121,13 @@ footer {
     cursor: pointer;
 }
 
-/* container for the game below the toolbar */
+/* GAME WINDOW (ITEMS/AISLES)
+/* container for the game below the toolbar. Which has a split of 
+items/aisles */
 .the-shop {
     display: flex;
     flex-direction: row;
     width: 100%;
-    /* height: inherit; */
-    /* overflow-y: scroll; */
-    /* max-height: inherit; */
     height: 100%;
 }
 
@@ -190,47 +136,10 @@ footer {
     display: flex;
     flex-direction: column;
     width: 80%;
-    /* height: auto; */
-    /* max-height: inherit; */
     border-right: 2px solid black;
     padding: 2rem;
     overflow-x: hidden;
     overflow-y: scroll;
-}
-
-.the-receipt {
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    color: white;
-    background-color: black;
-
-}
-
-.the-receipt-header {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    border-bottom: 2px dashed white;
-    padding: 1rem;
-}
-
-.basket-receipt-line {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    font-family: 'Courier Prime', monospace;
-    font-size: 0.7rem;
-    padding: 0 0.5rem;
-}
-
-.total-line {
-    border-top: 2px dashed white;
-    border-bottom: 2px dashed white;
 }
 
 /* container to hold the aisle options */
@@ -267,10 +176,86 @@ footer {
     box-shadow: 0 0 4px 100px #2500cac4 inset;
 }
 
+/* aisle button highlight for which aisle the user is in */
 .aisle-button-active {
     color: black;
     box-shadow: 0 0 4px 100px cyan inset;
 }
+
+
+/* style of button within the basket window */
+.return-to-shop-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 4rem;
+    padding: 0.5rem;
+    align-items: center;
+    border-bottom: 2px solid white;
+}
+
+/* container in the basket. Allowing for a div split in two, one for items, the
+other for the generated "receipt" */
+.basket-split {
+    display: flex;
+    height: calc(100% - 3.3rem);
+    flex-direction: row;
+    width: inherit;
+}
+
+/* a header inserted into "the-basket" which partitions the items
+by their aisle */
+.basket-aisle-title {
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+    color: #3d9970;
+    border-bottom: 2px dashed white;
+    font-size: 3rem;
+}
+
+/* container for the receipt which is in the basket */
+.the-receipt {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    color: white;
+    background-color: black;
+
+}
+
+/* container for the receipt header which carries the white text logo */
+.the-receipt-header {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    border-bottom: 2px dashed white;
+    padding: 1rem;
+}
+
+/* a div to hold each code generated line for the receipt in "the-basket" */
+.basket-receipt-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    padding: 0 0.5rem;
+}
+
+/* div for the total in the receipt */
+.total-line {
+    border-top: 2px dashed white;
+    border-bottom: 2px dashed white;
+}
+
+
 
 /* styling for the container which has each item in the shop, which has the 
 item name, the stock and a button to add it to your basket */
@@ -287,28 +272,21 @@ item name, the stock and a button to add it to your basket */
     padding: 0.5rem;
 }
 
+/*a container, similar to "item-container" which holds each 
+item in the basket */
 .basket-item-container {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: auto;
-    /* border: 2px solid white; */
-    /* box-shadow: 0 0 4px 2px white; */
     background-color: black;
     align-items: center;
-    /* margin: 0.5rem 0; */
-    /* padding: 0.3rem; */
 }
 
-/* for the img element which will hold the image of the item in the shop */
+/*ITEM CONTAINER ELEMENTS*/
+/* for the img element which will hold the image of the item in "the-items"
+and "the-basket" This is also used in the "basket-item-container" */
 .item-container-img {
-    width: 10%;
-    height: auto;
-    border: 2px solid white;
-    box-shadow: 0 0 4px 2px white;
-}
-
-.basket-item-container-img {
     width: 10%;
     height: auto;
     border: 2px solid white;
@@ -327,24 +305,12 @@ stacked vertically)*/
     width: 40%;
 }
 
-.basket-item-container-quantity-div {
-    font-family: 'Courier Prime', monospace;
-    /* font-size: 2rem; */
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 15%;
-    /* height: 3%; */
-    padding: 0.5rem;
-    /* text-align: center; */
-    align-items: center;
-}
-
+/* holds the price in the item-container-p-div */
 .price-div {
     width: 30%;
 }
 
-/*styling for the text inside the aisle item (text styling of name and stock */
+/*styling for the text in "the-items" (text styling of name and stock) */
 .item-container-text {
     font-family: "Roboto", sans-serif;
     font-size: 1.5rem;
@@ -353,45 +319,6 @@ stacked vertically)*/
     margin: auto auto auto 1rem;
     font-weight: bold;
 }
-
-.basket-item-container-text {
-    display: flex;
-    font-family: 'Courier Prime', monospace;
-    width: 100%;
-    font-size: 1.5rem;
-    color: white;
-    text-shadow: 0px 1px 5px #000000;
-    font-weight: bold;
-    justify-content: center;
-    /* padding: 0.2rem 0.2rem; */
-    /* padding-left: 0.7rem; */
-    margin: 0;
-}
-
-.basket-price-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 20%;
-}
-
-/*style to add the strikethrough when a price is on a special offer, this 
-strikethrough will be applied to the RRP.*/
-.strikethrough-text {
-    color: red;
-    text-decoration: line-through red 1px;
-}
-
-/*Colour assignment for stock text, can also be used elsewhere when declared
-in this way */
-.negative-text {
-    color: red;
-}
-
-.positive-text {
-    color: lightgreen;
-}
-
 
 /* styling for the + button inside the aisle item */
 .item-container-button {
@@ -408,6 +335,63 @@ in this way */
     transition: all 0.7s ease;
 }
 
+/* GENERIC COLOUR EFFECTS */
+
+/*style to add the strikethrough when a price is on a special offer, this 
+strikethrough will be applied to the RRP.*/
+.strikethrough-text {
+    color: red;
+    text-decoration: line-through red 1px;
+}
+
+/*Colour assignment for stock text, can also be used elsewhere when declared
+in this way */
+.negative-text {
+    color: red;
+}
+
+/*Colour assignment for special offer text, can also be used elsewhere when
+declared in this way */
+.positive-text {
+    color: lightgreen;
+}
+
+/*BASKET CONTAINER ELEMENTS*/
+/* for the container which has (+), quantity and (-) in "the-basket" 
+(vertically stacked)*/
+.basket-item-container-quantity-div {
+    font-family: 'Courier Prime', monospace;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 15%;
+    padding: 0.5rem;
+    align-items: center;
+}
+
+/*styling for the text inside "the-basket" (text styling of name, stock and
+it is also used in "the-receipt" */
+.basket-item-container-text {
+    display: flex;
+    font-family: 'Courier Prime', monospace;
+    width: 100%;
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 0px 1px 5px #000000;
+    font-weight: bold;
+    justify-content: center;
+    margin: 0;
+}
+
+/*container for the (+), quantity and (-) in a basket item. Vertical stacking */
+.basket-price-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+}
+
+/* Styling for (+) and (-) buttons in "the-basket". */
 .basket-item-quantity-button {
     height: 2rem;
     display: flex;
@@ -419,15 +403,13 @@ in this way */
     color: white;
     text-shadow: 0px 1px 5px #000000;
     font-size: 1.3rem;
-    /* font-weight: bold; */
-    /* margin: auto 1rem; */
-    /* padding-bottom: 1.2rem; */
     transition: all 0.7s ease;
-    /* align-items: baseline; */
     justify-content: space-evenly;
     margin: 5px;
 }
 
+/* a blank space to replace (+) or (-) if they are not necessary 
+in "the-basket" sharing size factors with the styling above*/
 .basket-item-quantity-button-blank {
     height: 2rem;
     display: flex;
@@ -442,6 +424,8 @@ in this way */
     margin: 5px;
 }
 
+/*INNER TOOLBAR IN "the-basket"
+/*both buttons (by id) in the secondary toolbar in "the-basket" */
 #return-to-shop-button,
 #checkout-button {
     display: flex;
@@ -458,7 +442,7 @@ in this way */
     align-items: center;
 }
 
-
+/*ALL ITEMS IN MAIN TOOLBAR ARE AFFECTED BY .toolbar-items
 /* styling for any basket button and quantity text */
 .toolbar-items {
     background: none;
@@ -472,6 +456,7 @@ in this way */
     font-weight: bold;
 }
 
+/* put the £ amount after the fontawesome symbol depective a wallet */
 #wallet-icon::after {
     content: attr(wallet-count);
     margin-left: 0.5rem;
@@ -483,6 +468,7 @@ in this way */
     font-weight: bold;
 }
 
+/* the font awesome basket (actually a trolley) button in the toolbar */
 #basket-button {
     cursor: pointer;
     text-shadow: 0px 1px 5px #000000;
@@ -494,6 +480,8 @@ in this way */
     color: cyan;
 }
 
+/*different hover style required here as it overlays a dark background for the
+buttons at the top of "the-basket" */
 #return-to-shop-button:hover,
 #checkout-button:hover {
     transition: 0.5s;
@@ -501,14 +489,16 @@ in this way */
     border-color: #3d9970;
 }
 
+/*for the (+) in each item in "the-shop" allowing a user to +1 to the selected
+item into their basket */
 .item-container-button:hover {
-    /*transition: 0.5s;*/
     color: black;
-    /*background-color: #3d9970;*/
     box-shadow: 0 0 4px 100px lightgreen inset;
 }
 
-/* Footer styling */
+
+
+/* FOOTER STYLING */
 /*Full page width, fixed 100px height (height matches header). Flex row display
 with centred content and the background colour in line with the theme top shadow 
 to help content pop*/
@@ -520,6 +510,7 @@ footer {
     justify-content: center;
     background-color: #3d9970;
     box-shadow: 0px -3px 1px 0px rgba(57, 61, 63, 0.8);
+    border: 2px solid black;
 }
 
 /* social-networks ul css set the text to be centre aligned in a flex row 
@@ -555,4 +546,61 @@ line height to create a centring effect*/
 of the theme.*/
 .social-networks i:hover {
     color: cyan;
+}
+
+/*These are thhe most common resolutions : 320px 480px 600px 768px 900px 1024px 1200px
+https: //www.toptal.com/responsive-web/introduction-to-responsive-web-design-pseudo-elements-media-queries
+So media queries will be based on these*/
+
+/* 1200 showed no negative aspects */
+
+@media screen and (max-width:1024px) {
+
+    /*a lot of the text uses this class, this is shrunk from 1024*/
+    .item-container-text {
+        font-size: 1.1rem
+    }
+}
+
+@media screen and (max-width:900px) {
+
+    /*scale down the (+) in the items in "the-shop"->"the-items" */
+    .item-container-button {
+        height: 3.5rem;
+        width: 3.5rem;
+        font-size: 270%;
+    }
+}
+
+@media screen and (max-width:768px) {
+
+    /*aisle button font was seeming quite dominating by this point */
+    .aisle-button {
+        font-size: 1.4rem;
+    }
+
+    /*here the shop is displayed with each item in a smaller box, rather than a
+    full width rectangle, the overall "the-items" also uses row/wrap with flex,
+    this achieves two side by side*/
+    .the-items {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 1rem;
+        justify-content: center;
+    }
+
+    .item-container {
+        flex-direction: column;
+        width: 45%;
+        margin: 0rem 1rem 1rem 0rem;
+        align-items: center;
+    }
+
+    .item-container-text {
+        text-align: center;
+    }
+
+    .item-container-img {
+        width: 40%;
+    }
 }
