@@ -54,12 +54,11 @@ function startGame(customerType = "new", dayType = "new") {
         startingPlayerCash(customerType);
         gameStartingStock(dayType);
         /*
-            A delay of 2s gives time to for the 
+            A delay of 4s gives time to for the 
             arrays of data to populate during the gameStartingStock function before
             performing createEnvironment which relies on these variables
         */
-        setTimeout(createEnvironment, 5000);
-        emptyBasket();
+        setTimeout(createEnvironment, 4000);
     }
 }
 
@@ -97,6 +96,8 @@ function createEnvironment() {
     document.getElementById("the-toolbar").style.justifyContent = "flex-start";
     document.getElementById("toolbar-loading").style.display = "none";
     document.getElementById("loading-overlay").style.display = "none";
+
+    emptyBasket();
 }
 
 /**
@@ -155,66 +156,71 @@ function gameStartingStock(dayType = "new") {
     });
 
     //getJSON gets the data from the items.json file to then work with each item
-    $.getJSON("assets/json/items.json", function (jsonItemsList) {
-        for (jsonItem of jsonItemsList) {
-            //adding aisle options
-            aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
+    function thenGetItems() {
+        $.getJSON("assets/json/items.json", function (jsonItemsList) {
+            for (jsonItem of jsonItemsList) {
+                //adding aisle options
+                aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
 
-            let thisItemStock = Math.round(Math.random() * (jsonItem.highStock - jsonItem.lowStock) + jsonItem.lowStock);
-            let thisItemPrice = Number((Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2));
+                let thisItemStock = Math.round(Math.random() * (jsonItem.highStock - jsonItem.lowStock) + jsonItem.lowStock);
+                let thisItemPrice = Number((Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2));
 
-            /*
-              Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
-              ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
-              But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
-            */
+                /*
+                Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
+                ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
+                But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
+                */
 
-            let thisSpecial;
-            if (Math.random() < 0.4) {
-                for (let i = 0; i < specialOffers.length; i++) {
-                    //secondary number generation for "mini-game"
-                    let thisScore = Math.random();
-                    //if no occurances left of special offers set special to 1 and continue
-                    if (specialOffers[i].occurance > 0) {
-                        /*
-                          if the random number is less or equal to chance then set the special
-                          modifier and continue
-                        */
-                        if (thisScore <= specialOffers[i].chance) {
-                            //remove an occurance so specials don't keep forever generating
-                            specialOffers[i].occurance--;
-                            //set thisSpecial to the modifier
-                            thisSpecial = specialOffers[i].factor;
-                            break;
+                let thisSpecial;
+                if (Math.random() < 0.4) {
+                    for (let i = 0; i < specialOffers.length; i++) {
+                        //secondary number generation for "mini-game"
+                        let thisScore = Math.random();
+                        //if no occurances left of special offers set special to 1 and continue
+                        if (specialOffers[i].occurance > 0) {
+                            /*
+                            if the random number is less or equal to chance then set the special
+                            modifier and continue
+                            */
+                            if (thisScore <= specialOffers[i].chance) {
+                                //remove an occurance so specials don't keep forever generating
+                                specialOffers[i].occurance--;
+                                //set thisSpecial to the modifier
+                                thisSpecial = specialOffers[i].factor;
+                                break;
+                            }
+                        } else {
+                            thisSpecial = 1;
                         }
-                    } else {
                         thisSpecial = 1;
                     }
+                } else {
                     thisSpecial = 1;
                 }
-            } else {
-                thisSpecial = 1;
+                //create the item to go into the shop stock
+                let thisItem = {
+                    id: jsonItem.id,
+                    name: jsonItem.name,
+                    price: thisItemPrice,
+                    quantity: thisItemStock,
+                    aisle: jsonItem.aisle,
+                    special: thisSpecial,
+                    imageUrl: jsonItem.imageUrl,
+                    alertText: jsonItem.alertText
+                };
+                shopStock.push(thisItem);
             }
-            //create the item to go into the shop stock
-            let thisItem = {
-                id: jsonItem.id,
-                name: jsonItem.name,
-                price: thisItemPrice,
-                quantity: thisItemStock,
-                aisle: jsonItem.aisle,
-                special: thisSpecial,
-                imageUrl: jsonItem.imageUrl,
-                alertText: jsonItem.alertText
-            };
-            shopStock.push(thisItem);
-        }
-    });
+        });
 
-    //ensure that arrays that could be strings, are effectively parsed into objects
-    specialOffers = JSON.parse(JSON.stringify(specialOffers));
-    shopStock = JSON.parse(JSON.stringify(shopStock));
-    aisles = JSON.parse(JSON.stringify(aisles));
+        specialOffers = JSON.parse(JSON.stringify(specialOffers));
+        shopStock = JSON.parse(JSON.stringify(shopStock));
+        aisles = JSON.parse(JSON.stringify(aisles));
+    }
+
+    setTimeout(thenGetItems(), 1500);
 }
+
+
 
 /**
  * @param {string} requestType - new/same, determines how emptyBasket operates
@@ -529,7 +535,7 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
             document.getElementById("basket-receipt-total-price").innerHTML = "£" + basketTotalCost.toFixed(2);
             document.getElementById("basket-item-quantity_" + itemExistingInBasket.id).innerHTML = itemExistingInBasket.quantity;
             let totalPaid = calculateNumberTimes(itemExistingInBasket.amountPaid, itemExistingInBasket.quantity);
-            document.getElementById("basket-per-total-_" + itemExistingInBasket.id).innerHTML = "£" + totalPaid.toFixed(2);
+            document.getElementById("basket-per-total_" + itemExistingInBasket.id).innerHTML = "£" + totalPaid.toFixed(2);
             let rrpAmount = calculateNumberTimes(itemExistingInBasket.price, itemExistingInBasket.quantity);
 
             if (itemExistingInBasket.special < 1) {
@@ -709,7 +715,7 @@ function showBasket(lastAisle) {
                 }
 
                 basketItemPricePer.id = "basket-per_" + basketItem.id;
-                basketItemTotalPrice.id = "basket-per-total-_" + basketItem.id;
+                basketItemTotalPrice.id = "basket-per-total_" + basketItem.id;
 
                 basketItemQuantityMinus.id = "basket-sub_" + basketItem.id;
                 basketItemQuantityMinus.className = "basket-item-quantity-button";
@@ -811,7 +817,7 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
     } else if (basketStockItem.quantity > 0) {
         let quantityContainer = document.getElementById(removeQuantity);
         quantityContainer.innerHTML = basketStockItem.quantity;
-        let basketPerTotalContainer = document.getElementById("basket-per-total-_" + removeId);
+        let basketPerTotalContainer = document.getElementById("basket-per-total_" + removeId);
         basketPerTotalContainer.innerHTML = "£" + calculateNumberTimes(basketStockItem.amountPaid, basketStockItem.quantity).toFixed(2);
 
         let rrpAmount = calculateNumberTimes(basketStockItem.price, basketStockItem.quantity);
@@ -853,7 +859,30 @@ function returnToShop(lastAisle) {
  */
 function checkoutBasket() {
 
+    let myWindow = window.open('', 'PRINT', 'height=400,width=600');
+    let tempBasket = basketStock;
+    tempBasket.sort();
+
+    myWindow.document.write('<html><head><title> Hypermarket Cheap </title>');
+    myWindow.document.write('</head><body>');
+    myWindow.document.write('<h1>Thank you for shopping today!</h1>');
+    myWindow.document.write('<img src="assets/images/header-logo.webp">');
+
+    //myWindow.document.write(document.getElementById("the-receipt").innerHTML);
+    for (let item of tempBasket) {
+        document.write(tempBasket.name);
+    }
+    myWindow.document.write('</body></html>');
+
+    myWindow.document.close(); // necessary for IE >= 10
+    myWindow.focus(); // necessary for IE >= 10*/
+
+    myWindow.print();
+    myWindow.close();
+
+    return true;
 }
+
 
 /**
  * 

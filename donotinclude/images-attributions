@@ -63,3 +63,5 @@ Using typeof() really helped me trace the issue back.
 insertAdjacentELement() : https://www.w3schools.com/jsref/met_node_insertadjacentelement.asp
 
 classList : https://www.w3schools.com/jsref/prop_element_classlist.asp
+
+print page size demo : https://stackoverflow.com/questions/16649943/css-to-set-a4-paper-size
