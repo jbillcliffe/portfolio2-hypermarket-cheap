@@ -594,13 +594,75 @@ So media queries will be based on these*/
         width: 45%;
         margin: 0rem 1rem 1rem 0rem;
         align-items: center;
+        max-height: 50%
     }
 
     .item-container-text {
         text-align: center;
     }
 
-    .item-container-img {
+    .item-container>.item-container-img {
         width: 40%;
+    }
+
+    .item-container-p-div {
+        width: 100%;
+
+    }
+
+    .basket-aisle-title {
+        font-size: 2rem;
+    }
+
+    .basket-item-container>.item-container-img {
+        width: 25%;
+    }
+
+    .basket-item-container-text {
+        font-size: 1.1rem;
+    }
+
+    .basket-receipt-line {
+        font-size: 0.6rem;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .item-container-text {
+        margin: auto auto auto 0.5rem;
+        font-size: 1rem;
+    }
+
+    .item-container-button {
+        height: 3rem;
+        width: 3rem;
+        font-size: 200%;
+        margin-top: 0.5rem;
+
+    }
+
+    .basket-aisle-title {
+        height: 4rem;
+    }
+}
+
+@media screen and (max-width:480px) {
+
+    .item-container {
+        width: 100%;
+        max-height: 47%;
+    }
+
+    .aisle-button {
+        font-size: 1rem;
+    }
+
+    .basket-item-container-text {
+        font-size: 0.9rem;
+    }
+
+    #return-to-shop-button,
+    #checkout-button {
+        font-size: 0.9rem;
     }
 }
