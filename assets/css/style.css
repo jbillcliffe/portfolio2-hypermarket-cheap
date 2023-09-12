@@ -1,30 +1,3 @@
-/*paper size for printing receipt*/
-@page {
-    size: A4;
-}
-
-/*conversion of the html to a size to fit A4*/
-@media print {
-
-    html,
-    body {
-        width: 210mm;
-        height: 297mm;
-    }
-
-    .the-receipt-print {
-        margin-left: auto;
-        margin-right: auto;
-        border: initial;
-        border-radius: initial;
-        width: initial;
-        min-height: initial;
-        box-shadow: initial;
-        background: initial;
-        page-break-after: always;
-    }
-}
-
 * {
     /* Stop border issues with overlapping */
     box-sizing: border-box;
@@ -748,35 +721,44 @@ So media queries will be based on these*/
 
 @media screen and (max-width:600px) {
 
+    /*scale down the width of item-container and child elements that are not highlighted by (not)*/
     .item-container:not(.item-container-p-div):not(.item-container-text):not(.item-container-button):not(.item-container-img):not(.price-div) {
         width: 90%;
     }
 
+    /*scale down font*/
     .item-container-text {
         font-size: 0.8rem;
     }
 
+    /*scale down image in item container*/
     .item-container-img {
         width: 40%;
     }
 
+    /*scale down font size in aisle buttons*/
     .aisle-button {
         font-size: 1rem;
     }
 
+    /*scale down font size in aisle headers*/
     .basket-aisle-title {
         height: 2.5rem;
         font-size: 1.5rem;
     }
 
+    /*scale down text inside item containers in the basket*/
     .basket-item-container-text {
         font-size: 0.9rem;
     }
 
+    /*where ids are like "basket-item-quantity" (they have numbers appended for
+    their ids) remove all padding*/
     [id^="basket-item-quantity_"] {
         padding: 0;
     }
 
+    /*for these two ids reduce font size*/
     #return-to-shop-button,
     #checkout-button {
         font-size: 0.9rem;
@@ -785,32 +767,47 @@ So media queries will be based on these*/
 
 @media screen and (max-width:480px) {
 
+    /*changing from rem to % sizes, with rem sizing, there were issues with
+    overlapping at resolutions lower than this */
     .menu-button {
         height: 20%;
         width: 70%;
         font-size: 150%;
     }
 
+    /*the text inside the button that contains "play-new" its "data-button"
+    attribute, is changed to column. This puts the "Play New Game" text and the
+    shopping trolley font awesome icon to be seperated onto seperate lines*/
     [data-button="play-new"].menu-button {
         flex-direction: column;
     }
 
+    /*change width of aisles div, so it is slightly bigger to allow the font to
+    stay larger for longer. Ensuring the text remains able to be read at
+    smaller sizes*/
     .the-aisles {
         width: 45%;
     }
 
+    /*increase size before they get too small */
     .item-container-img {
         width: 60%;
     }
 
+    /*make the basket and receipt 50/50 sizing, so the receipt text is able to
+    be read*/
     #the-basket {
         width: 50%;
     }
 
+    /*see above comment */
     .the-receipt {
         width: 50%;
     }
 
+    /*scale up the basket container size and its children not highlighted by
+    (not). This makes each basket container item full width within the basket.
+    Also setting all content to be column rather than row*/
     .basket-item-container:not(.basket-item-container-quantity-div):not(.basket-price-div) {
         display: flex;
         flex-direction: column;
@@ -820,18 +817,24 @@ So media queries will be based on these*/
         margin: 1rem auto 0 auto;
     }
 
+    /*have found that after using :not() selectors, css can need rewriting,
+    so this is unchanged from previous media query*/
     .basket-item-container-text {
         font-size: 0.9rem;
     }
 
+    /*reduce basket image size*/
     .basket-item-container>.item-container-img {
         width: 35%;
     }
 
+    /*reduce quantity container width*/
     .basket-item-container-quantity-div {
         width: 50%;
     }
 
+    /*reduce quantity button dimensions and font size within. Also setting it
+    to be a bold font to be clearer*/
     .basket-item-quantity-button {
         height: 1.8rem;
         width: 2.8rem;
@@ -839,6 +842,7 @@ So media queries will be based on these*/
         font-weight: bold;
     }
 
+    /*reduce padding to push each social network icon closer together*/
     .social-networks>li {
         padding: 1rem;
     }
@@ -846,16 +850,46 @@ So media queries will be based on these*/
 
 @media screen and (max-width:320px) {
 
+    /*reduce button sizes in the aisle*/
     .aisle-button {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
+    /*reduce button sizes in the secondary basket toolbar*/
     #return-to-shop-button,
     #checkout-button {
         font-size: 0.6rem;
     }
 
+    /*reduce padding to push each social network icon closer together*/
     .social-networks>li {
         padding: 0.4rem;
+    }
+}
+
+/*paper size for printing receipt*/
+@page {
+    size: A4;
+}
+
+/*conversion of the html to a size to fit A4*/
+@media print {
+
+    html,
+    body {
+        width: 210mm;
+        height: 297mm;
+    }
+
+    .the-receipt-print {
+        margin-left: auto;
+        margin-right: auto;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        min-height: initial;
+        box-shadow: initial;
+        background: initial;
+        page-break-after: always;
     }
 }
