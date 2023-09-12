@@ -858,7 +858,7 @@ function checkoutBasket() {
 
     let myWindow = window.open('', 'PRINT', 'height=400,width=600');
     let tempBasket = basketStock;
-    tempBasket.sort();
+
 
     myWindow.document.write('<html><head><title> Hypermarket Cheap </title>');
     myWindow.document.write('</head><body>');
@@ -867,106 +867,10 @@ function checkoutBasket() {
     myWindow.document.write('<div id="print-receipt-table">');
     myWindow.document.write('</body></html>');
 
-    let table = document.createElement("TABLE");
-    let tBody = document.createElement("TBODY");
-    let tHead = document.createElement("THEAD");
-    let tHRow = document.createElement("TR");
-    let headerArray = ["Item", "Per Item (RRP/Paid)", "Quantity", "Total"];
-    let jsonProperty = ["name", "price", "quantity", "amountPaid"];
-    let basketTotal;
-    let basketRRP;
-    let basketSaving;
-    /*
-    Build the header row for the table
-    */
+    let receiptTable = createReceiptForPrint(basketStock);
 
-    for (let i = 0; i < headerArray.length; i++) {
-        let tH = document.createElement("TH");
-        let tHText = document.createTextNode(headerArray[i]);
-        if (i === (headerArray.length - 1)) {
-            tH.appendChild(tHText);
-            tHRow.appendChild(tH);
-            tHead.appendChild(tHRow);
-        } else {
-            tH.appendChild(tHText);
-            tHRow.appendChild(tH);
-        }
-    }
-
-    for (let j = 0; j < basketStock.length; j++) {
-
-        console.log(basketStock[j].amountPaid);
-        console.log(basketStock[j].price);
-
-        let paidToAdd = Number(basketStock[j].amountPaid);
-        let paidRRPShow = Number(basketStock[j].price);
-        basketTotal += paidToAdd;
-        basketRRP += paidRRPShow;
-
-        console.log(basketTotal);
-        console.log(basketRRP);
-        let tR = document.createElement("TR");
-
-        let rrpRow = document.createElement("TR");
-        let savingRow = document.createElement("TR");
-        let toPayRow = document.createElement("TR");
-
-        for (let k = 0; k < headerArray.length; k++) {
-
-            let tD = document.createElement("TD");
-            if (jsonProperty[k] == "amountPaid") {
-                let quantityPrice = basketStock[j].amountPaid * basketStock[j].quantity;
-                tD.appendChild(document.createTextNode(quantityPrice.toFixed(2)));
-            } else if (jsonProperty[k] == "price") {
-                let quantityPrice = basketStock[j].price;
-                let paidPrice = basketStock[j].amountPaid;
-                tD.appendChild(document.createTextNode("(" + quantityPrice.toFixed(2) + "/" + paidPrice.toFixed(2) + ")"));
-            } else {
-                tD.appendChild(document.createTextNode(basketStock[j][jsonProperty[k]]));
-            }
-            tR.appendChild(tD);
-
-            if (j === (basketStock.length - 1)) {
-
-                let blankTD = document.createElement("TD");
-                blankTD.appendChild(document.createTextNode(""));
-                let rrpTD = document.createElement("TD");
-                let savingTD = document.createElement("TD");
-                let toPayTD = document.createElement("TD");
-
-                basketSaving = basketRRP - basketTotal;
-                console.log(basketRRP + " - " + basketTotal + " - " + basketSaving);
-
-                if (k === (headerArray.length - 2)) {
-                    rrpTD.appendChild(document.createTextNode("RRP : "));
-                    savingTD.appendChild(document.createTextNode("Saving : "));
-                    toPayTD.appendChild(document.createTextNode("Total Due : "));
-                } else if (k === headerArray.length - 1) {
-                    rrpTD.appendChild(document.createTextNode(basketRRP.toFixed(2)));
-                    savingTD.appendChild(document.createTextNode(basketSaving.toFixed(2)));
-                    toPayTD.appendChild(document.createTextNode(basketTotal.toFixed(2)));
-                } else {
-                    rrpTD.appendChild(document.createTextNode(""));
-                    savingTD.appendChild(document.createTextNode(""));
-                    toPayTD.appendChild(document.createTextNode(""));
-                }
-
-                rrpRow.appendChild(rrpTD);
-                savingRow.appendChild(savingTD);
-                toPayRow.appendChild(toPayTD);
-
-                addElementsToContainer(tBody, [tR, rrpRow, savingRow, toPayRow]);
-
-            } else {
-                tBody.appendChild(tR);
-                addElementsToContainer(table, [tHead, tBody]);
-            }
-        }
-    }
-
-
-    myWindow.document.getElementById("print-receipt-table").appendChild(table);
-    myWindow.document.body.appendChild(table);
+    myWindow.document.getElementById("print-receipt-table").appendChild(receiptTable);
+    myWindow.document.body.appendChild(receiptTable);
     myWindow.document.close(); // necessary for IE >= 10
     myWindow.focus(); // necessary for IE >= 10*/
 
@@ -1056,4 +960,94 @@ function removePlusQuantityButton(buttonId) {
     currentQuantityText.insertAdjacentElement("beforebegin", basketItemQuantityPlus);
     console.log(currentQuantityText.parentElement.children[0]);
     currentQuantityText.parentElement.removeChild(currentQuantityText.parentElement.children[0]);
+}
+
+function createReceiptForPrint(basketData) {
+
+    let tempBasket = basketData.sort();
+    let table = document.createElement("TABLE");
+    let tBody = document.createElement("TBODY");
+    let tHead = document.createElement("THEAD");
+    let tHRow = document.createElement("TR");
+    let headerArray = ["Item", "Per Item (RRP/Paid)", "Quantity", "Total"];
+    let jsonProperty = ["name", "price", "quantity", "amountPaid"];
+    let basketTotal = 0.00;
+    let basketRRP = 0.00;
+    let basketSaving = 0.00;
+    /*
+    Build the header row for the table
+    */
+    for (let i = 0; i < headerArray.length; i++) {
+        let tH = document.createElement("TH");
+        let tHText = document.createTextNode(headerArray[i]);
+        if (i === (headerArray.length - 1)) {
+            tH.appendChild(tHText);
+            tHRow.appendChild(tH);
+            tHead.appendChild(tHRow);
+        } else {
+            tH.appendChild(tHText);
+            tHRow.appendChild(tH);
+        }
+    }
+
+    for (let j = 0; j < tempBasket.length; j++) {
+
+        let tR = document.createElement("TR");
+        let rrpRow = document.createElement("TR");
+        let savingRow = document.createElement("TR");
+        let toPayRow = document.createElement("TR");
+
+        for (let k = 0; k < headerArray.length; k++) {
+
+            let tD = document.createElement("TD");
+            if (jsonProperty[k] == "amountPaid") {
+                let quantityPrice = tempBasket[j].amountPaid * tempBasket[j].quantity;
+                tD.appendChild(document.createTextNode("£" + quantityPrice.toFixed(2)));
+                basketTotal += quantityPrice;
+            } else if (jsonProperty[k] == "price") {
+                let quantityPrice = tempBasket[j].price;
+                let paidPrice = tempBasket[j].amountPaid;
+                tD.appendChild(document.createTextNode("( £" + quantityPrice.toFixed(2) + "/ £" + paidPrice.toFixed(2) + ")"));
+                basketRRP += quantityPrice * basketStock[j].quantity;
+            } else {
+                tD.appendChild(document.createTextNode(tempBasket[j][jsonProperty[k]]));
+            }
+            tR.appendChild(tD);
+
+            if (j === (tempBasket.length - 1)) {
+
+                let blankTD = document.createElement("TD");
+                blankTD.appendChild(document.createTextNode(""));
+                let rrpTD = document.createElement("TD");
+                let savingTD = document.createElement("TD");
+                let toPayTD = document.createElement("TD");
+
+                basketSaving = basketRRP - basketTotal;
+
+                if (k === (headerArray.length - 2)) {
+                    rrpTD.appendChild(document.createTextNode("RRP : "));
+                    savingTD.appendChild(document.createTextNode("Saving : "));
+                    toPayTD.appendChild(document.createTextNode("Total Due : "));
+                } else if (k === headerArray.length - 1) {
+                    rrpTD.appendChild(document.createTextNode("£" + basketRRP.toFixed(2)));
+                    savingTD.appendChild(document.createTextNode("£" + basketSaving.toFixed(2)));
+                    toPayTD.appendChild(document.createTextNode("£" + basketTotal.toFixed(2)));
+                } else {
+                    rrpTD.appendChild(document.createTextNode(""));
+                    savingTD.appendChild(document.createTextNode(""));
+                    toPayTD.appendChild(document.createTextNode(""));
+                }
+
+                rrpRow.appendChild(rrpTD);
+                savingRow.appendChild(savingTD);
+                toPayRow.appendChild(toPayTD);
+                addElementsToContainer(tBody, [tR, rrpRow, savingRow, toPayRow]);
+            } else {
+                tBody.appendChild(tR);
+                addElementsToContainer(table, [tHead, tBody]);
+            }
+        }
+    }
+
+    return table;
 }
