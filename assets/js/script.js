@@ -1,3 +1,8 @@
+
+/*
+Initial function to get the first buttons and assign their functions based on
+data-attributes. Reference the Love Maths exercise
+*/
 document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.getElementsByTagName("button");
 
@@ -31,7 +36,6 @@ let cashHigh = 100.00;
 let cashLow = 30.00;
 let playerCash = 0.00;
 let basketTotalCost = 0.00;
-
 
 /**
  * * @param {string} customerType - new/same, determines how startGame operates
@@ -300,10 +304,10 @@ function changeAisle(aisleId, callback) {
             let specialText;
             let itemText = document.createTextNode(stockItem.name);
             let innerPriceText;
-            //The amount paid to pass to the addToBasket function
             let calculatedAmount = 0.00;
-            //add the item name to the p element.
+
             itemPTag.appendChild(itemText);
+
             /*
             Define class names for the divs that are all present within a
             singular item div in the shop 
@@ -408,16 +412,6 @@ function changeAisle(aisleId, callback) {
             to text div, the text div to the aisle div and then the button to 
             the aisle div
             */
-
-            // itemDisplay.appendChild(itemPTag);
-            // itemDisplay.appendChild(stockPTag);
-            // priceDisplay.appendChild(pricePTag);
-            // priceDisplay.appendChild(specialPTag);
-            // aisleItem.appendChild(itemImage);
-            // aisleItem.appendChild(itemDisplay);
-            // aisleItem.appendChild(priceDisplay);
-            // aisleItem.appendChild(basketAdd);
-
             addElementsToContainer(itemDisplay, [itemPTag, stockPTag]);
             addElementsToContainer(priceDisplay, [pricePTag, specialPTag]);
             addElementsToContainer(aisleItem, [itemImage, itemDisplay, priceDisplay, basketAdd]);
@@ -842,13 +836,16 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
 function returnToShop(lastAisle) {
     let gameWindow = document.getElementById("game-screen");
     let basketWindow = document.getElementById("basket-screen");
+    let itemsWindow = document.getElementById("the-items");
 
     gameWindow.style.display = "flex";
     basketWindow.style.display = "none";
+    gameWindow.scrollTop = 0;
 
     changeAisle(lastAisle, function () {
         document.getElementById("toolbar-loading").style.display = "none";
         document.getElementById("loading-overlay").style.display = "none";
+
     });
 }
 
@@ -867,13 +864,109 @@ function checkoutBasket() {
     myWindow.document.write('</head><body>');
     myWindow.document.write('<h1>Thank you for shopping today!</h1>');
     myWindow.document.write('<img src="assets/images/header-logo.webp">');
-
-    //myWindow.document.write(document.getElementById("the-receipt").innerHTML);
-    for (let item of tempBasket) {
-        document.write(tempBasket.name);
-    }
+    myWindow.document.write('<div id="print-receipt-table">');
     myWindow.document.write('</body></html>');
 
+    let table = document.createElement("TABLE");
+    let tBody = document.createElement("TBODY");
+    let tHead = document.createElement("THEAD");
+    let tHRow = document.createElement("TR");
+    let headerArray = ["Item", "Per Item (RRP/Paid)", "Quantity", "Total"];
+    let jsonProperty = ["name", "price", "quantity", "amountPaid"];
+    let basketTotal;
+    let basketRRP;
+    let basketSaving;
+    /*
+    Build the header row for the table
+    */
+
+    for (let i = 0; i < headerArray.length; i++) {
+        let tH = document.createElement("TH");
+        let tHText = document.createTextNode(headerArray[i]);
+        if (i === (headerArray.length - 1)) {
+            tH.appendChild(tHText);
+            tHRow.appendChild(tH);
+            tHead.appendChild(tHRow);
+        } else {
+            tH.appendChild(tHText);
+            tHRow.appendChild(tH);
+        }
+    }
+
+    for (let j = 0; j < basketStock.length; j++) {
+
+        console.log(basketStock[j].amountPaid);
+        console.log(basketStock[j].price);
+
+        let paidToAdd = Number(basketStock[j].amountPaid);
+        let paidRRPShow = Number(basketStock[j].price);
+        basketTotal += paidToAdd;
+        basketRRP += paidRRPShow;
+
+        console.log(basketTotal);
+        console.log(basketRRP);
+        let tR = document.createElement("TR");
+
+        let rrpRow = document.createElement("TR");
+        let savingRow = document.createElement("TR");
+        let toPayRow = document.createElement("TR");
+
+        for (let k = 0; k < headerArray.length; k++) {
+
+            let tD = document.createElement("TD");
+            if (jsonProperty[k] == "amountPaid") {
+                let quantityPrice = basketStock[j].amountPaid * basketStock[j].quantity;
+                tD.appendChild(document.createTextNode(quantityPrice.toFixed(2)));
+            } else if (jsonProperty[k] == "price") {
+                let quantityPrice = basketStock[j].price;
+                let paidPrice = basketStock[j].amountPaid;
+                tD.appendChild(document.createTextNode("(" + quantityPrice.toFixed(2) + "/" + paidPrice.toFixed(2) + ")"));
+            } else {
+                tD.appendChild(document.createTextNode(basketStock[j][jsonProperty[k]]));
+            }
+            tR.appendChild(tD);
+
+            if (j === (basketStock.length - 1)) {
+
+                let blankTD = document.createElement("TD");
+                blankTD.appendChild(document.createTextNode(""));
+                let rrpTD = document.createElement("TD");
+                let savingTD = document.createElement("TD");
+                let toPayTD = document.createElement("TD");
+
+                basketSaving = basketRRP - basketTotal;
+                console.log(basketRRP + " - " + basketTotal + " - " + basketSaving);
+
+                if (k === (headerArray.length - 2)) {
+                    rrpTD.appendChild(document.createTextNode("RRP : "));
+                    savingTD.appendChild(document.createTextNode("Saving : "));
+                    toPayTD.appendChild(document.createTextNode("Total Due : "));
+                } else if (k === headerArray.length - 1) {
+                    rrpTD.appendChild(document.createTextNode(basketRRP.toFixed(2)));
+                    savingTD.appendChild(document.createTextNode(basketSaving.toFixed(2)));
+                    toPayTD.appendChild(document.createTextNode(basketTotal.toFixed(2)));
+                } else {
+                    rrpTD.appendChild(document.createTextNode(""));
+                    savingTD.appendChild(document.createTextNode(""));
+                    toPayTD.appendChild(document.createTextNode(""));
+                }
+
+                rrpRow.appendChild(rrpTD);
+                savingRow.appendChild(savingTD);
+                toPayRow.appendChild(toPayTD);
+
+                addElementsToContainer(tBody, [tR, rrpRow, savingRow, toPayRow]);
+
+            } else {
+                tBody.appendChild(tR);
+                addElementsToContainer(table, [tHead, tBody]);
+            }
+        }
+    }
+
+
+    myWindow.document.getElementById("print-receipt-table").appendChild(table);
+    myWindow.document.body.appendChild(table);
     myWindow.document.close(); // necessary for IE >= 10
     myWindow.focus(); // necessary for IE >= 10*/
 
