@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/loading.css" />
+    <link rel="stylesheet" href="assets/css/modal.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -21,6 +22,25 @@
     <title>Hypermarket Cheap - A Shopping Simulator</title>
   </head>
   <body>
+    <div id="game-end-modal" class="modal-window">
+      <p>Would you like to shop again?</p>
+      <div id="button-choices">
+        <!--Click functions are customerType/dayType-->
+        <button onclick="startGame('new','new')">New Customer / New Day</button>
+        <button onclick="startGame('new','same')">
+          New Customer / Same Day
+        </button>
+        <button onclick="startGame('same','new')">
+          Same Customer / New Day
+        </button>
+        <button onclick="startGame('same','same')">
+          Same Customer / Same Day
+        </button>
+      </div>
+      <div id="button-choices">
+        <button onclick="newCustomer()"></button>
+      </div>
+    </div>
     <header>
       <img src="../assets/images/header-logo.webp" />
     </header>

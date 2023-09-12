@@ -1,0 +1,39 @@
+/* Not visible */
+.modal-window {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(37, 37, 37, 0.3);
+}
+
+/* Modal Styling*/
+.modal-content {
+    background-color: #fefefe;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3%;
+    border: 1px solid #3d9970;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* Modal Close */
+.close {
+    color: rgb(48, 48, 48);
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

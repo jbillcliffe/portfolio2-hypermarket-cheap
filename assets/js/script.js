@@ -1,4 +1,3 @@
-
 /*
 Initial function to get the first buttons and assign their functions based on
 data-attributes. Reference the Love Maths exercise
@@ -22,11 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /*
-    --- Global Variables --- 
-    Values that are required across the game. Therefore they are declared at
-    the top of the script.
+--- Global Variables --- 
+Values that are required across the game. Therefore they are declared at
+the top of the script.
 */
-
 let lastAisle;
 let aisles = [];
 let basketStock = [];
@@ -38,46 +36,56 @@ let playerCash = 0.00;
 let basketTotalCost = 0.00;
 
 /**
- * * @param {string} customerType - new/same, determines how startGame operates
- * * @param {string} dayType - new/same, determines how startGame operates
- * 
- * Function to start the game.
+ * ## Function to start the game
  * customerType and dayType will determine how the function operates, both of
  * these parameters default as "new". These are changed upon request when the
  * function is called. 
  * Cash, stock and the environment are initated here. The function will also
  * show the loading animation in the toolbar while running
+ * @param {string} customerType - new/same, determines how startGame operates.
+ * @param {string} dayType - new/same, determines how startGame operates.
  */
 function startGame(customerType = "new", dayType = "new") {
 
     document.getElementById("toolbar-loading").style.display = "flex";
     document.getElementById("loading-overlay").style.display = "block";
+    document.getElementById("game-end-modal").style.display = "none";
 
-    if (dayType === "new") {
+    startingPlayerCash(customerType);
+    gameStartingStock(dayType);
+    setTimeout(createEnvironment, 4000);
+    /*
+    A delay of 4s gives time to for the 
+    arrays of data to populate during the gameStartingStock function before
+    performing createEnvironment which relies on these variables
+    */
 
-        startingPlayerCash(customerType);
-        gameStartingStock(dayType);
-        /*
-            A delay of 4s gives time to for the 
-            arrays of data to populate during the gameStartingStock function before
-            performing createEnvironment which relies on these variables
-        */
-        setTimeout(createEnvironment, 4000);
-    }
+    //}
 }
 
 /**
- * Create the game environment which is based on a new customer on a new day.
- * If the day is the same, then a whole new environment is not required.
- * Create buttons for the aisles. Clicking on the buttons will show the shop
+ * ## Function for creating the game environment
+ * - Create the game environment which is based on a new customer on a new day.
+ * - If the day is the same, then a whole new environment is not required.
+ * - This function will also be required after emptyBasket() when a "same" value
+ * is returned for customerType.
+ * - Create buttons for the aisles. Clicking on the buttons will show the shop
  * items associated with the aisle.
+ * @param {string} customerType - new/same, determines how createEnvironment operates.
  */
-function createEnvironment() {
+function createEnvironment(customerType = "new") {
     /*
         Add the aisles, default to no aisle selected and a message to choose an aisle to go to.
     */
     let aisleList = document.getElementById("the-aisles");
-
+    aisleList.innerHTML = "";
+    /*
+    document.getElementById("the-shop").innerHTML = "";
+    document.getElementById("the-items").innerHTML = "";
+    document.getElementById("return-to-shop-div").innerHTML = "";
+    document.getElementById("the-basket").innerHTML = "";
+    document.getElementById("the-receipt").innerHTML = "";
+*/
     for (let aisle of aisles) {
         let aisleButton = document.createElement("BUTTON");
         aisleButton.className = "aisle-button";
@@ -91,35 +99,38 @@ function createEnvironment() {
         aisleButton.innerHTML = aisle;
         aisleList.appendChild(aisleButton);
     }
+    /*hide these elements from their string names passed to a function to
+    operate with an array and getElementById*/
+    console.log(aisleList);
 
-    document.getElementById("game-menu").style.display = "none";
-    document.getElementById("game-screen").style.display = "flex";
-    document.getElementById("basket-screen").style.display = "none";
-    document.getElementById("wallet-icon").style.display = "flex";
-    document.getElementById("basket-button").style.display = "flex";
+    hideElementArray(["game-menu", "basket-screen", "toolbar-loading", "loading-overlay"]);
+    showElementArray(["game-screen", "wallet-icon", "basket-button"]);
     document.getElementById("the-toolbar").style.justifyContent = "flex-start";
-    document.getElementById("toolbar-loading").style.display = "none";
-    document.getElementById("loading-overlay").style.display = "none";
 
-    emptyBasket();
+    if (customerType === "new") {
+        emptyBasket();
+    } else {
+        /*
+        emptyBasket is not required to be re-run on a same customer as the 
+        basket will have previously been emptied
+        */
+    }
 }
 
 /**
- * Function to show the About information
+ * ## Function to show the About information
  */
 function showAbout() {
     console.log("Show About Info");
 }
 
 /**
+ * ## Function for determining player starting cash amount
+ * - If customerType="new" then choose a random amount of cash from a range,
+ * - if customerType="same" then the cash amount is not changed
  * @param {string} customerType - new/same, determines how startingPlayerCash operates
- * 
- * Function for determining player starting cash amount, if customerType="new"
- * then choose a random amount of cash from a range, if customerType="same"
- * then the cash amount is not changed
  */
 function startingPlayerCash(customerType = "new") {
-
     /*
       eg. 0.5 * 70 + 30 = 35 + 30
       eg. 1 * 70 + 30 = 100
@@ -130,127 +141,153 @@ function startingPlayerCash(customerType = "new") {
       provided. "toFixed(2)" sets the number to 2 decimal places, accurate
       for cash.
     */
-    playerCash = (Math.random() * (cashHigh - cashLow) + cashLow).toFixed(2);
-    document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toString());
+    if (customerType == "same") {
+        //if the same person, do not regenerate the cash amount
+    } else {
+        playerCash = (Math.random() * (cashHigh - cashLow) + cashLow);
+    }
+
+    document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
 }
 
 /**
+ * ## Function for determining starting shop stock
+ * - If dayType="new" then a new generation of stock is created, new items,
+ * amounts and prices. 
+ * - If dayType="same" then no change in prices/stocks for a new game.
  * @param {string} dayType - new/same, determines how gameStartingStock operates
- * 
- * Function for determining starting shop stock, if dayType="new"
- * then a new generation of stock is created, new items,amounts and prices. If
- * dayType="same" then no change in prices/stocks for a new game
  */
 function gameStartingStock(dayType = "new") {
     /*
-      Go through each item in items.json and beginning setting stock levels
-      also applying specieals as necessary
+      Go through each item in items.json and begin setting stock levels
+      also applying specials as necessary
     */
-    //getJSON gets the data from the specials.json file and holds them for stock creation
-    $.getJSON("assets/json/specials.json", function (jsonSpecialOfferList) {
-        for (jsonSpecialOffer of jsonSpecialOfferList) {
-            specialOffers.push({
-                id: jsonSpecialOffer.id,
-                name: jsonSpecialOffer.name,
-                chance: jsonSpecialOffer.chance,
-                factor: jsonSpecialOffer.factor,
-                occurance: jsonSpecialOffer.occurance
-            });
-        }
-    });
-
-    //getJSON gets the data from the items.json file to then work with each item
-    function thenGetItems() {
-        $.getJSON("assets/json/items.json", function (jsonItemsList) {
-            for (jsonItem of jsonItemsList) {
-                //adding aisle options
-                aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
-
-                let thisItemStock = Math.round(Math.random() * (jsonItem.highStock - jsonItem.lowStock) + jsonItem.lowStock);
-                let thisItemPrice = Number((Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2));
-
-                /*
-                Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
-                ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
-                But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
-                */
-
-                let thisSpecial;
-                if (Math.random() < 0.4) {
-                    for (let i = 0; i < specialOffers.length; i++) {
-                        //secondary number generation for "mini-game"
-                        let thisScore = Math.random();
-                        //if no occurances left of special offers set special to 1 and continue
-                        if (specialOffers[i].occurance > 0) {
-                            /*
-                            if the random number is less or equal to chance then set the special
-                            modifier and continue
-                            */
-                            if (thisScore <= specialOffers[i].chance) {
-                                //remove an occurance so specials don't keep forever generating
-                                specialOffers[i].occurance--;
-                                //set thisSpecial to the modifier
-                                thisSpecial = specialOffers[i].factor;
-                                break;
-                            }
-                        } else {
-                            thisSpecial = 1;
-                        }
-                        thisSpecial = 1;
-                    }
-                } else {
-                    thisSpecial = 1;
-                }
-                //create the item to go into the shop stock
-                let thisItem = {
-                    id: jsonItem.id,
-                    name: jsonItem.name,
-                    price: thisItemPrice,
-                    quantity: thisItemStock,
-                    aisle: jsonItem.aisle,
-                    special: thisSpecial,
-                    imageUrl: jsonItem.imageUrl,
-                    alertText: jsonItem.alertText
-                };
-                shopStock.push(thisItem);
+    if (dayType == "new") {
+        //getJSON gets the data from the specials.json file and holds them for stock creation
+        $.getJSON("assets/json/specials.json", function (jsonSpecialOfferList) {
+            for (jsonSpecialOffer of jsonSpecialOfferList) {
+                specialOffers.push({
+                    id: jsonSpecialOffer.id,
+                    name: jsonSpecialOffer.name,
+                    chance: jsonSpecialOffer.chance,
+                    factor: jsonSpecialOffer.factor,
+                    occurance: jsonSpecialOffer.occurance
+                });
             }
+            //small timeout before moving to the next section, making sure 
+            setTimeout(thenGetItems(), 1500);
         });
 
-        specialOffers = JSON.parse(JSON.stringify(specialOffers));
-        shopStock = JSON.parse(JSON.stringify(shopStock));
-        aisles = JSON.parse(JSON.stringify(aisles));
+        //getJSON gets the data from the items.json file to then work with each item
+        function thenGetItems() {
+            $.getJSON("assets/json/items.json", function (jsonItemsList) {
+                for (jsonItem of jsonItemsList) {
+                    //adding aisle options
+                    aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
+
+                    let thisItemStock = Math.round(Math.random() * (jsonItem.highStock - jsonItem.lowStock) + jsonItem.lowStock);
+                    let thisItemPrice = Number((Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2));
+
+                    /*
+                    Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
+                    ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
+                    But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
+                    */
+                    let thisSpecial;
+
+                    if (Math.random() < 0.4) {
+                        for (let i = 0; i < specialOffers.length; i++) {
+                            let thisScore = Math.random();
+                            if (specialOffers[i].occurance > 0) {
+                                /*
+                                if the random number is less or equal to chance then set the special
+                                modifier and continue
+                                */
+                                if (thisScore <= specialOffers[i].chance) {
+                                    //remove an occurance so specials don't keep forever generating
+                                    specialOffers[i].occurance--;
+                                    //set thisSpecial to the modifier
+                                    thisSpecial = specialOffers[i].factor;
+                                    break;
+                                }
+                            } else {
+                                thisSpecial = 1;
+                            }
+                            thisSpecial = 1;
+                        }
+                    } else {
+                        thisSpecial = 1;
+                    }
+
+                    //create the item to go into the shop stock
+                    let thisItem = {
+                        id: jsonItem.id,
+                        name: jsonItem.name,
+                        price: thisItemPrice,
+                        quantity: thisItemStock,
+                        aisle: jsonItem.aisle,
+                        special: thisSpecial,
+                        imageUrl: jsonItem.imageUrl,
+                        alertText: jsonItem.alertText
+                    };
+                    shopStock.push(thisItem);
+                }
+            });
+
+            /*
+            parsing a string, ensures that data is definitely correct and in a JSON
+            format
+            */
+            specialOffers = JSON.parse(JSON.stringify(specialOffers));
+            shopStock = JSON.parse(JSON.stringify(shopStock));
+            aisles = JSON.parse(JSON.stringify(aisles));
+        }
+    } else {
+        //starting stock does not change
     }
 
-    setTimeout(thenGetItems(), 1500);
 }
-
-
-
 /**
+ * ## Function to remove all items from the basket. 
+ * If requestType="new", this is an emptying to start a new game. If 
+ * requestType="customer" then the customer has requested the items be returned
+ * and this is not the process of beginning a new game
  * @param {string} requestType - new/same, determines how emptyBasket operates
- * 
- * Function to remove all items from the basket. If requestType="new", this is
- * an emptying to start a new game. If requestType="customer" then the customer
- * has requested the items be returned and this is not the process of beginning
- * a new game
  */
 function emptyBasket(requestType = "new") {
     if (requestType === "new") {
         basketStock = [];
     } else {
         /*
-          For each item in basket, return to stock. Cash is not altered, 
-          this only changes on checkout.
+          - For each item in basket, return to stock. 
+          - Cash needs to be restored to previous level, which is done 
+          in this loop.
+          - perform createEnvironment function, which leaves the basket and reloads
         */
+        for (let basketItem of basketStock) {
+            let shopObject = shopStock.find(({ id }) => id === basketItem.id);
+            shopObject.quantity += basketItem.quantity;
+            playerCash += basketItem.amountPaid * basketItem.quantity;
+            createEnvironment("same");
+            startingPlayerCash("same");
+        }
+
+        //empty the array and update the wallet to display current cash
+        basketStock = [];
+        document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
     }
+
+    let basketTally = document.getElementById("basket-tally");
+    basketTally.innerHTML = "0";
 }
 
 /**
- * * @param {number} aisleId - id of the aisle passed to the function eg. "Bakery"
- * 
- * Function which tells the game to change aisle by sending across the id
- * it can use it to filter the JSON data. Starts by clearing the-items div,
- * then populating it with new divs which have content
+ * ## Function which tells the game to change aisle
+ * By sending across the id it can use it to filter the JSON data. 
+ * Starts by clearing the-items div, then populating it with new divs
+ * which have content. The content is chosen by iterating through the options
+ * available from the shop and inserting only those where the aisle matches.
+ * @param {number} aisleId - id of the aisle passed to the function eg. "Bakery"
  */
 function changeAisle(aisleId, callback) {
 
@@ -271,14 +308,12 @@ function changeAisle(aisleId, callback) {
             }
         }
     }
-
     //Ensure the shop is emptied each time an aisle button is clicked
     let shopAisle = document.getElementById("the-items");
     shopAisle.innerHTML = "";
 
     //Iterate through the stock options and add when its the right aisle option
     for (let stockItem of shopStock) {
-
         if (stockItem.aisle === aisleId) {
             //Creating the elements for each aisle item
             const aisleItem = document.createElement("DIV");
@@ -425,19 +460,19 @@ function changeAisle(aisleId, callback) {
 }
 
 /**
+ * ## Function to send an alert when + button clicked when there is no stock
+ * Tell user to try again another time, alertingText is given from the item's
+ * alertText value in its object
  * @param {string} alertingText - the alertText string from the shopStock item
- * 
- * An alert to be fired reminding the user that there is no stock of this item
- * and to try again another time.
  */
 function noStockToAdd(alertingText) {
     alert("I'm sorry, there " + alertingText);
 }
 
 /**
- * @param {object} itemForBasket - the whole item object passed to the function from shopStock
- * @param {number} amountPaid - the amount "paid" attached to the basket button
+ * ## Function to add an item to the basket.
  * ```
+ * BasketItem
  * {
  *      id:number, 
  *      name:string, 
@@ -449,46 +484,48 @@ function noStockToAdd(alertingText) {
  *      alertText: string
  * }
  * ```
- * Function to add an item to the basket, done on an individual basis. You 
- * only have one hand when you are holding a basket!
- * It checks if the id of the object is already in the basket. If so it needs
- * to alter the quantity rather than
+ * This is done on a +1 basis. You only have one hand when you are holding a basket!
+ * - Checks if there is enough cash. If not display an alert.
+ * - Subtract cost from wallet
+ * - Checks if object with same id already exists in basketStock 
+ *      - if yes, +1 to quantity
+ *      - if no, add new object to basketStock array with quantity 1
+ * - Then checks to see if this was performed "in-shop" or "in-basket"
+ * - In Shop 
+ *      - Update required text elements
+ *      - Checks the stock level after update.
+ *      - If 0, change the + button to display an alert instead when clicked.
+ *      - Also change the + to a red X to signify no stock
+ * - In Basket
+ *      - Insert a new line into the receipt
+ *      - Calculate new receipt total
+ *      - If this was last of stock, remove the ability to add more by removing + button
+ * @param {object} itemForBasket - the whole item object passed to the function from shopStock
+ * @param {number} amountPaid - the amount "paid" attached to the basket button
+ * @param {string} whichScreen - From basket or shop determines how its added
  */
 function addToBasket(itemForBasket, amountPaid, whichScreen) {
-    /*
-    First, it needs to be determined if the player has enough money. Otherwise,
-    they cannot addToBasket.
-    */
+
+    //Alert if no money
     if (playerCash - amountPaid < 0) {
         alert("I'm sorry, you do not have enough money to purchase this");
     } else {
 
-        /*
-        subtract the cost from the wallet and set the "wallet-count" data
-        attached to the wallet icon to change.
-        */
-
+        //Subtract from playerCash the cost after "special" modifier
         playerCash = playerCash - amountPaid;
         document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
-        /*
-        - If after taking one off the shelf the quantity left is 0, it needs to now
-        be marked as out of stock. Otherwise, it is a straightforward quantity 
-        adjustment.
-        - The ADD button needs to be considered for alteration, as does the text for the stock.
-        - Basket tally needs to be altered by +1.
-        - basketStock array needs to be altered to include the new item added
-        */
+
+        // -1 off the item in the shopStock
         let shopObject = shopStock.find(({ id }) => id === itemForBasket.id);
         shopObject.quantity--;
 
+        //increase the tally in the toolbar +1
         let basketTally = document.getElementById("basket-tally");
         basketTally.innerHTML = (parseInt(basketTally.innerHTML) + 1).toString();
+
         /*
-        After checking if this item already exists in the basket. It needs to
-        add 1 to the quantity of it, or if not found it needs to create a new
-        object into the array based on the initial object with a quantity of 1.
-        Remove unnecessary data from the object to go into the basket.
-        Then add other values which speed up any further processes
+        Create the object as a reference for this item alone being added to
+        the basket
         */
         let itemToGoToBasket = {
             id: itemForBasket.id,
@@ -501,8 +538,10 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
             imageUrl: itemForBasket.imageUrl
         };
 
+        //Search for item's existence in the basket
         let itemExistingInBasket = basketStock.find(({ id }) => id === itemToGoToBasket.id);
 
+        //if false, add to basket new object, else +1 quantity
         if (!(basketStock.find(({ id }) => id === itemToGoToBasket.id))) {
             basketStock.push(itemToGoToBasket);
             itemExistingInBasket = itemToGoToBasket;
@@ -510,10 +549,16 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
             itemExistingInBasket.quantity++;
         }
 
+        //Dependent upon location, determines which DOM Elements need updating.
         if (whichScreen === "in-shop") {
             let stockTextSpan = document.getElementById("stock_" + itemForBasket.id).children[0];
             let basketButton = document.getElementById("basket-add_" + itemForBasket.id);
 
+            /*
+            If this was the last of the stock, change the function on the
+            + button and edit texts and classes. If not, then just amend the
+            stock text to the new number
+            */
             if (shopObject.quantity === 0) {
                 basketButton.onclick = function () { noStockToAdd(itemForBasket.alertText); };
                 basketButton.innerHTML = `<i class="fas fa-times negative-text"></i>`;
@@ -523,6 +568,10 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
                 stockTextSpan.innerHTML = shopObject.quantity;
             }
         } else if (whichScreen === "in-basket") {
+            /*
+            When this is done in the basket, it is required to add a new line
+            to the receipt in real time.
+            */
             let receiptLineReference = document.getElementsByName("receipt-line_" + itemForBasket.id)[0];
             let newReceiptLine = createNewReceiptLine(itemForBasket.id, itemForBasket.name, itemForBasket.amountPaid, "no");
             receiptLineReference.insertAdjacentElement("beforebegin", newReceiptLine);
@@ -532,6 +581,10 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
             document.getElementById("basket-per-total_" + itemExistingInBasket.id).innerHTML = "£" + totalPaid.toFixed(2);
             let rrpAmount = calculateNumberTimes(itemExistingInBasket.price, itemExistingInBasket.quantity);
 
+            /*
+            if there is a special offer (factor of multiplication less than 1)
+            then the text needs to be added
+            */
             if (itemExistingInBasket.special < 1) {
                 document.getElementById("basket-per-total-special_" + itemExistingInBasket.id).innerHTML = "£" + rrpAmount.toFixed(2);
             } else {
@@ -541,24 +594,24 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
             if (shopObject.quantity === 0) {
                 console.log("Remove button");
                 removePlusQuantityButton(itemForBasket.id);
-
-
             }
         } else {
             //Any other locations?
         }
-
     }
 }
 /**
  * ### A function to load and populate the basket window 
- * - Sort basket by item names
+ * - Sort basket by item names and aisle options by name
  * - Iterate through aisle array and populate as necessary by aisle category
- * - With each iteration, add the item to the basket window, id assigned to container
  * - Container (Image - Name - Price Per - (+) Quantity (-) - Total Price)
  * - When all items added. Need to add a basket total and checkout option.
+ * @param {string} lastAisle - This allows the user to return to their previous aisle on closing basket
  */
 function showBasket(lastAisle) {
+
+    //Sorting an object array : 
+    //Credit : https://www.w3schools.com/js/js_array_sort.asp
 
     basketStock.sort(function (a, b) {
         let x = a.name.toLowerCase();
@@ -571,8 +624,10 @@ function showBasket(lastAisle) {
     let basketAisles = aisles;
     basketAisles.sort();
 
+    //reset to 0 and recalculate
     basketTotalCost = 0.00;
 
+    //creating necessary elements
     const gameWindow = document.getElementById("game-screen");
     const basketWindow = document.getElementById("basket-screen");
     const basketItemDisplayDiv = document.getElementById("the-basket");
@@ -582,31 +637,35 @@ function showBasket(lastAisle) {
     const basketReturnToShopButton = document.createElement("BUTTON");
     const basketCheckoutButton = document.createElement("BUTTON");
 
+    //empty divs for repopulation
     basketReturnToShopDiv.innerHTML = "";
     basketItemDisplayDiv.innerHTML = "";
     basketReceiptDiv.innerHTML = "";
 
+    //hide game, show basket
     gameWindow.style.display = "none";
     basketWindow.style.display = "flex";
 
+    //setting attributes and onclick for the basketToShop button, then add to secondary toolbar
     basketReturnToShopButton.id = "return-to-shop-button";
     basketReturnToShopButton.onclick = function () { returnToShop(lastAisle); };
     basketReturnToShopButton.innerHTML =
         `<span style="display:flex; align-items:stretch; flex-direction:row;"><i class="fas fa-angle-double-left"></i>&nbspReturn To Shop</span>`;
     basketReturnToShopDiv.appendChild(basketReturnToShopButton);
 
+    //setting attributes and onclick for the checkout button, then add to secondary toolbar
     basketCheckoutButton.id = "checkout-button";
     basketCheckoutButton.onclick = function () { checkoutBasket(); };
     basketCheckoutButton.innerHTML =
         `<span style="display:flex; align-items:stretch; flex-direction:row;">Checkout! &nbsp<i class="fas fa-angle-double-right"></i></span>`;
     basketReturnToShopDiv.appendChild(basketCheckoutButton);
 
+    //setting the header image for the receipt on screen, then add to the receipt div
     basketReceiptHeader.src = "assets/images/logo-white-350.webp";
     basketReceiptHeader.className = "the-receipt-header";
     basketReceiptDiv.appendChild(basketReceiptHeader);
 
-
-
+    //setting and then adding the total line for the receipt
     const receiptTotalDivLine = document.createElement("DIV");
     receiptTotalDivLine.className = "basket-receipt-line total-line";
     const receiptTotalP = document.createElement("P");
@@ -614,12 +673,14 @@ function showBasket(lastAisle) {
     receiptTotalPriceP.id = "basket-receipt-total-price";
     receiptTotalP.appendChild(document.createTextNode("Total : "));
 
+    //for each basket item, add it to the receipt
     for (let a = 0; a < basketStock.length; a++) {
         for (let b = 0; b < basketStock[a].quantity; b++) {
             createNewReceiptLine(basketStock[a].id, basketStock[a].name, basketStock[a].amountPaid);
         }
     }
 
+    //adding the receipt line to the receipt div
     receiptTotalPriceP.appendChild(document.createTextNode("£" + basketTotalCost.toFixed(2)));
     addElementsToContainer(receiptTotalDivLine, [receiptTotalP, receiptTotalPriceP]);
     basketReceiptDiv.appendChild(receiptTotalDivLine);
@@ -632,6 +693,10 @@ function showBasket(lastAisle) {
     */
     for (let aisleOption of basketAisles) {
 
+        /*
+        .some() checks if it exists at all, not where.
+        If the aisle exists at all then add the header to the basket display
+        */
         if (basketStock.some(x => x.aisle === aisleOption)) {
             const basketAisleTitleDiv = document.createElement("DIV");
             basketAisleTitleDiv.appendChild(document.createTextNode(aisleOption));
@@ -640,7 +705,12 @@ function showBasket(lastAisle) {
             basketItemDisplayDiv.appendChild(basketAisleTitleDiv);
         }
 
+        /*
+        while still in this aisle, add basket items to the basket div that share
+        the same aisle
+        */
         for (let basketItem of basketStock) {
+            //Create the elements required
             const basketItemContainer = document.createElement("DIV");
             basketItemContainer.id = "basket-item_" + basketItem.id;
             const basketItemImage = document.createElement("IMG");
@@ -656,6 +726,7 @@ function showBasket(lastAisle) {
             const basketItemTotalPrice = document.createElement("SPAN");
             const basketItemTotalRrp = document.createElement("SPAN");
 
+            //look for existing image of the item
             if (basketItem.aisle === aisleOption) {
                 checkIfImageExists("assets/images/items/" + basketItem.imageUrl, (exists) => {
                     if (exists) {
@@ -665,12 +736,19 @@ function showBasket(lastAisle) {
                     }
                 });
 
+                //add and set id of the name
                 basketItemName.appendChild(basketItemNameText);
                 basketItemName.id = "basket-item-name_" + basketItem.id;
 
+                //calculating amount paid and what rrp would have
                 let calculateTotal = calculateNumberTimes(basketItem.amountPaid, basketItem.quantity);
                 let calculateTotalRrp = calculateNumberTimes(basketItem.price, basketItem.quantity);
 
+                /*
+                This determines if there was a special price applied or not.
+                Then sets classes and texts for elements in the pricing container.
+                Then adds the pricing container to the basket item
+                */
                 if (basketItem.price === basketItem.amountPaid) {
                     basketItemPricePer.appendChild(document.createTextNode("£" + (basketItem.price).toFixed(2)));
                     basketItemTotalPrice.appendChild(document.createTextNode("£" + (calculateTotal).toFixed(2)));
@@ -701,16 +779,13 @@ function showBasket(lastAisle) {
                     basketItemTotalRrp.id = "basket-per-total-special_" + basketItem.id;
 
                     addElementsToContainer(basketItemPriceP, [basketItemPricePer, basketItemPricePerRrp]);
-                    //basketItemPriceP.appendChild(basketItemPricePer);
-                    //basketItemPriceP.appendChild(basketItemPricePerRrp);
                     addElementsToContainer(basketItemTotalPriceP, [basketItemTotalPrice, basketItemTotalRrp]);
-                    //basketItemTotalPriceP.appendChild(basketItemTotalPrice);
-                    //basketItemTotalPriceP.appendChild(basketItemTotalRrp);
                 }
 
                 basketItemPricePer.id = "basket-per_" + basketItem.id;
                 basketItemTotalPrice.id = "basket-per-total_" + basketItem.id;
 
+                //Minus will always be added, as you can always lose what is in the basket
                 basketItemQuantityMinus.id = "basket-sub_" + basketItem.id;
                 basketItemQuantityMinus.className = "basket-item-quantity-button";
                 basketItemQuantityMinus.innerHTML = "-";
@@ -745,6 +820,11 @@ function showBasket(lastAisle) {
                 addElementsToContainer(basketItemQuantityContainer, [basketItemQuantityPlus, basketItemQuantity, basketItemQuantityMinus]);
                 addElementsToContainer(basketItemContainer, [basketItemImage, basketItemName, basketItemPriceP, basketItemQuantityContainer, basketItemTotalPriceP]);
 
+                /*
+                Final attributes for items inside the container.
+                Then add the container to the basket div
+                */
+
                 basketItemContainer.className = "basket-item-container";
                 basketItemImage.className = "item-container-img";
                 basketItemName.className = "basket-item-container-text";
@@ -761,39 +841,53 @@ function showBasket(lastAisle) {
 }
 
 /**
- * Function to remove an item to the basket (including its quantity). Whjole 
- * object is passed to the function. It is the manipulated in the basketStock
- * and returned to shopStock. 
+ * ## Function to remove an item to the basket. 
+ * This is achieved by either removing an object from the array or reducing
+ * its quantity.
  * NOTE : shopStock can have quantity of 0, the basketStock cannot. If this
  * results in basketStock having a quantity of 0 on the item, it needs removing
  * from the array entirely. If the shopStock was out of stock prior, it would 
- * become In Stock as its quantity will increase
+ * become In Stock as its quantity will increase.
+ * @param removeId - id of the item to be removed
+ * @param removeContainer - the element containing the item
+ * @param removeQuantity - the element containing the quantity
  */
 function removeFromBasket(removeId, removeContainer, removeQuantity) {
 
+    //get the shopStock reference of the item and +1 quantity
     let shopStockItem = shopStock.find(({ id }) => id === removeId);
     shopStockItem.quantity++;
+    //get the basketStock of the item and -1 quantity
     let basketStockItem = basketStock.find(({ id }) => id === removeId);
     let basketItemAisle = "basket-aisle_" + basketStockItem.aisle;
     basketStockItem.quantity--;
+    //Minus the cost of the basket -- Add to player cash
     basketTotalCost -= basketStockItem.amountPaid;
     playerCash += basketStockItem.amountPaid;
-
     document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
 
+    //remove one from the tally in the basket
     let basketTally = document.getElementById("basket-tally");
     basketTally.innerHTML = (parseInt(basketTally.innerHTML) - 1).toString();
     console.log("remove 2. " + basketStock);
 
-    //get all lines that match the id, remove the first, they all are the same
+    /*
+    get all lines that match the id, remove the first, they all are the same
+    but 0 is always an easy referal
+    */
     let receiptLines = document.getElementsByName("receipt-line_" + removeId);
     receiptLines[0].remove();
     document.getElementById("basket-receipt-total-price").innerHTML = "£" + basketTotalCost.toFixed(2);
 
+    /*
+    Check for quantity of the item in question if it is 0 after amending the 
+    quantity the container in the basket needs removing.
+    Also if it was the last item in an aisle category, then the aisle header
+    needs to be removed
+    */
     if (basketStockItem.quantity === 0) {
 
         let basketContainer = document.getElementById(removeContainer);
-
         const removeIndex = basketStock.findIndex(({ id }) => id === removeId);
         basketStock.splice(removeIndex, 1);
         console.log("remove 3. " + basketStock);
@@ -807,6 +901,12 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
             aisleHeader.remove();
         }
         basketContainer.remove();
+
+        /*
+        When the quantity is > 0, it means it still exists in the basket but with
+        one less than before. Therefore it just needs the quantity and pricing
+        text updating
+        */
 
     } else if (basketStockItem.quantity > 0) {
         let quantityContainer = document.getElementById(removeQuantity);
@@ -833,6 +933,11 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
     }
 }
 
+/**
+ * ## Function to leave the basket
+ * It then will send the user back to the last aisle they were in.
+ * @param {string} lastAisle - String data of last aisle.
+ */
 function returnToShop(lastAisle) {
     let gameWindow = document.getElementById("game-screen");
     let basketWindow = document.getElementById("basket-screen");
@@ -840,8 +945,10 @@ function returnToShop(lastAisle) {
 
     gameWindow.style.display = "flex";
     basketWindow.style.display = "none";
+    //return to the top of the aisle screen
     gameWindow.scrollTop = 0;
 
+    //perform the changeAisle function, using the last aisle data to send there.
     changeAisle(lastAisle, function () {
         document.getElementById("toolbar-loading").style.display = "none";
         document.getElementById("loading-overlay").style.display = "none";
@@ -850,15 +957,14 @@ function returnToShop(lastAisle) {
 }
 
 /**
- * Function to checkout. This will display items bought, amount spent,
- * amount remaining and then provide a choice of a starting a new game with new
- * values to play with or to start again with remaining shop items and cash.
+ * ## Function to checkout.
+ * This will display items bought, amount spent, amount remaining and then
+ * provide a choice of a starting a new game with new values to play with or
+ * to start again with remaining shop items and cash.
  */
 function checkoutBasket() {
 
     let myWindow = window.open('', 'PRINT', 'height=400,width=600');
-    let tempBasket = basketStock;
-
 
     myWindow.document.write('<html><head><title> Hypermarket Cheap </title>');
     myWindow.document.write('</head><body>');
@@ -874,13 +980,27 @@ function checkoutBasket() {
     myWindow.document.close(); // necessary for IE >= 10
     myWindow.focus(); // necessary for IE >= 10*/
 
+    myWindow.onafterprint = (event) => {
+        document.getElementById("game-end-modal").style.display = "flex";
+    };
+
     myWindow.print();
     myWindow.close();
 
-    return true;
 }
 
 
+function showElementArray(theseElements) {
+    for (let element of theseElements) {
+        document.getElementById(element).style.display = "flex";
+    }
+}
+
+function hideElementArray(theseElements) {
+    for (let element of theseElements) {
+        document.getElementById(element).style.display = "none";
+    }
+}
 /**
  * 
  * @param {string} url - url of the image to search
