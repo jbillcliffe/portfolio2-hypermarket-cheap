@@ -50,17 +50,20 @@ function startGame(customerType = "new", dayType = "new") {
     document.getElementById("toolbar-loading").style.display = "flex";
     document.getElementById("loading-overlay").style.display = "block";
     document.getElementById("game-end-modal").style.display = "none";
-
     startingPlayerCash(customerType);
-    gameStartingStock(dayType);
-    setTimeout(createEnvironment, 4000);
+
+    if (dayType == "new") {
+        gameStartingStock(dayType);
+    } else {
+    }
+
     /*
     A delay of 4s gives time to for the 
     arrays of data to populate during the gameStartingStock function before
     performing createEnvironment which relies on these variables
     */
+    setTimeout(createEnvironment, 4000, customerType, dayType);
 
-    //}
 }
 
 /**
@@ -72,20 +75,15 @@ function startGame(customerType = "new", dayType = "new") {
  * - Create buttons for the aisles. Clicking on the buttons will show the shop
  * items associated with the aisle.
  * @param {string} customerType - new/same, determines how createEnvironment operates.
+ * @param {string} dayType - new/same, determines how createEnvironment operates.
  */
-function createEnvironment(customerType = "new") {
+function createEnvironment(customerType = "new", dayType = "new") {
     /*
         Add the aisles, default to no aisle selected and a message to choose an aisle to go to.
     */
     let aisleList = document.getElementById("the-aisles");
     aisleList.innerHTML = "";
-    /*
-    document.getElementById("the-shop").innerHTML = "";
-    document.getElementById("the-items").innerHTML = "";
-    document.getElementById("return-to-shop-div").innerHTML = "";
-    document.getElementById("the-basket").innerHTML = "";
-    document.getElementById("the-receipt").innerHTML = "";
-*/
+
     for (let aisle of aisles) {
         let aisleButton = document.createElement("BUTTON");
         aisleButton.className = "aisle-button";
@@ -107,14 +105,15 @@ function createEnvironment(customerType = "new") {
     showElementArray(["game-screen", "wallet-icon", "basket-button"]);
     document.getElementById("the-toolbar").style.justifyContent = "flex-start";
 
-    if (customerType === "new") {
-        emptyBasket();
+    emptyBasket();
+    /*if (customerType === "new" || dayType == "new") {
+        
     } else {
-        /*
+        
         emptyBasket is not required to be re-run on a same customer as the 
         basket will have previously been emptied
-        */
-    }
+        
+    }*/
 }
 
 /**
@@ -162,100 +161,95 @@ function gameStartingStock(dayType = "new") {
       Go through each item in items.json and begin setting stock levels
       also applying specials as necessary
     */
-    if (dayType == "new") {
-        //getJSON gets the data from the specials.json file and holds them for stock creation
-        $.getJSON("assets/json/specials.json", function (jsonSpecialOfferList) {
-            for (jsonSpecialOffer of jsonSpecialOfferList) {
-                specialOffers.push({
-                    id: jsonSpecialOffer.id,
-                    name: jsonSpecialOffer.name,
-                    chance: jsonSpecialOffer.chance,
-                    factor: jsonSpecialOffer.factor,
-                    occurance: jsonSpecialOffer.occurance
-                });
-            }
-            //small timeout before moving to the next section, making sure 
-            setTimeout(thenGetItems(), 1500);
-        });
+    //getJSON gets the data from the specials.json file and holds them for stock creation
+    $.getJSON("assets/json/specials.json", function (jsonSpecialOfferList) {
+        for (jsonSpecialOffer of jsonSpecialOfferList) {
+            specialOffers.push({
+                id: jsonSpecialOffer.id,
+                name: jsonSpecialOffer.name,
+                chance: jsonSpecialOffer.chance,
+                factor: jsonSpecialOffer.factor,
+                occurance: jsonSpecialOffer.occurance
+            });
+        }
+        //small timeout before moving to the next section, making sure 
+        setTimeout(thenGetItems(), 1500);
+    });
 
-        //getJSON gets the data from the items.json file to then work with each item
-        function thenGetItems() {
-            $.getJSON("assets/json/items.json", function (jsonItemsList) {
-                for (jsonItem of jsonItemsList) {
-                    //adding aisle options
-                    aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
+    //getJSON gets the data from the items.json file to then work with each item
+    function thenGetItems() {
+        $.getJSON("assets/json/items.json", function (jsonItemsList) {
+            for (jsonItem of jsonItemsList) {
+                //adding aisle options
+                aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
 
-                    let thisItemStock = Math.round(Math.random() * (jsonItem.highStock - jsonItem.lowStock) + jsonItem.lowStock);
-                    let thisItemPrice = Number((Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2));
+                let thisItemStock = Math.round(Math.random() * (jsonItem.highStock - jsonItem.lowStock) + jsonItem.lowStock);
+                let thisItemPrice = Number((Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2));
 
-                    /*
-                    Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
-                    ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
-                    But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
-                    */
-                    let thisSpecial;
+                /*
+                Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
+                ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
+                But to add a special at all first, it has to get through a previous Math.random and score below 0.4.
+                */
+                let thisSpecial;
 
-                    if (Math.random() < 0.4) {
-                        for (let i = 0; i < specialOffers.length; i++) {
-                            let thisScore = Math.random();
-                            if (specialOffers[i].occurance > 0) {
-                                /*
-                                if the random number is less or equal to chance then set the special
-                                modifier and continue
-                                */
-                                if (thisScore <= specialOffers[i].chance) {
-                                    //remove an occurance so specials don't keep forever generating
-                                    specialOffers[i].occurance--;
-                                    //set thisSpecial to the modifier
-                                    thisSpecial = specialOffers[i].factor;
-                                    break;
-                                }
-                            } else {
-                                thisSpecial = 1;
+                if (Math.random() < 0.4) {
+                    for (let i = 0; i < specialOffers.length; i++) {
+                        let thisScore = Math.random();
+                        if (specialOffers[i].occurance > 0) {
+                            /*
+                            if the random number is less or equal to chance then set the special
+                            modifier and continue
+                            */
+                            if (thisScore <= specialOffers[i].chance) {
+                                //remove an occurance so specials don't keep forever generating
+                                specialOffers[i].occurance--;
+                                //set thisSpecial to the modifier
+                                thisSpecial = specialOffers[i].factor;
+                                break;
                             }
+                        } else {
                             thisSpecial = 1;
                         }
-                    } else {
                         thisSpecial = 1;
                     }
-
-                    //create the item to go into the shop stock
-                    let thisItem = {
-                        id: jsonItem.id,
-                        name: jsonItem.name,
-                        price: thisItemPrice,
-                        quantity: thisItemStock,
-                        aisle: jsonItem.aisle,
-                        special: thisSpecial,
-                        imageUrl: jsonItem.imageUrl,
-                        alertText: jsonItem.alertText
-                    };
-                    shopStock.push(thisItem);
+                } else {
+                    thisSpecial = 1;
                 }
-            });
 
-            /*
-            parsing a string, ensures that data is definitely correct and in a JSON
-            format
-            */
-            specialOffers = JSON.parse(JSON.stringify(specialOffers));
-            shopStock = JSON.parse(JSON.stringify(shopStock));
-            aisles = JSON.parse(JSON.stringify(aisles));
-        }
-    } else {
-        //starting stock does not change
+                //create the item to go into the shop stock
+                let thisItem = {
+                    id: jsonItem.id,
+                    name: jsonItem.name,
+                    price: thisItemPrice,
+                    quantity: thisItemStock,
+                    aisle: jsonItem.aisle,
+                    special: thisSpecial,
+                    imageUrl: jsonItem.imageUrl,
+                    alertText: jsonItem.alertText
+                };
+                shopStock.push(thisItem);
+            }
+        });
+
+        /*
+        parsing a string, ensures that data is definitely correct and in a JSON
+        format
+        */
+        specialOffers = JSON.parse(JSON.stringify(specialOffers));
+        shopStock = JSON.parse(JSON.stringify(shopStock));
+        aisles = JSON.parse(JSON.stringify(aisles));
     }
-
 }
 /**
  * ## Function to remove all items from the basket. 
- * If requestType="new", this is an emptying to start a new game. If 
- * requestType="customer" then the customer has requested the items be returned
+ * If customerType="new", this is an emptying to start a new game. If 
+ * customerType="customer" then the customer has requested the items be returned
  * and this is not the process of beginning a new game
- * @param {string} requestType - new/same, determines how emptyBasket operates
+ * @param {string} customerType - new/same, determines how emptyBasket operates
  */
-function emptyBasket(requestType = "new") {
-    if (requestType === "new") {
+function emptyBasket(customerType = "new") {
+    if (customerType === "new") {
         basketStock = [];
     } else {
         /*
@@ -268,7 +262,6 @@ function emptyBasket(requestType = "new") {
             let shopObject = shopStock.find(({ id }) => id === basketItem.id);
             shopObject.quantity += basketItem.quantity;
             playerCash += basketItem.amountPaid * basketItem.quantity;
-            createEnvironment("same");
             startingPlayerCash("same");
         }
 
@@ -279,6 +272,8 @@ function emptyBasket(requestType = "new") {
 
     let basketTally = document.getElementById("basket-tally");
     basketTally.innerHTML = "0";
+
+    let itemsWindow = document.getElementById("the-items").innerHTML = "";
 }
 
 /**
