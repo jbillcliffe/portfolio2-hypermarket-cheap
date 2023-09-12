@@ -1,3 +1,13 @@
+/*
+-----------------------------------------------------------
+ The code below has been sourced from https: //cssload.net/
+
+ This generates the loading bar which is seen on the menu screen while JSON 
+ loads in the background.
+-----------------------------------------------------------
+*/
+
+/*the id of the div which will hold this loading bar and setting its size*/
 #toolbar-loading {
     display: flex;
     flex-direction: row;
@@ -5,6 +15,7 @@
     height: 80%;
 }
 
+/*assigning the animation to the class of loading-bar*/
 .loading-bar {
     display: flex;
     flex-direction: row;
@@ -12,111 +23,59 @@
     width: 10%;
     height: 100%;
     animation-name: bounce_loading;
-    -o-animation-name: bounce_loading;
-    -ms-animation-name: bounce_loading;
-    -webkit-animation-name: bounce_loading;
-    -moz-animation-name: bounce_loading;
     animation-duration: 1.165s;
-    -o-animation-duration: 1.165s;
-    -ms-animation-duration: 1.165s;
-    -webkit-animation-duration: 1.165s;
-    -moz-animation-duration: 1.165s;
     animation-iteration-count: infinite;
-    -o-animation-iteration-count: infinite;
-    -ms-animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
     animation-direction: normal;
-    -o-animation-direction: normal;
-    -ms-animation-direction: normal;
-    -webkit-animation-direction: normal;
-    -moz-animation-direction: normal;
     transform: scale(.3);
-    -o-transform: scale(.3);
-    -ms-transform: scale(.3);
-    -webkit-transform: scale(.3);
-    -moz-transform: scale(.3);
     border-radius: 50px;
-    -o-border-radius: 50px;
-    -ms-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
 }
 
+/*bars/balls 1 -> 8 in the loading animation the delay from one to the next
+means they are not all the same size at the same time, thus creating a waving
+effect*/
 #loading_1 {
     display: flex;
     animation-delay: 0.466s;
-    -o-animation-delay: 0.466s;
-    -ms-animation-delay: 0.466s;
-    -webkit-animation-delay: 0.466s;
-    -moz-animation-delay: 0.466s;
 }
 
 #loading_2 {
     display: flex;
     animation-delay: 0.5825s;
-    -o-animation-delay: 0.5825s;
-    -ms-animation-delay: 0.5825s;
-    -webkit-animation-delay: 0.5825s;
-    -moz-animation-delay: 0.5825s;
 }
 
 #loading_3 {
     display: flex;
     animation-delay: 0.699s;
-    -o-animation-delay: 0.699s;
-    -ms-animation-delay: 0.699s;
-    -webkit-animation-delay: 0.699s;
-    -moz-animation-delay: 0.699s;
 }
 
 #loading_4 {
     display: flex;
     animation-delay: 0.8155s;
-    -o-animation-delay: 0.8155s;
-    -ms-animation-delay: 0.8155s;
-    -webkit-animation-delay: 0.8155s;
-    -moz-animation-delay: 0.8155s;
 }
 
 #loading_5 {
     display: flex;
     animation-delay: 0.932s;
-    -o-animation-delay: 0.932s;
-    -ms-animation-delay: 0.932s;
-    -webkit-animation-delay: 0.932s;
-    -moz-animation-delay: 0.932s;
 }
 
 #loading_6 {
     display: flex;
     animation-delay: 1.0485s;
-    -o-animation-delay: 1.0485s;
-    -ms-animation-delay: 1.0485s;
-    -webkit-animation-delay: 1.0485s;
-    -moz-animation-delay: 1.0485s;
 }
 
 #loading_7 {
     display: flex;
     animation-delay: 1.165s;
-    -o-animation-delay: 1.165s;
-    -ms-animation-delay: 1.165s;
-    -webkit-animation-delay: 1.165s;
-    -moz-animation-delay: 1.165s;
 }
 
 #loading_8 {
     display: flex;
     animation-delay: 1.2915s;
-    -o-animation-delay: 1.2915s;
-    -ms-animation-delay: 1.2915s;
-    -webkit-animation-delay: 1.2915s;
-    -moz-animation-delay: 1.2915s;
 }
 
-
-
+/*at 0%, is at its full scale, and has a green colour. Then at 100% animation,
+it is white and smaller. So the animation of each bar foes from big green to
+small white and it chooses a wide ranging colour spectrum in between*/
 @keyframes bounce_loading {
     0% {
         transform: scale(1);
@@ -125,54 +84,6 @@
 
     100% {
         transform: scale(.3);
-        background-color: rgb(255, 255, 255);
-    }
-}
-
-@-o-keyframes bounce_loading {
-    0% {
-        -o-transform: scale(1);
-        background-color: rgb(16, 97, 25);
-    }
-
-    100% {
-        -o-transform: scale(.3);
-        background-color: rgb(255, 255, 255);
-    }
-}
-
-@-ms-keyframes bounce_loading {
-    0% {
-        -ms-transform: scale(1);
-        background-color: rgb(16, 97, 25);
-    }
-
-    100% {
-        -ms-transform: scale(.3);
-        background-color: rgb(255, 255, 255);
-    }
-}
-
-@-webkit-keyframes bounce_loading {
-    0% {
-        -webkit-transform: scale(1);
-        background-color: rgb(16, 97, 25);
-    }
-
-    100% {
-        -webkit-transform: scale(.3);
-        background-color: rgb(255, 255, 255);
-    }
-}
-
-@-moz-keyframes bounce_loading {
-    0% {
-        -moz-transform: scale(1);
-        background-color: rgb(16, 97, 25);
-    }
-
-    100% {
-        -moz-transform: scale(.3);
         background-color: rgb(255, 255, 255);
     }
 }
