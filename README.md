@@ -36,7 +36,8 @@ Gail Hinton is the manager of this store and she looks forward to welcoming you 
 ### Wireframe Design
 
 Wireframe was created using Figma[^1]. The wireframe includes initial function ideas and allocation of variables, functions and
-how to apply a good flow to the program to ensure it is effective
+how to apply a good flow to the program to ensure it is effective.
+
 ![Image of wireframe created for Hypermarket Cheap](readme/design/wireframe-figma.png)
 
 ### Logo
@@ -67,18 +68,91 @@ All of these are sourced from Google Fonts[^4].
 
 ### Existing Features
 
+#### Clear Buttons
+
+The buttons used have easy to read text on them, all with a text shadow to give extra emphasis.
+
+##### Menu Buttons
+
+![Main menu buttons for Hypermarket Cheap](readme/buttons/menu-buttons.png)
+
+##### Aisle Buttons
+
+![Aisle buttons and their styles. Default,hover and active](readme/buttons/shop-aisle-buttons.png)
+
+##### Add To Basket Buttons
+
+![The add to basket buttons and their styles. Out of Stock, hover and default](readme/buttons/shop-add-to-basket-buttons.png)
+
+#### Responsive Design
+
+Each section of the application has been tested at key width values. 1200+px, 1200px, 900px, 768px, 600px, 480px, 320px and 280px.
+
+##### Responsive -- The Menu
+
+|  Width   |                                                                          |
+| -------- | ------------------------------------------------------------------------ |
+| 1200px   | [View](readme/menu/menu-1200.png "The menu at 1200px width resolution")  |
+| 600px    | [View](readme/menu/menu-600.png "The menu at 600px width resolution")    |
+| 480px    | [View](readme/menu/menu-480.png "The menu at 480px width resolution")    |
+
+##### Responsive -- About
+
+|  Width   |                                                                          |
+| -------- | ------------------------------------------------------------------------ |
+| 1200px   | [View](readme/about/about-1200.png "The about page at 1200px width resolution")  |
+| 900px    | [View](readme/about/about-900.png "The about page at 900px width resolution")    |
+| 600px    | [View](readme/about/about-600.png "The about page at 600px width resolution")    |
+| 320px    | [View](readme/about/about-320.png "The about page at 320px width resolution")    |
+| 280px    | [View](readme/about/about-280.png "The about page at 280px width resolution")    |
+
+##### Responsive -- The Shop
+
+|  Width   |                                                                          |
+| -------- | ------------------------------------------------------------------------ |
+| 1200px   | [View](readme/shop/shop-1200.png "The shop at 1200px width resolution")  |
+| 1024px   | [View](readme/shop/shop-1024.png "The shop at 1024px width resolution")  |
+| 900px    | [View](readme/shop/shop-900.png "The shop at 900px width resolution")    |
+| 768px    | [View](readme/shop/shop-768.png "The shop at 768px width resolution")    |
+| 600px    | [View](readme/shop/shop-600.png "The shop at 600px width resolution")    |
+| 480px    | [View](readme/shop/shop-480.png "The shop at 480px width resolution")    |
+| 320px    | [View](readme/shop/shop-320.png "The shop at 320px width resolution")    |
+| 280px    | [View](readme/shop/shop-280.png "The shop at 280px width resolution")    |
+
+##### Responsive -- The Basket
+
+|  Width   |                                                                                |
+| -------- | ------------------------------------------------------------------------------ |
+| 1200px   | [View](readme/basket/basket-1200.png "The basket at 1200px width resolution")  |
+| 1024px   | [View](readme/basket/basket-1024.png "The basket at 1024px width resolution")  |
+| 900px    | [View](readme/basket/basket-900.png "The basket at 900px width resolution")    |
+| 768px    | [View](readme/basket/basket-768.png "The basket at 768px width resolution")    |
+| 600px    | [View](readme/basket/basket-600.png "The basket at 600px width resolution")    |
+| 480px    | [View](readme/basket/basket-480.png "The basket at 480px width resolution")    |
+| 320px    | [View](readme/basket/basket-320.png "The basket at 320px width resolution")    |
+| 280px    | [View](readme/basket/basket-280.png "The basket at 280px width resolution")    |
+
 #### Galaxy Fold Resolution Drop (280px)
 
 The website has been checked to ensure that it can resize down to the smallest available resolution for a mobile device (excluding watches).
 Currently the Galaxy Zfold (3/4/5) which has a front screen resolution width of 280px
+
 ![An example of 280px wide styling](readme/menu/menu-280.png)
 
-#### Clear Menu
+#### A printable receipt for you to take home
 
-Clear, easy to read buttons are present whenever required.
-![Main menu buttons for Hypermarket Cheap](readme/buttons/menu-buttons.png)
+**By clicking the Checkout! button, you can get a printable version of the receipt!**
 
-### Footer
+![Checkout! button ready to be clicked and load print dialog](readme/receipt/receipt-1.png)
+
+**A new printable document page is created**
+![New document window created, to be printed by the now open dialog](readme/receipt/receipt-2.png)
+
+![The finished receipt](readme/receipt/receipt-3.png)
+
+**[Download one here](readme/receipt/print-receipt.pdf "A pdf of a receipt")**
+
+#### Footer
 
 A responsive social media links area included in the footer which is present at all times, it scales the size of footer without comprimising
 the Fontawesome[^5] icons. Each one has an aria-label which describes where the link goes to and explains that it will open
@@ -137,10 +211,9 @@ Only one page for validation as everything is run within the index.html
 
 To start the validation failed, due to :
 
-- Trailing /, which have been removed. 
+- Trailing /, which have been removed.
 - Incorrect assignment of a variable in the "i" tag element.
-    - The wallet which has an ::after associated with it to display player cash.
-
+  - The wallet which has an ::after associated with it to display player cash.
 
 | Issue        | Resolution                                                                                   |
 | -------------| ---------------------------------------------------------------------------------------------|
@@ -152,6 +225,7 @@ To start the validation failed, due to :
 
 WAVE is a measure of website issues. There was only one error. This was stating I was missing an alt on an image.
 This too has been rectified.
+
 ![Wave Analysis for Hypermarket Cheap](readme/wave/wave-page.png)
 
 ## Lighthouse, Google Chrome Inspect (F12) Mode
@@ -159,7 +233,7 @@ This too has been rectified.
 Scoring for Lighthouse was done on the Index (landing) page :
 |  Page   |  Source        |                                                                                 |
 | ------- | -------------- | ------------------------------------------------------------------------------- |
-| Index   | Desktop/Mobile | [View](readme/lighthouse/lighthouse-score.png "Score on index.html")     |
+| Index   | Desktop/Mobile | [View](readme/lighthouse/lighthouse-score.png "Score on index.html")            |
 
 The performance does not log as perfect by any means.
 However, this is a game that has to load data in to work with. Unlike where a website speed can be key, people playing games,
@@ -230,6 +304,8 @@ The steps below were followed to deploy the page to GitHub pages :
 - W3Schools[^26] - Invaluable for providing details on elements and their attributes and so much HTML/CSS information.
 - Image Resizer.com[^27] - Very useful for providing a way of cropping and resizing images. This was used for all
   of the items in the shop.
+- Myself, The footer was reused (with minor style changes) from my first portfolio piece. This readme is also inspired
+  by the original readme I did on portfolio 1. See other repository : Renterprise[^20]
 
 ## Images
 
@@ -261,7 +337,7 @@ Images were all sourced for free :
 [^6]: W3 Validator : https://validator.w3.org/
 [^18]: PHPMailer is an email creation class library for PHP : https://github.com/PHPMailer/PHPMailer
 [^19]: JSON file for all the country code data so that it was not on the html page, it would been very untidy in that case. : assets/json/country.json
-
+[^20]: Renterprise, my first portfolio piece : https://github.com/jbillcliffe/portfolio1-renterprise
 [^21]: Cloud based IDE for development : https://app.codeanywhere.com/
 [^22]: Am I Responsive? A Website designed to display a singular website at multiple resolutions : https://ui.dev/amiresponsive
 [^23]: Button hover animation : https://www.w3schools.com/howto/howto_css_animate_buttons.asp
