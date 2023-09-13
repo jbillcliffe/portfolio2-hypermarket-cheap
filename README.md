@@ -1,7 +1,7 @@
 # Hypermarket Cheap
 <div style="width:100%; height:100px; background-color:white; margin-left:auto;margin-right:auto;">
 <a href="https://jbillcliffe.github.io/portfolio2-hypermarket-cheap/" target="_self">
-            <img class="header-logo" src="../assets/images/header-logo" alt="Hypermarket Sweep"
+            <img class="header-logo" src="../assets/images/header-logo.webp" alt="Hypermarket Sweep"
                 aria-label="Hypermarket Sweep game home page">
         </a>
 </div>
@@ -14,7 +14,7 @@ Gail Hinton is the manager of this store and she looks forward to welcoming you 
 
 **Play now and enjoy your shopping today!?**
 
-![Responsive view of webpage ](assets/readme/design/am-i-responsive.png)
+![Responsive view of webpage](readme/design/am-i-responsive.png)
 
 ## User Experience Design
 
@@ -37,7 +37,7 @@ Gail Hinton is the manager of this store and she looks forward to welcoming you 
 
 Wireframe was created using Figma[^1]. The wireframe includes initial function ideas and allocation of variables, functions and
 how to apply a good flow to the program to ensure it is effective
-![Image of wireframe created for Hypermarket Cheap](assets/readme/design/wireframe-figma.png)
+![Image of wireframe created for Hypermarket Cheap](readme/design/wireframe-figma.png)
 
 ### Logo
 
@@ -47,7 +47,7 @@ The logo was created using the website LOGO.com.[^2]
 
 Full branding was provided at the end of the step by step development process.
 
-![Full branding theme for Renterprise](assets/readme/design/branding.png)
+![Full branding theme for Renterprise](readme/design/branding.png)
 
 ### Breakdown of Design
 
@@ -71,12 +71,12 @@ All of these are sourced from Google Fonts[^4].
 
 The website has been checked to ensure that it can resize down to the smallest available resolution for a mobile device (excluding watches).
 This is currently the Galaxy Zfold (3/4/5) which has a front screen resolution width of 280px
-![An example of 280px wide styling](assets/readme/menu/menu-280.png)
+![An example of 280px wide styling](readme/menu/menu-280.png)
 
 #### Clear Menu
 
 Clear, easy to read buttons are present ahenever required.
-![Main menu buttons for Hypermarket Cheap](assets/readme/buttons/menu-buttons.png)
+![Main menu buttons for Hypermarket Cheap](readme/buttons/menu-buttons.png)
 
 ### Footer
 
@@ -86,101 +86,23 @@ in a separate window. The footer also includes the same blue hover as the menu, 
 
 #### Facebook
 
-![Footer on Hypermarket Cheap, showing Facebook label](assets/readme/footer/facebook-link.png)
+![Footer on Hypermarket Cheap, showing Facebook label](readme/footer/facebook-link.png)
 
 #### Twitter (Now "X/Twitter")
 
-![Footer on Hypermarket Cheap, showing x/Twitter label](assets/readme/footer/twitter-link.png)
+![Footer on Hypermarket Cheap, showing x/Twitter label](readme/footer/twitter-link.png)
 
 #### YouTube
 
-![Footer on Hypermarket Cheap, showing YouTube label](assets/readme/footer/youtube-link.png)
+![Footer on Hypermarket Cheap, showing YouTube label](readme/footer/youtube-link.png)
 
 #### Instagram
 
-![Footer on Hypermarket Cheap, showing Instagram label](assets/readme/footer/instagram-link.png)
-
-### Index/Home Page
-
-Contains the initial key information to draw in the user. A hero created from scratch (image[^7] freely sourced). Proposition cards to engage
-with the website user and give them the desire to dig deeper on the website or to contact directly.
-
-#### Hero Container/Image
-A clear message right on the front of the page, issuing the first key question for most businesses - is it worth it?
-![The main, attention drawing hero image on the Renterprise website](assets/readme/index/index-repsonsive-1.png)
-
-#### Index Proposition Cards
-Another section which has the proposition cards to again, question the user and provide more snippets of key information and increase 
-website user interest. It is responsive too, to always keep the text clear across resolutions.
-![Proposition cards on the Renterprise website](assets/readme/index/index-cards-wide.png)
-
-### Contact Form
-A validated form which will ask for a name, phone number, email and the reason for their contact. 
-- The name is validated by expecting a string.
-- The phone, in the same way is expecting a string. *Country Code has a default of United Kingdom*
-- The country codes for the phone number is populated using JSON.[^19]
-- The email is expecting a string with the correct syntax, validated by html itself.
-- The reason is expecting a selection. Cannot be left with no selection.
-
-### SHOP
-It is desired to have a reminder (especially with current web browsers) of the page even if the user loads another page in a new tab. Text alone is never sufficient as at first glance, the name may not all be seen when too many tabs are open. So an icon is key. Also ensuring the first part of the text contains the company name. This then led to the choice of the title being "Renterprise - Leading Rental CRM System", the consumer would see the word "Renterprise" for the longest as more tabs could be added. There is also the logo included for further clarity.
-
-#### Name Validation
-![Name validation on Renterprise website contact form](assets/readme/contact/contact-validate-name.png)
-
-#### Phone Validation
-![Phone validation on Renterprise website contact form](assets/readme/contact/contact-validate-phone.png)
-
-#### Email Validation
-Requiring a string
-
-![Primary Email validation on Renterprise website contact form](assets/readme/contact/contact-validate-email-1.png)
-
-Requiring the correct syntax for an email
-
-![Secondary Email validation on Renterprise website contact form](assets/readme/contact/contact-validate-email-2.png)
-
-#### Reason Validation
-![Radio group validation on Renterprise website contact form](assets/readme/contact/contact-validate-radio.png)
-
-#### Country Codes
-![Phone country code selection on Renterprise website contact form](assets/readme/contact/contact-country-codes.png)
-
-#### Form Dump Response
-![Phone country code selection on Renterprise website contact form](assets/readme/contact/contact-form-submit.png)
-
-#### Secret Thanks Page Response
-![Successful form submission dump from contact form on Renterprise website](assets/readme/thanks/thanks-wide.png)
-
-### Contact Us Details
-A section on the contact.html page which contains the (fictional) company address and contact details (which link to Code Institute).
-The map is responsive and always centres on the location required.
-
-The phone number and email both perform functions related to their content. Clicking on the phone number will load up the device 
-calling function (such as Skype on a PC). Clicking on the email will load the default device emailing system, such as Outlook on a PC.
-
-#### Map & Details
-![Map and contact details on the Renterprise website contact page](assets/readme/contact/contact-map-wide.png)
-
-### Product Features Page
-A page on the website that displays the features of the proposed product. Each feature clearly separated so that a prospective customer
-can carefully evaluate each part of the software.
-![Product features on the Renterprise website product page](assets/readme/product/product-wide.png)
-
-### About Page
-A simple page, which has text to give a bit of detail about myself, the reasons for the software and the history of the evolution of the concept.
-![About page on the Renterprise website](assets/readme/about/about-wide.png)
-
-## Proposed Features
-
-- Fully functioning PHP submission form within the site, including an email auto response (PHPMailer[^18] can satisfy this.) Would need deeper CodeAnywhere knowledge to install a PHP server
-- Demo videos, useful for tutorials to show to other.
-- Jquery phone validation based on country code selected. This was initially in the scope, but it would have become a problem.
-- Chat feature, if you are selling something, you need to have a decent response time.
+![Footer on Hypermarket Cheap, showing Instagram label](readme/footer/instagram-link.png)
 
 ## Testing
 
-## HTML and CSS Validation Tool 
+## HTML and CSS Validation Tool
 
 The W3C Markup Validation Service[^6] was used to validate the html. Things were all in place on the GitHub Pages for testing HTML.
 For the CSS, I had to copy the full style.css. Results shown in the table below.
@@ -188,15 +110,16 @@ For the CSS, I had to copy the full style.css. Results shown in the table below.
 ### CSS Validation - All Passed
 
 Three css files to validate and main page is validated where all css files are referenced.
-![Validation for Hypermarket Cheap loading.css](assets/readme/validate/validate-loading-css.png)
-![Validation for Hypermarket Cheap modal.css](assets/readme/validate/validate-modal-css.png)
-![Validation for Hypermarket Cheap style.css](assets/readme/validate/validate-style-css.png)
-![Validation for Hypermarket Cheap](assets/readme/validate/css-validation.png)
+![Validation for Hypermarket Cheap loading.css](readme/validate/validate-loading-css.png)
+![Validation for Hypermarket Cheap modal.css](readme/validate/validate-modal-css.png)
+![Validation for Hypermarket Cheap style.css](readme/validate/validate-style-css.png)
+![Validation for Hypermarket Cheap](readme/validate/css-validation.png)
 
 ### HTML Validation -- All passed
+
 Only one page for validation as everything is run within the index.html
 
-![Validation for Hypermarket Cheap](assets/readme/validate/html-validation.png)
+![Validation for Hypermarket Cheap](readme/validate/html-validation.png)
 
 ### HTML Validation Error
 
@@ -215,16 +138,17 @@ To start the validation failed, due to :
 | Duplicate Id | Inadvertently assigned the "about-screen" id twice, which the validator picked. Now resolved |
 
 ## WAVE, Google Chrome extension.
+
 WAVE is a measure of website issues. There was only one error. This was stating I was missing an alt on an image.
 This too has been rectified.
-![Wave Analysis for Hypermarket Cheap](assets/readme/wave/wave-page.png)
+![Wave Analysis for Hypermarket Cheap](readme/wave/wave-page.png)
 
 ## Lighthouse, Google Chrome Inspect (F12) Mode
 
 Scoring for Lighthouse was done on the Index (landing) page :
 |  Page   |  Source        |                                                                                 |
 | ------- | -------------- | ------------------------------------------------------------------------------- |
-| Index   | Desktop/Mobile | [View](assets/readme/lighthouse/lighthouse-score.png "Score on index.html")     |
+| Index   | Desktop/Mobile | [View](readme/lighthouse/lighthouse-score.png "Score on index.html")     |
 
 The performance does not log as perfect by any means.
 However, this is a game that has to load data in to work with. Unlike where a website speed can be key, people playing games,
@@ -237,8 +161,8 @@ When reloading, the JSON is already in the cache and the following results occur
 Scoring for Lighthouse was done on the Index (landing) page, and what would be the most demanding page (contact.html) :
 |  Page   |  Source |                                                                                                      |
 | ------- | ------- | ---------------------------------------------------------------------------------------------------- |
-| Index   | Desktop | [View](assets/readme/lighthouse/lighthouse-desktop.png "Desktop Lighthouse score on index.html")     |
-| Index   | Mobile  | [View](assets/readme/lighthouse/lighthouse-mobile.png "Mobile Lighthouse score on index.html")       |
+| Index   | Desktop | [View](readme/lighthouse/lighthouse-desktop.png "Desktop Lighthouse score on index.html")     |
+| Index   | Mobile  | [View](readme/lighthouse/lighthouse-mobile.png "Mobile Lighthouse score on index.html")       |
 
 This is a noticeable difference, but it shows that the only issue is before the data is loaded.
 
@@ -248,21 +172,21 @@ This is a noticeable difference, but it shows that the only issue is before the 
 - Although not viewed on multiple physical devices. Google Chrome's development console allows for a very large amount of emulated devices to be used.
 - Repeated testing through each page, ensured functions were working correctly.
 
-# Deployment
+## Deployment
 
 The steps below were followed to deploy the page to GitHub pages :
 
 From Github, click on the repository required :
-![Github deployment step one, choose repository](assets/readme/deployment/deployment-step-1.png)
+![Github deployment step one, choose repository](readme/deployment/deployment-step-1.png)
 
 As shown in the below image, click on the settings within the repository :
-![Github deployment step two, choose settings](assets/readme/deployment/deployment-step-2.png)
+![Github deployment step two, choose settings](readme/deployment/deployment-step-2.png)
 
 Select "Pages, then select source "Deploy From Branch" and change Branch to "main" and select the "root" folder:
-![Github deployment step three, choose option->source->branch](assets/readme/deployment/deployment-step-3.png)
+![Github deployment step three, choose option->source->branch](readme/deployment/deployment-step-3.png)
 
 After refreshing and viewing again, you should (there could be a delay in the upload process) have the link to the website (hosted by GitHub) where the project is viewable :
-![Github deployment step four, refresh/reload to get the link for the project](assets/readme/deployment/deployment-step-4.png)
+![Github deployment step four, refresh/reload to get the link for the project](readme/deployment/deployment-step-4.png)
 
 [LIVE HYPERMARKET CHEAP WEBSITE](https://jbillcliffe.github.io/portfolio2-hypermarket-cheap/ "Go to Hypermarket Cheap")
 
@@ -292,7 +216,7 @@ After refreshing and viewing again, you should (there could be a delay in the up
 - Image Resizer.com[^27] - Very useful for providing a way of cropping and resizing images. This was used for all
   of the items in the shop.
 
-### Images
+## Images
 
 Images were all sourced for free :
 
@@ -313,7 +237,7 @@ Images were all sourced for free :
 
 *NB. All those that are N/A were due to be entered as further entries into the product.html page*
 
-# References 
+## References 
 [^1]: Figma is a free website for designing storyboards and wireframes : https://www.figma.com/
 [^2]: LOGO website used for creating a logo and branding from scratch for free : https://app.logo.com/
 [^3]: Coolors website for creating free colour themes : https://www.coolors.com/
