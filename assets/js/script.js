@@ -50,13 +50,12 @@ function startGame(customerType = "new", dayType = "new") {
     document.getElementById("toolbar-loading").style.display = "flex";
     document.getElementById("loading-overlay").style.display = "block";
     document.getElementById("game-end-modal").style.display = "none";
+
     startingPlayerCash(customerType);
 
     if (dayType == "new") {
-        gameStartingStock(dayType);
-    } else {
+        gameStartingStock("new");
     }
-
     /*
     A delay of 4s gives time to for the 
     arrays of data to populate during the gameStartingStock function before
@@ -106,14 +105,6 @@ function createEnvironment(customerType = "new", dayType = "new") {
     document.getElementById("the-toolbar").style.justifyContent = "flex-start";
 
     emptyBasket();
-    /*if (customerType === "new" || dayType == "new") {
-        
-    } else {
-        
-        emptyBasket is not required to be re-run on a same customer as the 
-        basket will have previously been emptied
-        
-    }*/
 }
 
 /**
@@ -157,12 +148,18 @@ function startingPlayerCash(customerType = "new") {
  * @param {string} dayType - new/same, determines how gameStartingStock operates
  */
 function gameStartingStock(dayType = "new") {
-    /*
-      Go through each item in items.json and begin setting stock levels
-      also applying specials as necessary
-    */
-    //getJSON gets the data from the specials.json file and holds them for stock creation
-    $.getJSON("assets/json/specials.json", function (jsonSpecialOfferList) {
+    
+    /*This function is only run when the day is new, so it has to generate new stock.
+    These arrays need to be cleared before restarting */
+    specialOffers = [];
+    aisles = [];
+    shopStock = [];
+
+    //Ensure the shop is emptied
+    //document.getElementById("the-items").innerHTML = "";
+    lastAisle = "Home";
+
+    $.getJSON("../assets/json/specials.json", function (jsonSpecialOfferList) {
         for (jsonSpecialOffer of jsonSpecialOfferList) {
             specialOffers.push({
                 id: jsonSpecialOffer.id,
@@ -178,7 +175,7 @@ function gameStartingStock(dayType = "new") {
 
     //getJSON gets the data from the items.json file to then work with each item
     function thenGetItems() {
-        $.getJSON("assets/json/items.json", function (jsonItemsList) {
+        $.getJSON("../assets/json/items.json", function (jsonItemsList) {
             for (jsonItem of jsonItemsList) {
                 //adding aisle options
                 aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
@@ -231,7 +228,6 @@ function gameStartingStock(dayType = "new") {
                 shopStock.push(thisItem);
             }
         });
-
         /*
         parsing a string, ensures that data is definitely correct and in a JSON
         format
@@ -273,7 +269,9 @@ function emptyBasket(customerType = "new") {
     let basketTally = document.getElementById("basket-tally");
     basketTally.innerHTML = "0";
 
-    let itemsWindow = document.getElementById("the-items").innerHTML = "";
+    //Ensure the shop is emptied
+    let shopAisle = document.getElementById("the-items");
+    shopAisle.innerHTML = "";
 }
 
 /**
@@ -286,7 +284,13 @@ function emptyBasket(customerType = "new") {
  */
 function changeAisle(aisleId, callback) {
 
-    lastAisle = aisleId;
+    if(!aisleId || aisleId === "Home")
+    {
+        //this will default no matches and leave the shop empty
+        lastAisle = "Home";
+    } else {
+        lastAisle = aisleId;
+    }
 
     document.getElementById("toolbar-loading").style.display = "flex";
     document.getElementById("loading-overlay").style.display = "block";
@@ -295,6 +299,7 @@ function changeAisle(aisleId, callback) {
 
         let thisAisleButton = document.getElementById(aisleButton + "_btn");
 
+        //if last
         if (aisleButton == aisleId) {
             thisAisleButton.classList.toggle("aisle-button-active");
         } else {
@@ -304,8 +309,8 @@ function changeAisle(aisleId, callback) {
         }
     }
     //Ensure the shop is emptied each time an aisle button is clicked
-    let shopAisle = document.getElementById("the-items");
-    shopAisle.innerHTML = "";
+    let changeShopAisle = document.getElementById("the-items");
+    changeShopAisle.innerHTML = "";
 
     //Iterate through the stock options and add when its the right aisle option
     for (let stockItem of shopStock) {
@@ -446,7 +451,7 @@ function changeAisle(aisleId, callback) {
             addElementsToContainer(priceDisplay, [pricePTag, specialPTag]);
             addElementsToContainer(aisleItem, [itemImage, itemDisplay, priceDisplay, basketAdd]);
             //add the item to the shop
-            shopAisle.appendChild(aisleItem);
+            changeShopAisle.appendChild(aisleItem);
         } else {
             continue;
         }
