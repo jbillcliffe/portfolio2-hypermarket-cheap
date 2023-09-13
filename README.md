@@ -66,7 +66,36 @@ All of these are sourced from Google Fonts[^4].
 
 ## Features
 
+### Features Wanted
+
+- Basket empty at any time. The function is in place, just needs a button to activate the function independant of a new game.
+- More special offers, algorithmic ones. Such as buy one get one free.
+- More items/aisles, can never have too big a database and it could increase scope to not necessarily select all the items each time
+  but instead have items that are rare, like a golden egg!
+- More refactoring of code - A few I was able to compress, but there is so much more potential.
+  Please see these images for refactoring examples :
+
+    1. Before : addElementsToContainer() - [EG.1](readme/refactoring/add-elements-to-container.png)[EG.2](readme/refactoring/add-elements-to-container-2.png)
+       After : ![Refactored function addElementsToContainer to be resued](readme/refactoring/refactor-add-elements-to-container.png)
+
+    2. Before : showElementArray()/hideElementArray() - [View](readme/refactoring/hide-and-show-elements.png)
+       After : ![Refactored functions showElementArray() and hideElementArray() to be resued](readme/refactoring/refactor-hide-and-show-elements.png)
+
+    3. Only after here : createNewReceiptLine()
+        - ![Inside the function operation](readme/refactoring/create-new-receipt-line.png)
+        Is called by : ![Calling the function](readme/refactoring/refactor-create-new-receipt-line.png)
+
 ### Existing Features
+
+#### Calculations
+
+The program is able to make a lot of calculations at run time.
+
+- Creating starting cash, stock and special offers are all random.
+- It determines the stock when an item is added, removes it from the shop, deals with the cash and updates the amount of basket items!
+- It will also then make assessments of what to do based on remaining stock. Such as changing classes to out of stock, removing buttons.etc.
+- It can tell you when you have run out of money. (Sorry). [View](readme/shop/out-of-money.png "Not enough money to purchase the item in the picture")
+- It will alert you if you try to put something into your basket that is not available. [View](readme/shop/no-stock-alert.png "Can't add an item that is no longer in stock")
 
 #### Clear Buttons
 
@@ -95,6 +124,7 @@ Each section of the application has been tested at key width values. 1200+px, 12
 | 1200px   | [View](readme/menu/menu-1200.png "The menu at 1200px width resolution")  |
 | 600px    | [View](readme/menu/menu-600.png "The menu at 600px width resolution")    |
 | 480px    | [View](readme/menu/menu-480.png "The menu at 480px width resolution")    |
+| 280px    | [View](readme/menu/menu-280.png "The menu at 280px width resolution")    |
 
 ##### Responsive -- About
 
@@ -157,6 +187,8 @@ Currently the Galaxy Zfold (3/4/5) which has a front screen resolution width of 
 A responsive social media links area included in the footer which is present at all times, it scales the size of footer without comprimising
 the Fontawesome[^5] icons. Each one has an aria-label which describes where the link goes to and explains that it will open
 in a separate window. The footer also includes the same blue hover as the menu, for consistency and clarity to the user.
+
+![Footer on Hypermarket Cheap](readme/footer/footer.png)
 
 #### Facebook
 
