@@ -146,7 +146,7 @@ function gameStartingStock(dayType = "new") {
     shopStock = [];
     lastAisle = "Home";
 
-    $.getJSON("../assets/json/specials.json", function (jsonSpecialOfferList) {
+    $.getJSON("assets/json/specials.json", function (jsonSpecialOfferList) {
         for (jsonSpecialOffer of jsonSpecialOfferList) {
             specialOffers.push({
                 id: jsonSpecialOffer.id,
@@ -162,7 +162,7 @@ function gameStartingStock(dayType = "new") {
 
     //getJSON gets the data from the items.json file to then work with each item
     function thenGetItems() {
-        $.getJSON("../assets/json/items.json", function (jsonItemsList) {
+        $.getJSON("assets/json/items.json", function (jsonItemsList) {
             for (jsonItem of jsonItemsList) {
                 //adding aisle options
                 aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);

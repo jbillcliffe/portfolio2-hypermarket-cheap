@@ -23,11 +23,13 @@
   </head>
   <body>
     <header>
-      <img src="../assets/images/header-logo.webp" />
+      <img src="assets/images/header-logo.webp" />
+      <h1>Hypermarket Cheap - A Shopping Simulator</h1>
     </header>
     <div id="hypermarket-cheap" class="hypermarket-cheap">
       <div id="game-end-modal" class="modal-window">
         <div id="game-end-modal-inner" class="modal-content">
+        <h2>Keep playing this game</h2>
           <p>Would you like to shop again?</p>
           <div id="button-choices">
             <!--Click functions are customerType/dayType-->
@@ -48,6 +50,7 @@
       </div>
       <!--Across the top, like a header-->
       <div class="the-toolbar" id="the-toolbar">
+        <h2>Toolbar that has the wallet and basket buttons</h2>
         <i
           id="wallet-icon"
           class="fas fa-wallet toolbar-items"
@@ -79,6 +82,7 @@
       <!--Overlay, styled by CSS, default invisible, shown with loading.-->
       <div id="loading-overlay" style="display: none"></div>
       <div class="game-container" id="game-menu">
+        <h2>The game is in here</h2>
         <button data-button="play-new" class="menu-button">
           Play New Game <i class="fas fa-shopping-cart"></i>
         </button>
@@ -88,7 +92,7 @@
       </div>
       <div class="game-container" id="about-screen" style="display: none">
         <div id="about-heading" class="about-heading">
-            <h2> About Hypermarket Cheap</h2>
+            <h2 class="visible-h"> About Hypermarket Cheap</h2>
             <button id="about-close"> X </p>
         </div>
         <div id="about-info" class="about-content">
@@ -140,8 +144,8 @@
             href="https://twitter.com"
             target="_blank"
             rel="noopener"
-            title="Visit my Twitter page (opens in a new tab)"
-            aria-label="Visit my Twitter page (opens in a new tab)"
+            title="Visit my X (formerly known as Twitter) page (opens in a new tab)"
+            aria-label="Visit my X (formerly known as Twitter) page (opens in a new tab)"
             ><i class="fab fa-twitter"></i
           ></a>
         </li>

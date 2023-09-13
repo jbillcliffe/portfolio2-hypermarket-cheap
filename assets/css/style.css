@@ -3,6 +3,16 @@
     box-sizing: border-box;
 }
 
+/*research says the h1 does not need to be visible
+but I have added it for semantic reasons*/
+h1,h2,h3,h4 {
+    display:none;
+}
+
+.visible-h {
+    display:flex;
+}
+
 /*Header Styling for the logo */
 header {
     display: flex;
