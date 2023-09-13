@@ -3,6 +3,7 @@
     display: none;
     position: absolute;
     z-index: 1;
+    max-width: 1440px;
     width: 100%;
     height: 80vh;
     background-color: rgba(37, 37, 37, 0.3);
@@ -50,5 +51,34 @@
     transition: all 0.8s ease;
     border-radius: 1rem;
     border: 3px solid white;
+}
 
+@media screen and (max-width:600px) {
+
+    .modal-content {
+        font-size:1.2rem;
+    }
+    .modal-buttons {
+        font-size:1rem;
+    }
+}
+
+@media screen and (max-width:480px) {
+
+    .modal-content {
+        font-size:1rem;
+    }
+    .modal-buttons {
+        font-size:0.8rem;
+    }
+}
+
+@media screen and (max-width:320px) {
+
+    .modal-content {
+        font-size:0.8rem;
+    }
+    .modal-buttons {
+        font-size:0.7rem;
+    }
 }

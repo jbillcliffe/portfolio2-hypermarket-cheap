@@ -11,6 +11,13 @@ h1,h2,h3,h4 {
 
 .visible-h {
     display:flex;
+    font-family: "Roboto", sans-serif;
+    color:#3d9970;
+    font-size:4rem; 
+    display: flex;
+    text-shadow: 1px 1px 2px #073b24;
+    width: 95%;
+    margin: 0.6rem 0;
 }
 
 /*Header Styling for the logo */
@@ -111,25 +118,41 @@ body {
     border: 10px solid #3d9970;
     color: white;
     font-family: "Roboto", sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     background-color: black;
-    margin: auto;
+    margin: 1rem auto;
     padding: 0.5% 2%;
     overflow-y: auto;
 }
 
 .about-heading {
-    display:flex;
-    justify-content:space-between;
+    display: flex;
     font-family: "Roboto", sans-serif;
-    color:#3d9970;
-    font-size:4rem;
-
+    color: #3d9970;
+    font-size: 4rem;
+    align-items: center;
+    flex-direction: row;
+    width: 95%;
+    margin: 0 auto;
+    justify-content: center;
 }
-.about-content>h2 {
-    font-family: "Roboto", sans-serif;
-    color:#3d9970;
-    font-size:4rem; 
+
+.about-close {
+    display: flex;
+    cursor: pointer;
+    transition: all 0.7s ease;
+    font-family: "Wallpoet", sans-serif;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    height: 3rem;
+    width: 3rem;
+    background-color: #3d9970;
+    color: white;
+    text-shadow: 0.1rem 0.1rem 0.3rem #000000;
+    font-size: 2rem;
+    justify-content: center;
+    margin: 2rem auto;
+    align-items: center;
 }
 
 /* specifically for basket-screen id, carries .game-container class too */
@@ -609,6 +632,10 @@ So media queries will be based on these*/
 
 @media screen and (max-width:900px) {
 
+    /*scale down about header*/
+    .visible-h {
+        font-size:3rem;
+    }
     /*scale down the (+) in the items in "the-shop"->"the-items" */
     .item-container-button {
         height: 3rem;
@@ -633,6 +660,11 @@ So media queries will be based on these*/
 }
 
 @media screen and (max-width:768px) {
+
+    /*scale down about header*/
+    .visible-h {
+        font-size:2rem;
+    }
 
     /*aisle button font was seeming quite dominating by this point */
     .aisle-button {
@@ -761,6 +793,17 @@ So media queries will be based on these*/
 
 @media screen and (max-width:600px) {
 
+    /*scale down close button in about header*/
+    .about-close {
+        width:2.5rem;
+        height:2.5rem;
+    }
+
+    /*scale down the display text in the box */
+    .about-content {
+        font-size:1.1rem;
+    }
+
     /*scale down the width of item-container and child elements that are not highlighted by (not)*/
     .item-container:not(.item-container-p-div):not(.item-container-text):not(.item-container-button):not(.item-container-img):not(.price-div) {
         width: 90%;
@@ -807,6 +850,10 @@ So media queries will be based on these*/
 
 @media screen and (max-width:480px) {
 
+    /*scale down about header*/
+    .visible-h {
+        font-size:1.3rem;
+    }
     /*changing from rem to % sizes, with rem sizing, there were issues with
     overlapping at resolutions lower than this */
     .menu-button {
@@ -890,6 +937,10 @@ So media queries will be based on these*/
 
 @media screen and (max-width:320px) {
 
+    /*scale down the display text in the box */
+    .about-content {
+        font-size:1rem;
+    }
     /*reduce button sizes in the aisle*/
     .aisle-button {
         font-size: 0.9rem;
