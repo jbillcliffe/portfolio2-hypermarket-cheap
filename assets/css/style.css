@@ -525,7 +525,7 @@ in "the-basket" sharing size factors with the styling above*/
 
 /* put the £ amount after the fontawesome symbol depective a wallet */
 #wallet-icon::after {
-    content: attr(wallet-count);
+    content: attr(data-wallet-count);
     margin-left: 0.5rem;
     margin-right: 3rem;
     font-family: "Roboto", sans-serif;

@@ -127,7 +127,7 @@ function startingPlayerCash(customerType = "new") {
         playerCash = (Math.random() * (cashHigh - cashLow) + cashLow);
     }
 
-    document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
+    document.getElementById("wallet-icon").setAttribute("data-wallet-count", "£" + playerCash.toFixed(2));
 }
 
 /**
@@ -249,7 +249,7 @@ function emptyBasket(customerType = "new") {
 
         //empty the array and update the wallet to display current cash
         basketStock = [];
-        document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
+        document.getElementById("wallet-icon").setAttribute("data-wallet-count", "£" + playerCash.toFixed(2));
     }
 
     let basketTally = document.getElementById("basket-tally");
@@ -499,7 +499,7 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
 
         //Subtract from playerCash the cost after "special" modifier
         playerCash = playerCash - amountPaid;
-        document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
+        document.getElementById("wallet-icon").setAttribute("data-wallet-count", "£" + playerCash.toFixed(2));
 
         //-1 off the item in the shopStock
         let shopObject = shopStock.find(({ id }) => id === itemForBasket.id);
@@ -848,7 +848,7 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
     //Minus the cost of the basket -- Add to player cash
     basketTotalCost -= basketStockItem.amountPaid;
     playerCash += basketStockItem.amountPaid;
-    document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
+    document.getElementById("wallet-icon").setAttribute("data-wallet-count", "£" + playerCash.toFixed(2));
 
     //remove one from the tally in the basket
     let basketTally = document.getElementById("basket-tally");
