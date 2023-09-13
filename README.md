@@ -1,159 +1,107 @@
-# Renterprise
-<div style="width:100%; height:100px; background-color:#1D5D40; margin-left:auto;margin-right:auto;">
-<a href="https://jbillcliffe.github.io/portfolio1-renterprise/" target="_self">
-            <img class="header-logo" src="assets/readme/logo-readme-banner.png" alt="Renterprise"
-                aria-label="Renterprise CRM software home page">
+# Hypermarket Cheap
+<div style="width:100%; height:100px; background-color:white; margin-left:auto;margin-right:auto;">
+<a href="https://jbillcliffe.github.io/portfolio2-hypermarket-cheap/" target="_self">
+            <img class="header-logo" src="../assets/images/header-logo" alt="Hypermarket Sweep"
+                aria-label="Hypermarket Sweep game home page">
         </a>
 </div>
 
 ***Click this banner to load the website.***
 
-Renterprise is a brand new solution that encompasses many key qualities of CRM software and applies it to the ever growing rental sector.
-There are organisations that are struggling to sell stock and customers that do not want to have the outlay of purchasing a product. 
+Hypermarket sweep is a simple to use simulator for shopping. Preferrably on your own, especially not your kids.
+Gail Hinton is the manager of this store and she looks forward to welcoming you to her store in Wales.
+"When you see the sheep, that's Hypermarket Cheap!" - Gail
 
-More people are turning to rentals as the world finances are in disarray and they can have your product at a much more managable cost. 
+**Play now and enjoy your shopping today!?**
 
-**So why not start with Renterprise today?**
+![Responsive view of webpage ](assets/readme/design/am-i-responsive.png)
 
-![Responsive view of webpage ](assets/readme/design/responsive-website.png)
+## User Experience Design
 
-# User Experience Design
+### Target Audience
 
-## Target Audience
-- Current business owners looking to change their business model
-- Start up entrepreneurs  looking to offer something new
+- Just users looking to have a bit of escapist fun
 
-## Website User Stories
+### Website User Stories
 
-- I want to find product information quickly
-    1. This is achieved by providing links to all pages on every page (except thanks.html which is a message).
-    2. The user can click and navigate quickly, and effectively through the pages.
-    3. They can then also return to previous pages without the use of the browser back button or a back button on the mouse.
-- I want to be able to contact the company for more information.
-    1. The contact.html page is visible from every page.
-    2. Furthermore, on the index page there is a secondary call to action button half way down.
-    3. Multiple methods (phone/email/post) of contact are provided.
-    4. These methods are also actionable with mailto: and tel: in the href attributes.
-- I want to know where the company is based (working hours of support)
-    - A map and address within the contact.html page showing the UK as the address.
-- I want to improve my business, will this help me?
-    1. Proposition cards on the index.html page highlight the benefits of Renterprise
-    2. Also on the index.html page at the bottom, there is a features box. This box also contains a button to go directly to the product.html page.
-    3. The product.html page provides greater emphasis on the features from the index.html page.
+- I want to find play straight away
+    1. Simple interface, one button to click and you are in the game
+    2. The objective is simple, the buttons labelled and it is intuitive in how users operate today with computers.
+- I want replay value
+    1. No game is the same!
+    2. Each new game has a new pricing system, different allocation of special offers, different starting cash and stock levels
+- I want to see my "achievements"
+    1. A printed receipt at the end is a wonderful souvenir(is it?!)
 
-## Wireframe Design
-Website wireframe was created using Figma[^1]. The image below shows the concept for the index page, which would be the underlying template for other pages.
-It includes an example of a responsive page (product.html) for mobile and how the screen resolution change would affect that particular page.
-There is also a flow diagram for the concept of the contact form.
-![Image of wireframe created for Renterprise website](assets/readme/design/renterprise-wireframe.png)
+### Wireframe Design
 
-## Logo
+Wireframe was created using Figma[^1]. The wireframe includes initial function ideas and allocation of variables, functions and
+how to apply a good flow to the program to ensure it is effective
+![Image of wireframe created for Hypermarket Cheap](assets/readme/design/wireframe-figma.png)
+
+### Logo
+
 The logo was created using the website LOGO.com.[^2]
 
-### Logo Process 
-Using their step by step builder a full brand could be created from scratch, firstly the selection of software industry was chosen as it was accurate and appropriate.
+#### Branding Including Logo
 
-![Logo and brand creation for Renterprise, first step](assets/readme/design/logo-step-1.png)
+Full branding was provided at the end of the step by step development process.
 
-Next, it gave an overall palette choice, blues, greens etc. Given the fact that a product is trying to be sold, and green symbolises wealth it seemed like a logical decision.
+![Full branding theme for Renterprise](assets/readme/design/branding.png)
 
-![Logo and brand creation for Renterprise, second step](assets/readme/design/logo-step-2.png)
+### Breakdown of Design
 
-The creator then asked for a styling of the font to be used, a modern font was the best choice as it is for a modern product.
+#### Colour Theme
 
-![Logo and brand creation for Renterprise, third step](assets/readme/design/logo-step-3.png)
+Colour theme was initially chosen from the branding. But a darker green and cyan was used in the game also.
+This was merely to achieve a better range for button hovers and backgrounds.
 
-The final font choice for the logo was then made and it displayed the generated logo with it.
+#### Typography
 
-![Logo and brand creation for Renterprise, fourth step](assets/readme/design/logo-step-4.png)
+The font chosen, was initially based upon the font in the logo - "Wallpoet", a secondary font of Roboto was chosen as it was a very easy to read font.
+Roboto, was then chosen as the main font as Wallpoet is hard to read at smaller sizes. It does remain in a couple of buttons and the logo.
+A third font was introduced "Courier Prime" as I was looking to try and achieve a different look in the basket, similar to a receipt.
+All of these are sourced from Google Fonts[^4].
 
-This was then the branding provided.
+## Features
 
-![Full branding theme for Renterprise](assets/readme/design/initial-brand-board.png)
-
-## Breakdown of Design
-
-### Colour Theme
-Colour theme was initially chosen and subsequently revised with Coolors.[^3] 
-The overall palette was picked with the website tools which enabled complementary and contrasting colour choices based upon the initial colour from the logo.
-
-![Initial colour palette for Renterprise website](assets/readme/design/initial-colour-palette.png)
-
-### Typography
-The font chosen, was initially based upon the font in the logo - Hind Light, a secondary font of Roboto was chosen as it was visually complementary to this initial font. Roboto features as the h1,h2 and h3 font. All other text within the website (barring Google Map) is Hind. These fonts were acquired from Google Fonts[^4]. If loading of the font(s) fail for any reason then there is the font Sans Serif chosen as a backup display font.
-
-### Tab Bar
-It is desired to have a reminder (especially with current web browsers) of the page even if the user loads another page in a new tab. Text alone is never sufficient as at first glance, the name may not all be seen when too many tabs are open. So an icon is key. Also ensuring the first part of the text contains the company name. This then led to the choice of the title being "Renterprise - Leading Rental CRM System", the consumer would see the word "Renterprise" for the longest as more tabs could be added. There is also the logo included for further clarity.
-
-![Tab bar design for the Renterprise website](assets/readme/design/tab-bar-icon-and-title.png)
-
-### Images
-Images were all sourced for free :
-
-| Filename                | Used         |                                                                         |
-| ----------------------- | ------------ | ----------------------------------------------------------------------- |
-| crm.webp[^5]            | product.html | [View](assets/images/crm.webp "Customer Relationship Management Image") |
-| delivery.webp[^6]       | product.html | [View](assets/images/delivery.webp "Delivery Image")                    |
-| growth.webp[^7]         | index.html   | [View](assets/images/growth.webp "Growth Image")                        |
-| inventory.webp[^8]      | product.html | [View](assets/images/inventory.webp "Inventory Image")                  |
-| money.webp[^9]          | index.html   | [View](assets/images/money.webp "Money Image")                          |
-| move-forward.webp[^10]  | N/A          | [View](assets/images/move-forward.webp "Forward Arrows Image")          |
-| opportunity.webp[^11]   | index.html   | [View](assets/images/opportunity.webp "Opportunity Image")              |
-| payments.webp[^12]      | product.html | [View](assets/images/payments.webp "Card Payments Image")               |
-| reporting.webp [^13]    | N/A          | [View](assets/images/reporting.webp "Reporting Image")                  |
-| server.webp [^14]       | N/A          | [View](assets/images/server.webp "Server Image")                        |
-| streamline.webp [^15]   | index.html   | [View](assets/images/streamline.webp "Streamline Image")                |
-| workflow.webp [^16]     | N/A          | [View](assets/images/workflow.webp "Workflow Image")                    |
-
-*NB. All those that are N/A were due to be entered as further entries into the product.html page*
-
-# Features
-
-## Existing Features
-
-### Navigation Bar
-A responsive navigation bar included in the header of all the pages, when each link is hovered over. It will "glow" blue to show that
-there is an interaction to be had. On the active page, the link will have a white underline. The below image features the hover and
-underline present.
-
-![Navigation bar on Renterprise website with all features visible](assets/readme/menu/menu-features.png)
-
-#### Default Navigation Bar Style
-![Default navigation bar on Renterprise website](assets/readme/menu/menu-wide.png)
-
-#### Smaller Navigation Bar
-![Smaller navigation bar on Renterprise website](assets/readme/menu/menu-responsive-1.png)
-
-#### Burger Menu At 705px
-![Initial burger menu button on Renterprise website](assets/readme/menu/menu-responsive-2.png)
-
-#### Burger Menu Responsive Drop
-![Initial burger menu drop style on Renterprise website](assets/readme/menu/menu-drop-responsive-1.png)
-
-#### Lower Resolution Burger Menu Drop
-![Secondary burger menu drop style on Renterprise website](assets/readme/menu/menu-drop-responsive-2.png)
+### Existing Features
 
 #### Galaxy Fold Resolution Drop (280px)
-![Burger menu drop style at Galaxy Fold split screen resolution on Renterprise website](assets/readme/menu/menu-drop-galaxy-fold.png)
+
+The website has been checked to ensure that it can resize down to the smallest available resolution for a mobile device (excluding watches).
+This is currently the Galaxy Zfold (3/4/5) which has a front screen resolution width of 280px
+![An example of 280px wide styling](assets/readme/menu/menu-280.png)
+
+#### Clear Menu
+
+Clear, easy to read buttons are present ahenever required.
+![Main menu buttons for Hypermarket Cheap](assets/readme/buttons/menu-buttons.png)
 
 ### Footer
-A responsive social media links area included in the footer of all the pages, it scales the size of the Fontawesome[^17]
-icons decreases/increases on the pages. Each one has an aria-label which describes where the link goes to and explains that it will open
+
+A responsive social media links area included in the footer which is present at all times, it scales the size of footer without comprimising
+the Fontawesome[^5] icons. Each one has an aria-label which describes where the link goes to and explains that it will open
 in a separate window. The footer also includes the same blue hover as the menu, for consistency and clarity to the user.
 
 #### Facebook
-![Footer on the Renterprise website, showing Facebook label](assets/readme/footer/footer-facebook-label.png)
+
+![Footer on Hypermarket Cheap, showing Facebook label](assets/readme/footer/facebook-link.png)
 
 #### Twitter (Now "X/Twitter")
-![Footer on the Renterprise website, showing Twitter label](assets/readme/footer/footer-twitter-label.png)
+
+![Footer on Hypermarket Cheap, showing x/Twitter label](assets/readme/footer/twitter-link.png)
 
 #### YouTube
-![Footer on the Renterprise website, showing YouTube label](assets/readme/footer/footer-youtube-label.png)
+
+![Footer on Hypermarket Cheap, showing YouTube label](assets/readme/footer/youtube-link.png)
 
 #### Instagram
-![Footer on the Renterprise website, showing Instagram label](assets/readme/footer/footer-instagram-label.png)
+
+![Footer on Hypermarket Cheap, showing Instagram label](assets/readme/footer/instagram-link.png)
 
 ### Index/Home Page
+
 Contains the initial key information to draw in the user. A hero created from scratch (image[^7] freely sourced). Proposition cards to engage
 with the website user and give them the desire to dig deeper on the website or to contact directly.
 
@@ -173,6 +121,9 @@ A validated form which will ask for a name, phone number, email and the reason f
 - The country codes for the phone number is populated using JSON.[^19]
 - The email is expecting a string with the correct syntax, validated by html itself.
 - The reason is expecting a selection. Cannot be left with no selection.
+
+### SHOP
+It is desired to have a reminder (especially with current web browsers) of the page even if the user loads another page in a new tab. Text alone is never sufficient as at first glance, the name may not all be seen when too many tabs are open. So an icon is key. Also ensuring the first part of the text contains the company name. This then led to the choice of the title being "Renterprise - Leading Rental CRM System", the consumer would see the word "Renterprise" for the longest as more tabs could be added. There is also the logo included for further clarity.
 
 #### Name Validation
 ![Name validation on Renterprise website contact form](assets/readme/contact/contact-validate-name.png)
@@ -227,71 +178,78 @@ A simple page, which has text to give a bit of detail about myself, the reasons 
 - Jquery phone validation based on country code selected. This was initially in the scope, but it would have become a problem.
 - Chat feature, if you are selling something, you need to have a decent response time.
 
-# Testing
+## Testing
 
 ## HTML and CSS Validation Tool 
-The W3C Markup Validation Service[^20] was used to validate the html. Things were all in place on the GitHub Pages for testing HTML.
+
+The W3C Markup Validation Service[^6] was used to validate the html. Things were all in place on the GitHub Pages for testing HTML.
 For the CSS, I had to copy the full style.css. Results shown in the table below.
 
 ### CSS Validation - All Passed
-Only one page to validate for CSS, which is below :
 
-![Validation for Renterprise style.css](assets/readme/validate/style-validated.png)
+Three css files to validate and main page is validated where all css files are referenced.
+![Validation for Hypermarket Cheap loading.css](assets/readme/validate/validate-loading-css.png)
+![Validation for Hypermarket Cheap modal.css](assets/readme/validate/validate-modal-css.png)
+![Validation for Hypermarket Cheap style.css](assets/readme/validate/validate-style-css.png)
+![Validation for Hypermarket Cheap](assets/readme/validate/css-validation.png)
 
 ### HTML Validation -- All passed
-Each page needs validation :
+Only one page for validation as everything is run within the index.html
 
-![Validation for Renterprise index.html](assets/readme/validate/index-validated.png)
+![Validation for Hypermarket Cheap](assets/readme/validate/html-validation.png)
 
-### Contact Page HTML Validation Error
+### HTML Validation Error
 
-contact.html initially failed this test as there was a group in the form with no fixed label to it. 
-This was amended and then retested by changing to a fieldset with a legend.
-To view the remaining tests, click on each "View" below :
+To start the validation failed, due to :
 
-| Page         | URL          |                                                                                            |
-| -------------| ------------ | -------------------------------------------------------------------------------------------|
-| About        | about.html   | [View](assets/readme/validate/about-validated.png "about.html successful validation")      |
-| Contact Fail | contact.html | [View](assets/readme/validate/contact-fail-validated.png "contact.html failed validation") |
-| Contact Pass | contact.html | [View](assets/readme/validate/contact-validated.png "contact.html successful validation")  |
-| Product      | product.html | [View](assets/readme/validate/product-validated.png "product.html successful validation")  |
-| Thanks       | thanks.html  | [View](assets/readme/validate/thanks-validated.png "thanks.html successful validation")    |
+- Trailing /, which have been removed. 
+- Incorrect assignment of a variable in the "i" tag element.
+    - The wallet which has an ::after associated with it to display player cash.
+
+
+| Issue        | Resolution                                                                                   |
+| -------------| ---------------------------------------------------------------------------------------------|
+| Trailing /'s | Removing any unnecessary /'s on elements within the index.html page                          |
+| i tag issue  | The problem was I forgot to assign it as "data-wallet-count", instead it was                 |
+|              | just "wallet-count" this was causing the issue, when I change this, all resolved             |
+| Duplicate Id | Inadvertently assigned the "about-screen" id twice, which the validator picked. Now resolved |
 
 ## WAVE, Google Chrome extension.
-WAVE is a measure of website issues. Some were fixable, the table below has a record of testing and fixes where applicable.
-
-| Page         | Issues          | Solution/Final Report                                                   |
-| ------------ | --------------- | ---------|---------------------------------------------------------------|
-| About        | N/A                                                                                                | [View](assets/readme/wave/about-final-wave.png "about.html WAVE report")                     |
-| Contact      | [View](assets/readme/wave/contact-issues.png "contact.html WAVE report with unaddressed issues")   | Orphaned label resolved by putting a fieldset on the radio group, this resolved the missing fieldset issue too. The fix creates a "missing form label" but this section as a whole is contained within the fieldset of the phone number [View](assets/readme/wave/contact-final-wave.png "contact.html final WAVE report")             |
-| Index        | N/A                                                                                                | [View](assets/readme/wave/index-final-wave.png "index.html WAVE report")                     |
-| Product      | Missing h1 tag [View](assets/readme/wave/product-issue.png "initial index.html WAVE report")       | add an h1 tag [View](assets/readme/wave/index-final-wave.png "index.html final WAVE report") |  
-| Thanks       | N/A                                                                                                | [View](assets/readme/wave/thanks-final-wave.png "thanks.html WAVE report")                   |
-
-One consistent issue, which remains is [The Empty Form Label](assets/readme/wave/empty-form-label.png "Empty form label in WAVE"). https://codepen.io/erikterwan/pen/EVzeRP is where I located the tutorial and under the guise of a pure CSS/HTML project, I was not overly familiar
-
-This empty label is for an invisible checkbox. This checkbox is the trigger for the burger menu switching on and off based on media queries. At 705px the clickable label appears visible. Then based on the label click selecting or deselecting the checkbox will determine if it should show the dropdown menu.
-
-The tutorial for this is loosely based from : https://codepen.io/erikterwan/pen/EVzeRP. 
+WAVE is a measure of website issues. There was only one error. This was stating I was missing an alt on an image.
+This too has been rectified.
+![Wave Analysis for Hypermarket Cheap](assets/readme/wave/wave-page.png)
 
 ## Lighthouse, Google Chrome Inspect (F12) Mode
 
-Scoring for Lighthouse was done on the Index (landing) page, and what would be the most demanding page (contact.html) :
-|  Page   |  Source |                                                                                                            |
-| ------- | ------- | ---------------------------------------------------------------------------------------------------------- |
-| Index   | Desktop | [View](assets/readme/lighthouse/index-lighthouse-desktop.png "Desktop Lighthouse score on index.html")     |
-| Index   | Mobile  | [View](assets/readme/lighthouse/index-lighthouse-mobile.png "Mobile Lighthouse score on index.html")       |
-| Contact | Desktop | [View](assets/readme/lighthouse/contact-lighthouse-desktop.png "Desktop Lighthouse score on contact.html") |
-| Contact | Mobile  | [View](assets/readme/lighthouse/contact-lighthouse-mobile.png "Mobile Lighthouse score on contact.html")   |
+Scoring for Lighthouse was done on the Index (landing) page :
+|  Page   |  Source        |                                                                                 |
+| ------- | -------------- | ------------------------------------------------------------------------------- |
+| Index   | Desktop/Mobile | [View](assets/readme/lighthouse/lighthouse-score.png "Score on index.html")     |
 
-The lighthouse testing did flag an issue with the iframe for the map, not having a title [View](assets/readme/lighthouse/contact-lighthouse-issue-1.png "Lighthouse missing iframe title"), remedied by adding a title to the iframe.
+The performance does not log as perfect by any means.
+However, this is a game that has to load data in to work with. Unlike where a website speed can be key, people playing games,
+on the whole understand that sometimes things take a little bit of time.
+
+HOWEVER!!
+
+When reloading, the JSON is already in the cache and the following results occur :
+
+Scoring for Lighthouse was done on the Index (landing) page, and what would be the most demanding page (contact.html) :
+|  Page   |  Source |                                                                                                      |
+| ------- | ------- | ---------------------------------------------------------------------------------------------------- |
+| Index   | Desktop | [View](assets/readme/lighthouse/lighthouse-desktop.png "Desktop Lighthouse score on index.html")     |
+| Index   | Mobile  | [View](assets/readme/lighthouse/lighthouse-mobile.png "Mobile Lighthouse score on index.html")       |
+
+This is a noticeable difference, but it shows that the only issue is before the data is loaded.
 
 ## Further Testing
-- The Website was tested on Google Chrome, Microsoft Edge and Mozilla Firefox
+
+- The game was tested on Google Chrome, Microsoft Edge and Mozilla Firefox
 - Although not viewed on multiple physical devices. Google Chrome's development console allows for a very large amount of emulated devices to be used.
-- Repeated testing through each page, ensured links were correctly working on each page.
+- Repeated testing through each page, ensured functions were working correctly.
 
 # Deployment
+
 The steps below were followed to deploy the page to GitHub pages :
 
 From Github, click on the repository required :
@@ -306,16 +264,18 @@ Select "Pages, then select source "Deploy From Branch" and change Branch to "mai
 After refreshing and viewing again, you should (there could be a delay in the upload process) have the link to the website (hosted by GitHub) where the project is viewable :
 ![Github deployment step four, refresh/reload to get the link for the project](assets/readme/deployment/deployment-step-4.png)
 
-[LIVE RENTERPRISE WEBSITE](https://jbillcliffe.github.io/portfolio1-renterprise/ "Go to Renterprise")
+[LIVE HYPERMARKET CHEAP WEBSITE](https://jbillcliffe.github.io/portfolio2-hypermarket-cheap/ "Go to Hypermarket Cheap")
 
-# Technologies Used
+## Technologies Used
 
-## Languages
+### Languages
 
 - HTML5
 - CSS3
+- Javascript
+- jQuery
 
-## Frameworks, Libraries & Programs Used
+### Frameworks, Libraries & Programs Used
 
 - Google Fonts[^4]
 - Font Awesome[^17]
@@ -324,35 +284,49 @@ After refreshing and viewing again, you should (there could be a delay in the up
 - Am I Responsive?[^22]
 
 ## Website Tutorials/References
+
 - Button Hover Animation Tutorial (W3Schools)[^23]
 - HTML/CSS Cards[^24]
 - Responsive iframes, used for the map on the contact.html[^25]
 - W3Schools[^26] - Invaluable for providing details on elements and their attributes and so much HTML/CSS information.
+- Image Resizer.com[^27] - Very useful for providing a way of cropping and resizing images. This was used for all
+  of the items in the shop.
+
+### Images
+
+Images were all sourced for free :
+
+| Filename                | Used         |                                                                         |
+| ----------------------- | ------------ | ----------------------------------------------------------------------- |
+| crm.webp[^5]            | product.html | [View](assets/images/crm.webp "Customer Relationship Management Image") |
+| delivery.webp[^6]       | product.html | [View](assets/images/delivery.webp "Delivery Image")                    |
+| growth.webp[^7]         | index.html   | [View](assets/images/growth.webp "Growth Image")                        |
+| inventory.webp[^8]      | product.html | [View](assets/images/inventory.webp "Inventory Image")                  |
+| money.webp[^9]          | index.html   | [View](assets/images/money.webp "Money Image")                          |
+| move-forward.webp[^10]  | N/A          | [View](assets/images/move-forward.webp "Forward Arrows Image")          |
+| opportunity.webp[^11]   | index.html   | [View](assets/images/opportunity.webp "Opportunity Image")              |
+| payments.webp[^12]      | product.html | [View](assets/images/payments.webp "Card Payments Image")               |
+| reporting.webp [^13]    | N/A          | [View](assets/images/reporting.webp "Reporting Image")                  |
+| server.webp [^14]       | N/A          | [View](assets/images/server.webp "Server Image")                        |
+| streamline.webp [^15]   | index.html   | [View](assets/images/streamline.webp "Streamline Image")                |
+| workflow.webp [^16]     | N/A          | [View](assets/images/workflow.webp "Workflow Image")                    |
+
+*NB. All those that are N/A were due to be entered as further entries into the product.html page*
 
 # References 
 [^1]: Figma is a free website for designing storyboards and wireframes : https://www.figma.com/
 [^2]: LOGO website used for creating a logo and branding from scratch for free : https://app.logo.com/
 [^3]: Coolors website for creating free colour themes : https://www.coolors.com/
 [^4]: Google's font listing, a very large database of free online hosted fonts : https://fonts.google.com/
-[^5]: CRM Image : https://www.freepik.com/free-vector/data-center-isometric-composition_4327444.htm#page=2&query=computing&position=0&from_view=search&track=sph
-[^6]: Delivery Image : https://www.freepik.com/free-vector/delivery-logos-collection-companies_2607189.htm#query=fast%20delivery&position=1&from_view=search&track=ais
-[^7]:Growth Image : https://www.freepik.com/free-vector/business-success-growth-chart-arrow-concept_5129993.htm#query=business%20growth&position=1&from_view=search&track=ais
-[^8]: Inventory Image : https://www.freepik.com/free-vector/conveyor-belt-warehouse-concept-illustration_37113966.htm#query=software%20inventory&position=48&from_view=search&track=ais
-[^9]: Money Image : https://www.vecteezy.com/vector-art/2490867-pile-of-pound-coins-with-banknote-stuck-in-middle-banking-metaphor-can-be-used-for-landing-pages-websites-posters-mobile-apps
-[^10]: Moving Forward Image :https://www.vecteezy.com/vector-art/5611491-businessmen-run-ahead-governed-by-a-business-team-and-a-leadership-concept-flat-style-cartoon-illustration-vector
-[^11]: Opportunity Image : https://www.vecteezy.com/free-vector/business-opportunity
-[^12]: Card Payment Image : https://www.vecteezy.com/vector-art/15881043-flat-isometric-3d-illustration-online-payment-security
-[^13]: Reporting Image : https://www.freepik.com/free-vector/site-stats-concept-illustration_7140739.htm#query=CRM&position=42&from_view=search&track=sph
-[^14]: Servers Image : https://www.freepik.com/free-vector/data-center-isometric-composition_4327444.htm#page=2&query=computing&position=0&from_view=search&track=sph
-[^15]: Streamline AI Image : https://www.freepik.com/free-ai-image/colorful-image-road-with-lights-it_42026233.htm#query=streamline&position=2&from_view=search&track=ais_ai_generated
-[^16]: Workflow Image : https://www.vecteezy.com/vector-art/10682818-receive-orders-and-prepare-to-pack-products-to-send-to-customers-beginnings-as-a-merchant-and-small-business-owner
-[^17]: Fontawesome a large database of free (and premium) icons : https://www.fontawesome.com
+[^5]: Fontawesome a large database of free (and premium) icons : https://www.fontawesome.com
+[^6]: W3 Validator : https://validator.w3.org/
 [^18]: PHPMailer is an email creation class library for PHP : https://github.com/PHPMailer/PHPMailer
 [^19]: JSON file for all the country code data so that it was not on the html page, it would been very untidy in that case. : assets/json/country.json
-[^20]: W3 Validator : https://validator.w3.org/
+
 [^21]: Cloud based IDE for development : https://app.codeanywhere.com/
 [^22]: Am I Responsive? A Website designed to display a singular website at multiple resolutions : https://ui.dev/amiresponsive
 [^23]: Button hover animation : https://www.w3schools.com/howto/howto_css_animate_buttons.asp
 [^24]: Cards, used for proposition cards on index.html : https://www.w3schools.com/howto/howto_css_cards.asp
 [^25]: Responsive iframes : https://www.w3schools.com/howto/howto_css_responsive_iframes.asp
 [^26]: W3Schools, comprehensive database of information for HTML and CSS : https://www.w3schools.com/
+[^27]: Image Resizer.com, Easily resize images online for free : https://imageresizer.com/
