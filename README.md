@@ -1,7 +1,7 @@
 # Hypermarket Cheap
 <div style="width:100%; height:100px; background-color:white; margin-left:auto;margin-right:auto;">
 <a href="https://jbillcliffe.github.io/portfolio2-hypermarket-cheap/" target="_self">
-            <img class="header-logo" src="../assets/images/header-logo.webp" alt="Hypermarket Sweep"
+            <img class="header-logo" src="assets/images/header-logo.webp" alt="Hypermarket Sweep"
                 aria-label="Hypermarket Sweep game home page">
         </a>
 </div>
@@ -70,12 +70,12 @@ All of these are sourced from Google Fonts[^4].
 #### Galaxy Fold Resolution Drop (280px)
 
 The website has been checked to ensure that it can resize down to the smallest available resolution for a mobile device (excluding watches).
-This is currently the Galaxy Zfold (3/4/5) which has a front screen resolution width of 280px
+Currently the Galaxy Zfold (3/4/5) which has a front screen resolution width of 280px
 ![An example of 280px wide styling](readme/menu/menu-280.png)
 
 #### Clear Menu
 
-Clear, easy to read buttons are present ahenever required.
+Clear, easy to read buttons are present whenever required.
 ![Main menu buttons for Hypermarket Cheap](readme/buttons/menu-buttons.png)
 
 ### Footer
@@ -90,7 +90,7 @@ in a separate window. The footer also includes the same blue hover as the menu, 
 
 #### Twitter (Now "X/Twitter")
 
-![Footer on Hypermarket Cheap, showing x/Twitter label](readme/footer/twitter-link.png)
+![Footer on Hypermarket Cheap, showing x/Twitter label](readme/footer/x-formerly-twitter-link.png)
 
 #### YouTube
 
@@ -110,9 +110,21 @@ For the CSS, I had to copy the full style.css. Results shown in the table below.
 ### CSS Validation - All Passed
 
 Three css files to validate and main page is validated where all css files are referenced.
+
+#### loading.css
+
 ![Validation for Hypermarket Cheap loading.css](readme/validate/validate-loading-css.png)
+
+#### modal.css
+
 ![Validation for Hypermarket Cheap modal.css](readme/validate/validate-modal-css.png)
+
+#### style.css
+
 ![Validation for Hypermarket Cheap style.css](readme/validate/validate-style-css.png)
+
+#### Overall
+
 ![Validation for Hypermarket Cheap](readme/validate/css-validation.png)
 
 ### HTML Validation -- All passed
@@ -133,8 +145,7 @@ To start the validation failed, due to :
 | Issue        | Resolution                                                                                   |
 | -------------| ---------------------------------------------------------------------------------------------|
 | Trailing /'s | Removing any unnecessary /'s on elements within the index.html page                          |
-| i tag issue  | The problem was I forgot to assign it as "data-wallet-count", instead it was                 |
-|              | just "wallet-count" this was causing the issue, when I change this, all resolved             |
+| i tag issue  | The problem was I forgot to assign it as "data-wallet-count", instead it was just "wallet-count" this was causing the issue, when I change this, all resolved                 |
 | Duplicate Id | Inadvertently assigned the "about-screen" id twice, which the validator picked. Now resolved |
 
 ## WAVE, Google Chrome extension.
@@ -154,7 +165,7 @@ The performance does not log as perfect by any means.
 However, this is a game that has to load data in to work with. Unlike where a website speed can be key, people playing games,
 on the whole understand that sometimes things take a little bit of time.
 
-HOWEVER!!
+**HOWEVER!!**
 
 When reloading, the JSON is already in the cache and the following results occur :
 
@@ -176,19 +187,23 @@ This is a noticeable difference, but it shows that the only issue is before the 
 
 The steps below were followed to deploy the page to GitHub pages :
 
-From Github, click on the repository required :
+**From Github, click on the repository required :**
+
 ![Github deployment step one, choose repository](readme/deployment/deployment-step-1.png)
 
-As shown in the below image, click on the settings within the repository :
+**As shown in the below image, click on the settings within the repository :**
+
 ![Github deployment step two, choose settings](readme/deployment/deployment-step-2.png)
 
-Select "Pages, then select source "Deploy From Branch" and change Branch to "main" and select the "root" folder:
+**Select "Pages, then select source "Deploy From Branch" and change Branch to "main" and select the "root" folder:**
+
 ![Github deployment step three, choose option->source->branch](readme/deployment/deployment-step-3.png)
 
-After refreshing and viewing again, you should (there could be a delay in the upload process) have the link to the website (hosted by GitHub) where the project is viewable :
+**After refreshing and viewing again, you should (there could be a delay in the upload process) have the link to the website (hosted by GitHub) where the project is viewable :**
+
 ![Github deployment step four, refresh/reload to get the link for the project](readme/deployment/deployment-step-4.png)
 
-[LIVE HYPERMARKET CHEAP WEBSITE](https://jbillcliffe.github.io/portfolio2-hypermarket-cheap/ "Go to Hypermarket Cheap")
+**[LIVE HYPERMARKET CHEAP WEBSITE](https://jbillcliffe.github.io/portfolio2-hypermarket-cheap/ "Go to Hypermarket Cheap")**
 
 ## Technologies Used
 
