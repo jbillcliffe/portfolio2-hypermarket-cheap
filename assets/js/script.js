@@ -98,12 +98,10 @@ function createEnvironment(customerType = "new", dayType = "new") {
     }
     /*hide these elements from their string names passed to a function to
     operate with an array and getElementById*/
-    console.log(aisleList);
 
-    hideElementArray(["game-menu", "basket-screen", "toolbar-loading", "loading-overlay"]);
+    hideElementArray(["game-menu", "about-screen", "basket-screen", "toolbar-loading", "loading-overlay"]);
     showElementArray(["game-screen", "wallet-icon", "basket-button"]);
     document.getElementById("the-toolbar").style.justifyContent = "flex-start";
-
     emptyBasket();
 }
 
@@ -111,7 +109,8 @@ function createEnvironment(customerType = "new", dayType = "new") {
  * ## Function to show the About information
  */
 function showAbout() {
-    console.log("Show About Info");
+    document.getElementById("game-menu").style.display = "none";
+    document.getElementById("about-screen").style.display = "flex";
 }
 
 /**
@@ -121,16 +120,7 @@ function showAbout() {
  * @param {string} customerType - new/same, determines how startingPlayerCash operates
  */
 function startingPlayerCash(customerType = "new") {
-    /*
-      eg. 0.5 * 70 + 30 = 35 + 30
-      eg. 1 * 70 + 30 = 100
-      eg. 0 * 70 + 30 = 30
-  
-      Examples to show how using Math.random (which generates between 0 and 1)
-      we can provide the random cash generating element to fit the numbers 
-      provided. "toFixed(2)" sets the number to 2 decimal places, accurate
-      for cash.
-    */
+
     if (customerType == "same") {
         //if the same person, do not regenerate the cash amount
     } else {
@@ -154,9 +144,6 @@ function gameStartingStock(dayType = "new") {
     specialOffers = [];
     aisles = [];
     shopStock = [];
-
-    //Ensure the shop is emptied
-    //document.getElementById("the-items").innerHTML = "";
     lastAisle = "Home";
 
     $.getJSON("../assets/json/specials.json", function (jsonSpecialOfferList) {
@@ -169,7 +156,7 @@ function gameStartingStock(dayType = "new") {
                 occurance: jsonSpecialOffer.occurance
             });
         }
-        //small timeout before moving to the next section, making sure 
+        //small timeout before moving to the next section, making sure data loaded
         setTimeout(thenGetItems(), 1500);
     });
 
@@ -182,7 +169,6 @@ function gameStartingStock(dayType = "new") {
 
                 let thisItemStock = Math.round(Math.random() * (jsonItem.highStock - jsonItem.lowStock) + jsonItem.lowStock);
                 let thisItemPrice = Number((Math.random() * (jsonItem.highPrice - jsonItem.lowPrice) + jsonItem.lowPrice).toFixed(2));
-
                 /*
                 Chance is used with another Math.random(). There rarer the special offer, the smaller the chance.
                 ie. Half price, rarest one, is 0.1. So Math.random() has to get a number below or equal to that.
@@ -299,7 +285,10 @@ function changeAisle(aisleId, callback) {
 
         let thisAisleButton = document.getElementById(aisleButton + "_btn");
 
-        //if last
+        /*
+        If the id sent to the function matches this in the array, then set this
+        button to have to active class, to clearly show the aisle currently in
+        */
         if (aisleButton == aisleId) {
             thisAisleButton.classList.toggle("aisle-button-active");
         } else {
@@ -340,9 +329,7 @@ function changeAisle(aisleId, callback) {
             let itemText = document.createTextNode(stockItem.name);
             let innerPriceText;
             let calculatedAmount = 0.00;
-
             itemPTag.appendChild(itemText);
-
             /*
             Define class names for the divs that are all present within a
             singular item div in the shop 
@@ -425,7 +412,6 @@ function changeAisle(aisleId, callback) {
                         continue;
                     }
                 }
-
             }
             /* ----- ADD TO BASKET BUTTON -----
             Define the ID, put a + inside the button and assign the onClick to
@@ -515,7 +501,7 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
         playerCash = playerCash - amountPaid;
         document.getElementById("wallet-icon").setAttribute("wallet-count", "£" + playerCash.toFixed(2));
 
-        // -1 off the item in the shopStock
+        //-1 off the item in the shopStock
         let shopObject = shopStock.find(({ id }) => id === itemForBasket.id);
         shopObject.quantity--;
 
@@ -553,7 +539,6 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
         if (whichScreen === "in-shop") {
             let stockTextSpan = document.getElementById("stock_" + itemForBasket.id).children[0];
             let basketButton = document.getElementById("basket-add_" + itemForBasket.id);
-
             /*
             If this was the last of the stock, change the function on the
             + button and edit texts and classes. If not, then just amend the
@@ -592,7 +577,6 @@ function addToBasket(itemForBasket, amountPaid, whichScreen) {
 
             //stock validation for + button removal if necessary
             if (shopObject.quantity === 0) {
-                console.log("Remove button");
                 removePlusQuantityButton(itemForBasket.id);
             }
         } else {
@@ -612,7 +596,6 @@ function showBasket(lastAisle) {
 
     //Sorting an object array : 
     //Credit : https://www.w3schools.com/js/js_array_sort.asp
-
     basketStock.sort(function (a, b) {
         let x = a.name.toLowerCase();
         let y = b.name.toLowerCase();
@@ -694,7 +677,7 @@ function showBasket(lastAisle) {
     for (let aisleOption of basketAisles) {
 
         /*
-        .some() checks if it exists at all, not where.
+        some() checks if it exists at all, not where.
         If the aisle exists at all then add the header to the basket display
         */
         if (basketStock.some(x => x.aisle === aisleOption)) {
@@ -824,7 +807,6 @@ function showBasket(lastAisle) {
                 Final attributes for items inside the container.
                 Then add the container to the basket div
                 */
-
                 basketItemContainer.className = "basket-item-container";
                 basketItemImage.className = "item-container-img";
                 basketItemName.className = "basket-item-container-text";
@@ -857,10 +839,12 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
     //get the shopStock reference of the item and +1 quantity
     let shopStockItem = shopStock.find(({ id }) => id === removeId);
     shopStockItem.quantity++;
+
     //get the basketStock of the item and -1 quantity
     let basketStockItem = basketStock.find(({ id }) => id === removeId);
     let basketItemAisle = "basket-aisle_" + basketStockItem.aisle;
     basketStockItem.quantity--;
+
     //Minus the cost of the basket -- Add to player cash
     basketTotalCost -= basketStockItem.amountPaid;
     playerCash += basketStockItem.amountPaid;
@@ -869,7 +853,6 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
     //remove one from the tally in the basket
     let basketTally = document.getElementById("basket-tally");
     basketTally.innerHTML = (parseInt(basketTally.innerHTML) - 1).toString();
-    console.log("remove 2. " + basketStock);
 
     /*
     get all lines that match the id, remove the first, they all are the same
@@ -890,14 +873,11 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
         let basketContainer = document.getElementById(removeContainer);
         const removeIndex = basketStock.findIndex(({ id }) => id === removeId);
         basketStock.splice(removeIndex, 1);
-        console.log("remove 3. " + basketStock);
-        console.log(JSON.parse(JSON.stringify(basketStock)));
 
         if (basketStock.some(x => x.aisle === basketStockItem.aisle)) {
             //if any found, do not delete the header
         } else {
             let aisleHeader = document.getElementById(basketItemAisle);
-            console.log(aisleHeader);
             aisleHeader.remove();
         }
         basketContainer.remove();
@@ -918,7 +898,6 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
         if (basketStockItem.special < 1) {
             document.getElementById("basket-per-total-special_" + basketStockItem.id).innerHTML = "£" + rrpAmount.toFixed(2);
         } else {
-
         }
     } else {
     }
@@ -941,7 +920,6 @@ function removeFromBasket(removeId, removeContainer, removeQuantity) {
 function returnToShop(lastAisle) {
     let gameWindow = document.getElementById("game-screen");
     let basketWindow = document.getElementById("basket-screen");
-    let itemsWindow = document.getElementById("the-items");
 
     gameWindow.style.display = "flex";
     basketWindow.style.display = "none";
@@ -964,8 +942,8 @@ function returnToShop(lastAisle) {
  */
 function checkoutBasket() {
 
+    //write content to a new blank window for printing
     let myWindow = window.open('', 'PRINT', 'height=400,width=600');
-
     myWindow.document.write('<html><head><title> Hypermarket Cheap </title>');
     myWindow.document.write('</head><body>');
     myWindow.document.write('<h1>Thank you for shopping today!</h1>');
@@ -978,7 +956,7 @@ function checkoutBasket() {
     myWindow.document.getElementById("print-receipt-table").appendChild(receiptTable);
     myWindow.document.body.appendChild(receiptTable);
     myWindow.document.close(); // necessary for IE >= 10
-    myWindow.focus(); // necessary for IE >= 10*/
+    myWindow.focus(); // necessary for IE >= 10
 
     myWindow.onafterprint = (event) => {
         document.getElementById("game-end-modal").style.display = "flex";
@@ -989,24 +967,36 @@ function checkoutBasket() {
 
 }
 
-
+/**
+ * ## Function to show multiple elements
+ * Take an array of element ids as strings, then display them by
+ * setting their style to flex.
+ * 
+ * @param {Array} theseElements 
+ */
 function showElementArray(theseElements) {
     for (let element of theseElements) {
         document.getElementById(element).style.display = "flex";
     }
 }
 
+/**
+ * ## Function to hide multiple elements
+ * Take an array of element ids as strings, then hide them by
+ * setting their style to none.
+ * 
+ * @param {Array} theseElements 
+ */
 function hideElementArray(theseElements) {
     for (let element of theseElements) {
         document.getElementById(element).style.display = "none";
     }
 }
 /**
- * 
- * @param {string} url - url of the image to search
- * 
+ * ## Function to check existence of an image in the directory
  * This function will use the url provided to determine if it is found on the
  * website.
+ * @param {string} url - url of the image to search
  */
 function checkIfImageExists(url, callback) {
 
@@ -1028,30 +1018,57 @@ function checkIfImageExists(url, callback) {
     }
 }
 
+/**
+ * ## Function to multiply two numbers and return a 2dp number
+ */
 function calculateNumberTimes(a, b) {
     return Number((a * b).toFixed(2));
 }
 
+/**
+ * ## Function that adds elements to another single element
+ * Takes a singular container element, then uses an array of elements based 
+ * on their ids as strings
+ * @param {string} container 
+ * @param {Array} elements 
+ */
 function addElementsToContainer(container, elements) {
     for (let element of elements) {
         container.appendChild(element);
     }
 }
 
+/**
+ * ## Function to create, then add a new line to the receipt.
+ * Create the div, the elements required within, append text nodes
+ * to give it visible text data. Then append the constructed line
+ * to the receipt
+ * @param {} receiptid 
+ * @param {string} receiptname 
+ * @param {*} receiptpaid 
+ * @param {*} goOrNo 
+ * @returns 
+ */
 function createNewReceiptLine(receiptid, receiptname, receiptpaid, goOrNo = "go") {
+    //create required elements
     const receiptDivLine = document.createElement("DIV");
     const receiptNameP = document.createElement("P");
     const receiptPriceP = document.createElement("P");
+
+    //set div line class, and give it a name based on its id
     receiptDivLine.className = "basket-receipt-line";
     receiptDivLine.setAttribute("name", "receipt-line_" + receiptid);
 
+    //add text to the <p> tags 
     receiptNameP.appendChild(document.createTextNode(receiptname));
     receiptPriceP.appendChild(document.createTextNode("£" + (receiptpaid).toFixed(2)));
+
+    //run the multi elements to container function
     addElementsToContainer(receiptDivLine, [receiptNameP, receiptPriceP]);
-
+    //increase basket cost
     basketTotalCost += receiptpaid;
-    //document.getElementById("basket-receipt-total-price").innerHTML = "£" + basketTotalCost.toFixed(2);
 
+    //if this was added from within the basket then it needs adding now.
     if (goOrNo === "go") {
         document.getElementById("the-receipt").appendChild(receiptDivLine);
     } else {
@@ -1059,29 +1076,65 @@ function createNewReceiptLine(receiptid, receiptname, receiptpaid, goOrNo = "go"
     }
 }
 
+/**
+ * ## Function to add a (+) button in the basket on an item
+ * If an item has max stock in the basket, it has no (+), but 
+ * the user can remove one and this will then allow a (+) to appear
+ * enabling the user to take it back.
+ * @param {*} buttonId 
+ * @param {Object} item 
+ * @param {Number} paid 
+ */
 function addPlusQuantityButton(buttonId, item, paid) {
+
+    //create the button, assign id, content, class and an onclick function.
     const basketItemQuantityPlus = document.createElement("BUTTON");
     basketItemQuantityPlus.id = "basket-add_" + buttonId;
     basketItemQuantityPlus.innerHTML = "+";
     basketItemQuantityPlus.className = "basket-item-quantity-button";
     basketItemQuantityPlus.onclick = function () { addToBasket(item, paid, "in-basket"); };
+
+    //get the quantity text container for this item
     const currentQuantityText = document.getElementById("basket-item-quantity_" + buttonId);
+
+    /*
+    Get the sibling before this (sibling before quantity text is a blank space or (+)).
+    Then insert the new (+) button before this sibling. Finally, then removing
+    the "currentBlankSpace"
+    */
     const currentBlankSpace = currentQuantityText.previousElementSibling;
     currentQuantityText.insertAdjacentElement("beforebegin", basketItemQuantityPlus);
     currentBlankSpace.remove();
 }
 
+/**
+ * ## Function to prevent over-adding of stock.
+ * The point of this is to now allow > 10 in the basket, when there may only be 10 in store.
+ * Once the quantity of the shopStock reaches 0. This function is very important.
+ * @param {*} buttonId 
+ */
 function removePlusQuantityButton(buttonId) {
 
+    //create P tag, assign class to it. Then add a text node
     const basketItemQuantityPlus = document.createElement("P");
     basketItemQuantityPlus.className = "basket-item-quantity-button-blank";
     basketItemQuantityPlus.appendChild(document.createTextNode("+"));
+
+    /*
+    Find the quantity in basket text, then get its parent, and remove the first child of the parent
+    DOM traversingf towards the plus button and removing it
+    */
     const currentQuantityText = document.getElementById("basket-item-quantity_" + buttonId);
     currentQuantityText.insertAdjacentElement("beforebegin", basketItemQuantityPlus);
-    console.log(currentQuantityText.parentElement.children[0]);
     currentQuantityText.parentElement.removeChild(currentQuantityText.parentElement.children[0]);
 }
 
+/**
+ * ## Function to generate the table of the receipt for printing
+ * 
+ * @param {Array} basketData - basketStock
+ * @returns The constructed table for print
+ */
 function createReceiptForPrint(basketData) {
 
     let tempBasket = basketData.sort();
@@ -1110,6 +1163,7 @@ function createReceiptForPrint(basketData) {
         }
     }
 
+    /*building the body*/
     for (let j = 0; j < tempBasket.length; j++) {
 
         let tR = document.createElement("TR");

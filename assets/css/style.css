@@ -34,7 +34,6 @@ body {
     flex-wrap: nowrap;
 }
 
-
 /* CORE STYLING */
 /* the main game window */
 #hypermarket-cheap {
@@ -93,6 +92,28 @@ body {
 /* specifically for game-menu id, carries .game-container class too */
 #game-menu {
     justify-content: center;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    border: 10px solid #3d9970;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.8rem;
+    background-color: black;
+    margin: auto;
+    padding: 0.5% 2%;
+    overflow-y: auto;
+}
+
+.about-content>h2 {
+    display:flex;
+    justify-content:center;
+    font-family: "Roboto", sans-serif;
+    color:#3d9970;
+    font-size:4rem;
 }
 
 /* specifically for basket-screen id, carries .game-container class too */
@@ -193,7 +214,6 @@ items/aisles */
     box-shadow: 0 0 4px 100px cyan inset;
 }
 
-
 /* style of button within the basket window */
 .return-to-shop-div {
     display: flex;
@@ -237,7 +257,6 @@ by their aisle */
     overflow-y: scroll;
     color: white;
     background-color: black;
-
 }
 
 /* container for the receipt header which carries the white text logo */
@@ -265,8 +284,6 @@ by their aisle */
     border-top: 2px dashed white;
     border-bottom: 2px dashed white;
 }
-
-
 
 /* styling for the container which has each item in the shop, which has the 
 item name, the stock and a button to add it to your basket */
@@ -658,10 +675,12 @@ So media queries will be based on these*/
         flex-direction: row;
     }
 
+    /*change margins of + buttons*/
     .item-container-button {
         margin: 1rem auto;
     }
 
+    /*amend width to make this and receipt easier to read*/
     #the-basket {
         width: 65%;
     }
@@ -684,21 +703,26 @@ So media queries will be based on these*/
         margin: 1rem auto 0 auto;
     }
 
+    /*full width expand*/
     .basket-price-div {
         width: 100%;
         flex-direction: row;
     }
 
+    /*increase image size*/
     .basket-item-container>.item-container-img {
         width: 50%;
     }
 
+    /*column to width -> reverse order as well as it makes more sense 
+    to go (-) -> (+)*/
     .basket-item-container-quantity-div {
         flex-direction: row-reverse;
         width: 80%;
         height: 3rem;
     }
 
+    /*change (-) and (+) buttons in the basket*/
     .basket-item-quantity-button {
         height: 2rem;
         width: 2rem;

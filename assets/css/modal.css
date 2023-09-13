@@ -1,4 +1,4 @@
-/* Not visible */
+/*Not visible*/
 .modal-window {
     display: none;
     position: absolute;
@@ -8,20 +8,17 @@
     background-color: rgba(37, 37, 37, 0.3);
 }
 
-/* Modal Styling*/
+/*Modal styling*/
 .modal-content {
     display: flex;
     background-color: #3d9970;
     border-radius: 2rem;
     margin: auto;
-    /* padding: 3%; */
     border: 3px solid #073b24;
     width: 80%;
-    /* height: 20%; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* align-content: center; */
     font-family: "Roboto", sans-serif;
     font-size: 1.8rem;
     font-weight: bold;
@@ -29,23 +26,22 @@
     text-shadow: 2px 2px 4px #000000;
 }
 
+/*Styling of buttons container in the modal*/
 #button-choices {
     display: flex;
     flex-direction: column;
     width: 75%;
     margin-bottom: 5%;
-    /* padding: 0%; */
 }
 
+/*Styling of the individual buttons in the modal*/
 .modal-buttons {
-
     height: 4rem;
     width: 100%;
     font-family: "Roboto", sans-serif;
     font-size: 1.5rem;
     font-weight: bold;
     margin: 1.5%;
-    /* padding: 2%; */
     background-color: #3d9970;
     color: white;
     cursor: pointer;
