@@ -1,4 +1,5 @@
 # Hypermarket Cheap
+
 <div style="width:100%; height:100px; background-color:white; margin-left:auto;margin-right:auto;">
 <a href="https://jbillcliffe.github.io/portfolio2-hypermarket-cheap/" target="_self">
             <img class="header-logo" src="assets/images/header-logo.webp" alt="Hypermarket Sweep"
@@ -251,7 +252,7 @@ To start the validation failed, due to :
 | i tag issue  | The problem was I forgot to assign it as "data-wallet-count", instead it was just "wallet-count" this was causing the issue, when I change this, all resolved                 |
 | Duplicate Id | Inadvertently assigned the "about-screen" id twice, which the validator picked. Now resolved |
 
-## WAVE, Google Chrome extension.
+## WAVE, Google Chrome extension
 
 WAVE is a measure of website issues. There was only one error. This was stating I was missing an alt on an image.
 This too has been rectified.
@@ -328,18 +329,13 @@ The steps below were followed to deploy the page to GitHub pages :
 
 ## Website Tutorials/References
 
-Check if image exists function[^13] https://codepen.io/kallil-belmonte/pen/KKKRoyx
-
-CSS Loader[^14] : https://cssload.net/
-
-Create Element References[^15] : https://www.w3schools.com/jsref/
-Change an ::after[^16] : https://geeksforgeeks.org/how-to-update-properties-of-pseudo-element-after-and-before-using-javascript/
-
-for finding object by property value[^17] : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-
-sort an object array[^18]: https://www.w3schools.com/js/js_array_sort.asp
-
-some[^19] : https://www.w3schools.com/jsref/jsref_some.asp 
+Check if image exists function[^13]
+CSS Loader[^14]
+Create Element References[^15]
+Change an ::after[^16]
+For finding object by property value[^17]
+Sort an object array[^18]
+JavaScript some()[^19]
 
 - W3Schools[^11] - Invaluable for providing details on elements and their attributes and so much HTML/CSS information.
 - Image Resizer.com[^12] - Very useful for providing a way of cropping and resizing images. This was used for all
@@ -397,7 +393,8 @@ Images were all sourced for free:
 | Birthday Card For Partner...[^60] | birthday-card.webp      |
 | No Image [^61]                    | no-image.webp           |
 
-## References 
+## References
+
 [^1]: Figma is a free website for designing storyboards and wireframes : https://www.figma.com/
 [^2]: LOGO website used for creating a logo and branding from scratch for free : https://app.logo.com/
 [^3]: Renterprise, my first portfolio piece : https://github.com/jbillcliffe/portfolio1-renterprise
@@ -410,7 +407,7 @@ Images were all sourced for free:
 [^10]: Am I Responsive? A Website designed to display a singular website at multiple resolutions : https://ui.dev/amiresponsive
 [^11]: W3Schools, comprehensive database of information for HTML and CSS : https://www.w3schools.com/
 [^12]: Image Resizer.com, Easily resize images online for free : https://imageresizer.com/
-[^13]Check if image exists function, best way of loading in images into the program : https://codepen.io/kallil-belmonte/pen/KKKRoyx
+[^13]: Check if image exists function, best way of loading in images into the program : https://codepen.io/kallil-belmonte/pen/KKKRoyx
 [^14]:CSS Loader - My CSS loader bar that obtained here royalty free : https://cssload.net/
 [^15]: Create Element References - Was handy to see all the createElement() references in JavaScript : https://www.w3schools.com/jsref/
 [^16]: Change an ::after pseudoclass. Was used in the toolbar for the wallet count: https://geeksforgeeks.org/how-to-update-properties-of-pseudo-element-after-and-before-using-javascript/
@@ -418,7 +415,7 @@ Images were all sourced for free:
 [^18]:Was required to sort an object array based on a value : https://www.w3schools.com/js/js_array_sort.asp
 [^19]:some function, a useful tool for an array in javascript : https://www.w3schools.com/jsref/jsref_some.asp
 
-### Images 
+### Image References
 
 [^20]:Bread : https://www.vecteezy.com/free-vector/bread
 [^21]:Milk : https://www.vecteezy.com/free-vector/milk
