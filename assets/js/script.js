@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 //further functions?
             }
-        });
+        })
     };
 });
 
@@ -147,7 +147,7 @@ function gameStartingStock(dayType = "new") {
     lastAisle = "Home";
 
     $.getJSON("assets/json/specials.json", function (jsonSpecialOfferList) {
-        for (jsonSpecialOffer of jsonSpecialOfferList) {
+        for (let jsonSpecialOffer of jsonSpecialOfferList) {
             specialOffers.push({
                 id: jsonSpecialOffer.id,
                 name: jsonSpecialOffer.name,
@@ -163,7 +163,7 @@ function gameStartingStock(dayType = "new") {
     //getJSON gets the data from the items.json file to then work with each item
     function thenGetItems() {
         $.getJSON("assets/json/items.json", function (jsonItemsList) {
-            for (jsonItem of jsonItemsList) {
+            for (let jsonItem of jsonItemsList) {
                 //adding aisle options
                 aisles.indexOf(jsonItem.aisle) >= 0 ? null : aisles.push(jsonItem.aisle);
 

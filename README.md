@@ -8,7 +8,7 @@
 
 ***Click this banner to load the website.***
 
-Hypermarket sweep is a simple to use simulator for shopping. Preferrably on your own, especially not your kids.
+Hypermarket sweep is a simple to use simulator for shopping. Preferably on your own, especially not your kids.
 Gail Hinton is the manager of this store and she looks forward to welcoming you to her store in Wales.
 "When you see the sheep, that's Hypermarket Cheap!" - Gail
 
@@ -31,7 +31,7 @@ Gail Hinton is the manager of this store and she looks forward to welcoming you 
     1. No game is the same!
     2. Each new game has a new pricing system, different allocation of special offers, different starting cash and stock levels
 - I want to see my "achievements"
-    1. A printed receipt at the end is a wonderful souvenir(is it?!)
+    1. A printed receipt at the end is a wonderful souvenir (is it?!)
 
 ### Wireframe Design
 
@@ -46,7 +46,7 @@ The logo was created using the website LOGO.com.[^2]
 
 #### Branding Including Logo
 
-Full branding was provided at the end of the step by step development process.
+Full branding was provided at the end of the step-by-step development process.
 
 ![Full branding theme for Renterprise](readme/design/branding.png)
 
@@ -68,20 +68,18 @@ All of these are sourced from Google Fonts[^4].
 
 ### Features Wanted
 
-- Basket empty at any time. The function is in place, just needs a button to activate the function independant of a new game.
+- Basket empty at any time. The function is in place, just needs a button to activate the function independent of a new game.
 - More special offers, algorithmic ones. Such as buy one get one free.
 - More items/aisles, can never have too big a database and it could increase scope to not necessarily select all the items each time
   but instead have items that are rare, like a golden egg!
 - More refactoring of code - A few I was able to compress, but there is so much more potential.
-  Please see these images for refactoring examples :
+  Please see these images for refactoring examples:
 
-    1. Before : addElementsToContainer() - [EG.1](readme/refactoring/add-elements-to-container.png)[EG.2](readme/refactoring/add-elements-to-container-2.png)
-       After : ![Refactored function addElementsToContainer to be resued](readme/refactoring/refactor-add-elements-to-container.png)
-
-    2. Before : showElementArray()/hideElementArray() - [View](readme/refactoring/hide-and-show-elements.png)
-       After : ![Refactored functions showElementArray() and hideElementArray() to be resued](readme/refactoring/refactor-hide-and-show-elements.png)
-
-    3. Only after here : createNewReceiptLine()
+    1. Before: addElementsToContainer() - [EG.1](readme/refactoring/add-elements-to-container.png)[EG.2](readme/refactoring/add-elements-to-container-2.png)
+    2. After: ![Refactored function addElementsToContainer to be resued](readme/refactoring/refactor-add-elements-to-container.png)
+    3. Before: showElementArray()/hideElementArray() - [View](readme/refactoring/hide-and-show-elements.png)
+    4. After: ![Refactored functions showElementArray() and hideElementArray() to be reused](readme/refactoring/refactor-hide-and-show-elements.png)
+    5. Only after here : createNewReceiptLine()
         - ![Inside the function operation](readme/refactoring/create-new-receipt-line.png)
         Is called by : ![Calling the function](readme/refactoring/refactor-create-new-receipt-line.png)
 
@@ -93,7 +91,7 @@ The program is able to make a lot of calculations at run time.
 
 - Creating starting cash, stock and special offers are all random.
 - It determines the stock when an item is added, removes it from the shop, deals with the cash and updates the amount of basket items!
-- It will also then make assessments of what to do based on remaining stock. Such as changing classes to out of stock, removing buttons.etc.
+- It will also then make assessments of what to do based on remaining stock. Such as changing classes to out of stock, removing buttons etc.
 - It can tell you when you have run out of money. (Sorry). [View](readme/shop/out-of-money.png "Not enough money to purchase the item in the picture")
 - It will alert you if you try to put something into your basket that is not available. [View](readme/shop/no-stock-alert.png "Can't add an item that is no longer in stock")
 
@@ -107,7 +105,7 @@ The buttons used have easy to read text on them, all with a text shadow to give 
 
 ##### Aisle Buttons
 
-![Aisle buttons and their styles. Default,hover and active](readme/buttons/shop-aisle-buttons.png)
+![Aisle buttons and their styles. Default, hover and active](readme/buttons/shop-aisle-buttons.png)
 
 ##### Add To Basket Buttons
 
@@ -184,7 +182,7 @@ Currently the Galaxy Zfold (3/4/5) which has a front screen resolution width of 
 
 #### Footer
 
-A responsive social media links area included in the footer which is present at all times, it scales the size of footer without comprimising
+A responsive social media links area included in the footer which is present at all times, it scales the size of footer without compromising
 the Fontawesome[^5] icons. Each one has an aria-label which describes where the link goes to and explains that it will open
 in a separate window. The footer also includes the same blue hover as the menu, for consistency and clarity to the user.
 
@@ -215,7 +213,7 @@ For the CSS, I had to copy the full style.css. Results shown in the table below.
 
 ### CSS Validation - All Passed
 
-Three css files to validate and main page is validated where all css files are referenced.
+Three CSS files to validate and main page is validated where all CSS files are referenced.
 
 #### loading.css
 
@@ -273,7 +271,7 @@ on the whole understand that sometimes things take a little bit of time.
 
 **HOWEVER!!**
 
-When reloading, the JSON is already in the cache and the following results occur :
+When reloading, the JSON Specials[^7] and JSON Items[^8] are already in the cache and the following results occur :
 
 Scoring for Lighthouse was done on the Index (landing) page, and what would be the most demanding page (contact.html) :
 |  Page   |  Source |                                                                                                      |
@@ -293,21 +291,21 @@ This is a noticeable difference, but it shows that the only issue is before the 
 
 The steps below were followed to deploy the page to GitHub pages :
 
-**From Github, click on the repository required :**
+**From GitHub, click on the repository required :**
 
-![Github deployment step one, choose repository](readme/deployment/deployment-step-1.png)
+![GitHub deployment step one, choose repository](readme/deployment/deployment-step-1.png)
 
 **As shown in the below image, click on the settings within the repository :**
 
-![Github deployment step two, choose settings](readme/deployment/deployment-step-2.png)
+![GitHub deployment step two, choose settings](readme/deployment/deployment-step-2.png)
 
 **Select "Pages, then select source "Deploy From Branch" and change Branch to "main" and select the "root" folder:**
 
-![Github deployment step three, choose option->source->branch](readme/deployment/deployment-step-3.png)
+![GitHub deployment step three, choose option->source->branch](readme/deployment/deployment-step-3.png)
 
 **After refreshing and viewing again, you should (there could be a delay in the upload process) have the link to the website (hosted by GitHub) where the project is viewable :**
 
-![Github deployment step four, refresh/reload to get the link for the project](readme/deployment/deployment-step-4.png)
+![GitHub deployment step four, refresh/reload to get the link for the project](readme/deployment/deployment-step-4.png)
 
 **[LIVE HYPERMARKET CHEAP WEBSITE](https://jbillcliffe.github.io/portfolio2-hypermarket-cheap/ "Go to Hypermarket Cheap")**
 
@@ -317,63 +315,150 @@ The steps below were followed to deploy the page to GitHub pages :
 
 - HTML5
 - CSS3
-- Javascript
+- JavaScript
 - jQuery
 
 ### Frameworks, Libraries & Programs Used
 
 - Google Fonts[^4]
 - Font Awesome[^17]
-- CodeAnywhere [^21]
+- Codeanywhere [^9]
 - Figma[^1]
-- Am I Responsive?[^22]
+- Am I Responsive?[^10]
 
 ## Website Tutorials/References
 
-- Button Hover Animation Tutorial (W3Schools)[^23]
-- HTML/CSS Cards[^24]
-- Responsive iframes, used for the map on the contact.html[^25]
-- W3Schools[^26] - Invaluable for providing details on elements and their attributes and so much HTML/CSS information.
-- Image Resizer.com[^27] - Very useful for providing a way of cropping and resizing images. This was used for all
+Check if image exists function[^13] https://codepen.io/kallil-belmonte/pen/KKKRoyx
+
+CSS Loader[^14] : https://cssload.net/
+
+Create Element References[^15] : https://www.w3schools.com/jsref/
+Change an ::after[^16] : https://geeksforgeeks.org/how-to-update-properties-of-pseudo-element-after-and-before-using-javascript/
+
+for finding object by property value[^17] : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+
+sort an object array[^18]: https://www.w3schools.com/js/js_array_sort.asp
+
+some[^19] : https://www.w3schools.com/jsref/jsref_some.asp 
+
+- W3Schools[^11] - Invaluable for providing details on elements and their attributes and so much HTML/CSS information.
+- Image Resizer.com[^12] - Very useful for providing a way of cropping and resizing images. This was used for all
   of the items in the shop.
 - Myself, The footer was reused (with minor style changes) from my first portfolio piece. This readme is also inspired
-  by the original readme I did on portfolio 1. See other repository : Renterprise[^20]
+  by the original readme I did on portfolio 1. See other repository: Renterprise[^3]
 
 ## Images
 
-Images were all sourced for free :
+Images are all located in the assets/images folder in the repository.
+Images were all sourced for free:
 
-| Filename                | Used         |                                                                         |
-| ----------------------- | ------------ | ----------------------------------------------------------------------- |
-| crm.webp[^5]            | product.html | [View](assets/images/crm.webp "Customer Relationship Management Image") |
-| delivery.webp[^6]       | product.html | [View](assets/images/delivery.webp "Delivery Image")                    |
-| growth.webp[^7]         | index.html   | [View](assets/images/growth.webp "Growth Image")                        |
-| inventory.webp[^8]      | product.html | [View](assets/images/inventory.webp "Inventory Image")                  |
-| money.webp[^9]          | index.html   | [View](assets/images/money.webp "Money Image")                          |
-| move-forward.webp[^10]  | N/A          | [View](assets/images/move-forward.webp "Forward Arrows Image")          |
-| opportunity.webp[^11]   | index.html   | [View](assets/images/opportunity.webp "Opportunity Image")              |
-| payments.webp[^12]      | product.html | [View](assets/images/payments.webp "Card Payments Image")               |
-| reporting.webp [^13]    | N/A          | [View](assets/images/reporting.webp "Reporting Image")                  |
-| server.webp [^14]       | N/A          | [View](assets/images/server.webp "Server Image")                        |
-| streamline.webp [^15]   | index.html   | [View](assets/images/streamline.webp "Streamline Image")                |
-| workflow.webp [^16]     | N/A          | [View](assets/images/workflow.webp "Workflow Image")                    |
-
-*NB. All those that are N/A were due to be entered as further entries into the product.html page*
+| Image                             | Filename               |
+|-----------------------------------|-------------------------|
+| Bread[^20]                        | bread.webp              |
+| Milk[^21]                         | milk.webp               |
+| Cheese[^22]                       | cheese.webp             |
+| Newspaper[^23]                    | newspaper.webp          |
+| Beef Mince[^24]                   | beef-mince.webp         |
+| Steak[^25]                        | steak.webp              |
+| Pork Chops[^26]                   | pork-chops.webp         |
+| Turkey Twizzlers[^27]             | turkey-twizzlers.webp   |
+| Ice Creams[^28]                   | ice-creams.webp         |
+| Chips[^29]                        | chips.webp              |
+| Strawberry Yoghurt[^30]           | strawberry-yoghurt.webp |
+| Cucumber[^31]                     | cucumber.webp           |
+| Peppers[^32]                      | peppers.webp            |
+| Tomatoes[^33]                     | tomatoes.webp           |
+| Cabbage[^34]                      | cabbage.webp            |
+| Iceberg Lettuce[^35]              | iceberg-lettuce.webp    |
+| Apples[^36]                       | apples.webp             |
+| Pears[^37]                        | pears.webp              |
+| Watermelon[^38]                   | watermelon.webp         |
+| Strawberries[^39]                 | strawberries.webp       |
+| Corn Flakes[^40]                  | corn-flakes.webp        |
+| Weetabix[^41]                     | weetabix.webp           |
+| Coco Pops[^42]                    | coco-pops.webp          |
+| Shredded Wheat[^43]               | shredded-wheat.webp     |
+| Laundry Detergent[^44]            | laundry-detergent.webp  |
+| Fabric Softener[^45]              | fabric-softener.webp    |
+| Colour Catchers[^46]              | colour-catchers.webp    |
+| Black Bin Bags[^47]               | black-bin-bags.webp     |
+| Food Bin Bags[^48]                | food-bin-bags.webp      |
+| Washing Up Liquid[^49]            | washing-up-liquid.webp  |
+| Coca-Cola[^50]                    | coca-cola.webp          |
+| Lemonade[^51]                     | lemonade.webp           |
+| Ribena[^52]                       | ribena.webp             |
+| Orange Squash[^53]                | orange-squash.webp      |
+| Bottled Water[^54]                | bottled-water.webp      |
+| Doughnuts[^55]                    | doughnuts.webp          |
+| Chicken Nuggets[^56]              | chicken-nuggets.webp    |
+| Chicken Breast[^57]               | chicken-breast.webp     |
+| Pens[^58]                         | pens.webp               |
+| Pencils[^59]                      | pencils.webp            |
+| Birthday Card For Partner...[^60] | birthday-card.webp      |
+| No Image [^61]                    | no-image.webp           |
 
 ## References 
 [^1]: Figma is a free website for designing storyboards and wireframes : https://www.figma.com/
 [^2]: LOGO website used for creating a logo and branding from scratch for free : https://app.logo.com/
-[^3]: Coolors website for creating free colour themes : https://www.coolors.com/
+[^3]: Renterprise, my first portfolio piece : https://github.com/jbillcliffe/portfolio1-renterprise
 [^4]: Google's font listing, a very large database of free online hosted fonts : https://fonts.google.com/
 [^5]: Fontawesome a large database of free (and premium) icons : https://www.fontawesome.com
 [^6]: W3 Validator : https://validator.w3.org/
-[^18]: PHPMailer is an email creation class library for PHP : https://github.com/PHPMailer/PHPMailer
-[^19]: JSON file for all the country code data so that it was not on the html page, it would been very untidy in that case. : assets/json/country.json
-[^20]: Renterprise, my first portfolio piece : https://github.com/jbillcliffe/portfolio1-renterprise
-[^21]: Cloud based IDE for development : https://app.codeanywhere.com/
-[^22]: Am I Responsive? A Website designed to display a singular website at multiple resolutions : https://ui.dev/amiresponsive
-[^23]: Button hover animation : https://www.w3schools.com/howto/howto_css_animate_buttons.asp
-[^24]: Cards, used for proposition cards on index.html : https://www.w3schools.com/howto/howto_css_cards.asp
-[^25]: Responsive iframes : https://www.w3schools.com/howto/howto_css_responsive_iframes.asp
-[^26]: W3Schools, comprehensive database of information for HTML and CSS : https://www.w3schools.com/
-[^27]: Image Resizer.com, Easily resize images online for free : https://imageresizer.com/
+[^7]: JSON file for all the special offers data so that it was not on the html page, it would been very untidy in that case. : assets/json/specials.json
+[^8]: JSON file for all the shop item data so that it was not on the html page, it would been very untidy in that case. : assets/json/specials.json
+[^9]: Cloud based IDE for development : https://app.codeanywhere.com/
+[^10]: Am I Responsive? A Website designed to display a singular website at multiple resolutions : https://ui.dev/amiresponsive
+[^11]: W3Schools, comprehensive database of information for HTML and CSS : https://www.w3schools.com/
+[^12]: Image Resizer.com, Easily resize images online for free : https://imageresizer.com/
+[^13]Check if image exists function, best way of loading in images into the program : https://codepen.io/kallil-belmonte/pen/KKKRoyx
+[^14]:CSS Loader - My CSS loader bar that obtained here royalty free : https://cssload.net/
+[^15]: Create Element References - Was handy to see all the createElement() references in JavaScript : https://www.w3schools.com/jsref/
+[^16]: Change an ::after pseudoclass. Was used in the toolbar for the wallet count: https://geeksforgeeks.org/how-to-update-properties-of-pseudo-element-after-and-before-using-javascript/
+[^17]:For finding object by property value in an array : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+[^18]:Was required to sort an object array based on a value : https://www.w3schools.com/js/js_array_sort.asp
+[^19]:some function, a useful tool for an array in javascript : https://www.w3schools.com/jsref/jsref_some.asp
+
+### Images 
+
+[^20]:Bread : https://www.vecteezy.com/free-vector/bread
+[^21]:Milk : https://www.vecteezy.com/free-vector/milk
+[^22]:Cheese : https://www.vecteezy.com/free-vector/cheese
+[^23]:Newspaper : https://www.vecteezy.com/free-vector/newspaper
+[^24]:Beef Mince : https://www.freepik.com/free-vector/raw-forcemeat-packaging-plastic-serving-tray-with-marking-minced-beef-realistic-mockup-vector-illustration_26765749
+[^25]:Steak : https://www.vecteezy.com/free-vector/steak
+[^26]:Pork Chops : https://www.vecteezy.com/free-vector/pork-chop
+[^27]:Turkey Twizzlers : https://logos.fandom.com/wiki/Turkey_Twizzlers
+[^28]:Ice creams : https://www.vecteezy.com/free-vector/ice-cream
+[^29]:Chips : https://www.vecteezy.com/free-vector/fries
+[^30]:Strawberry Yoghurt : https://www.vecteezy.com/free-vector/yogurt
+[^31]:Cucumber : https://www.vecteezy.com/free-vector/cucumber
+[^32]:Peppers : https://www.freepik.com/free-vector/red-green-yellow-peppers-graphic-illustration_2632386.htm
+[^33]:Tomatoes : https://www.freepik.com/free-vector/fresh-organic-ripe-tomato_16263556.htm
+[^34]:Cabbage : https://www.freepik.com/free-vector/vector-illustration-cabbage-colorful-gradient-mascot_32009946.htm
+[^35]:Lettuce : https://https://pixabay.com/vectors/lettuce-salad-green-vegetables-295158/
+[^36]:Apples : https://www.freepik.com/free-vector/apple-colorful-vector-design_38655651.htm
+[^37]:Pears : https://www.freepik.com/free-vector/hand-drawn-pear-fruit-illustration_2582461.htm
+[^38]:Watermelon : https://www.freepik.com/free-vector/fruity-realistic-design-concept-with-whole-watermelon-appetizing-juicy-slice-ripe-red-berry-transparent_6846642.htm
+[^39]:Strawberries : https://www.freepik.com/free-vector/strawberry-fruit-design-illustration-abstract_36799189.htm
+[^40]:Corn Flakes : https://www.freepik.com/free-vector/breakfast-cereals-realistic-composition_6414074.htm
+[^41]:Weetabix : https://www.brandsoftheworld.com/logo/weetabix?original=1
+[^42]:Coco Pops : https://pikeland.fandom.com/wiki/Coco_Pops_(Erisland)
+[^43]:Shredded Wheat : https://www.istockphoto.com/search/2/image?phrase=shredded%20wheat%20isolated
+[^44]:Laundry Detergent : https://www.vecteezy.com/free-vector/laundry-detergent
+[^45]:Fabric Softener : https://www.vecteezy.com/free-vector/fabric-softener
+[^46]:Colour Catchers : https://www.vecteezy.com/free-vector/laundry
+[^47]:Black Bin Bags : https://www.vecteezy.com/free-vector/hat
+[^48]:Food Bin Bags : https://www.vecteezy.com/free-vector/plastic
+[^49]:Washing Up Liquid : https://www.vecteezy.com/free-vector/washing-up-liquid
+[^50]:Coca Cola : https://www.vecteezy.com/free-vector/coca-cola
+[^51]:Lemonade : https://www.vecteezy.com/free-vector/lemonade
+[^52]:Ribena : https://www.vecteezy.com/free-vector/illustration
+[^53]:Orange Squash : https://www.freepik.com/free-vector/orange-juice-healthy-drink-glass-citrus-fruit-with-leaf-emblem_4619078.htm
+[^54]:Bottled Water : https://www.freepik.com/free-vector/bottle-water-concept-illustration_8476696.htm
+[^55]:Doughnuts : https://www.freepik.com/free-vector/coloured-pattern-design_902728.htm
+[^56]:Chicken Nuggets : https://www.freepik.com/free-vector/cute-nuggets-smile-with-sauce-cartoon-vector-icon-illustration-food-object-icon-flat-cartoon-style_23252229.htm
+[^57]:Chicken Breast : https://www.freepik.com/free-photo/knife-napkin-near-chicken-fillet_1891679.htm
+[^58]:Pens : https://www.freepik.com/free-vector/illustration-pen-icon_2606110.htm
+[^59]:Pencils : https://www.freepik.com/free-vector/writting-pencil-design_850418.htm
+[^60]:Birthday Card For Partner... : https://www.freepik.com/free-vector/happy-birthday-blooming-flowers-card_9989696.htm
+[^61]:Image Not Found (No Image) : https://www.vecteezy.com/vector-art/5337799-icon-image-not-found-vector

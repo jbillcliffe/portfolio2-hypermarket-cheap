@@ -166,14 +166,14 @@
     },
     {
         "id": 16,
-        "name": "Iceburg Lettuce",
+        "name": "Iceberg Lettuce",
         "lowPrice": 0.30,
         "highPrice": 0.50,
         "lowStock": 0,
         "highStock": 10,
         "aisle": "Vegetables",
-        "imageUrl": "iceburg-lettuce.webp",
-        "alertText": "is no iceburg lettuce today."
+        "imageUrl": "iceberg-lettuce.webp",
+        "alertText": "is no iceberg lettuce today."
     },
     {
         "id": 17,
