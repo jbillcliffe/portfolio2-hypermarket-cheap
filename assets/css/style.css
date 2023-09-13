@@ -108,12 +108,18 @@ body {
     overflow-y: auto;
 }
 
-.about-content>h2 {
+.about-heading {
     display:flex;
-    justify-content:center;
+    justify-content:space-between;
     font-family: "Roboto", sans-serif;
     color:#3d9970;
     font-size:4rem;
+
+}
+.about-content>h2 {
+    font-family: "Roboto", sans-serif;
+    color:#3d9970;
+    font-size:4rem; 
 }
 
 /* specifically for basket-screen id, carries .game-container class too */
